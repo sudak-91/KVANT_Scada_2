@@ -138,6 +138,9 @@ namespace KVANT_Scada_2.Objects
             PreHeat_Stage = new IntValue();
             HeatAssist_Stage = new IntValue();
             Tech_cam_STAGE = new IntValue();
+            IntValues = new List<IntValue>();
+            FVPStatus = new FVPStatus();
+            IonInputSetPoint = new IonInputSetPoint();
         }
 
         public static OPCObjects createObjects()

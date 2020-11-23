@@ -34,10 +34,13 @@ namespace KVANT_Scada_2.OPCUAWorker
         object OPCLocker;
         TimerCallback OpcInnerTimer;
         OpcClient client;
+        public delegate void OPCHandler(string message);
+        public event OPCHandler OPCNotify;
         public OPCObjects opcobjects;
+        
         public OPCUAWorker()
         {
-            
+            opcobjects = OPCObjects.createObjects();
         }
         ///<summaray>
         ///Метод  ReadAnalogValue осуществляет чтение данных OPC node
@@ -78,7 +81,7 @@ namespace KVANT_Scada_2.OPCUAWorker
         {
             OpcValue var = client.ReadNode(Path);
             intValue.Path = Path;
-            intValue.Value = (int)var.Value;
+            intValue.Value = int.Parse(var.ToString());
         }
         ///<summaray>
         ///Метод  ReadAnalogValues осуществляет чтение всех Node аналогового типа в проекте
@@ -181,8 +184,9 @@ namespace KVANT_Scada_2.OPCUAWorker
             OPCLocker = new object();
             client = new OpcClient("opc.tcp://192.168.0.10:4840/");
             opcobjects = OPCObjects.createObjects();
-            
-            lock (OPCLocker)
+            OPCObjects.OPCLocker = OPCLocker;
+            OPCNotify.Invoke("Старт OPC соединения");
+            lock (OPCObjects.OPCLocker) 
             {
                 client.Connect();
                 #region BAV_3
@@ -205,7 +209,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 ValveStatus SHV_Status = client.ReadNode(OPCUAWorkerPaths.SHV_Status_path).As<ValveStatus>();
                 ValveInput SHV_Input = client.ReadNode(OPCUAWorkerPaths.SHV_Input_path).As<ValveInput>();
                 #endregion
-            
+                OPCNotify?.Invoke("Чтение данных ValveStatus и ValveInput");
 
 
 
@@ -224,14 +228,46 @@ namespace KVANT_Scada_2.OPCUAWorker
                 CamPrepare camPrepare = client.ReadNode(OPCUAWorkerPaths.CamPrepare_path).As<CamPrepare>();
                 IonStatus IonStatus = client.ReadNode(OPCUAWorkerPaths.IonStatus_path).As<IonStatus>();
                 IonOutputFeedBack IonOutputFeedBack = client.ReadNode(OPCUAWorkerPaths.IonOutputFeedBack_path).As<IonOutputFeedBack>();
-                IonInputSetPoint IonInputSetPoint = client.ReadNode(OPCUAWorkerPaths.IonInputSetPoint_path).As<IonInputSetPoint>();
+
+
+
+                OPCObjects.IonInputSetPoint = client.ReadNode(OPCUAWorkerPaths.IonInputSetPoint_path).As<IonInputSetPoint>();
+
+
+                //OpcNodeInfo adsd = client.BrowseNode(OPCUAWorkerPaths.IonInputSetPoint_path);
+                //if (adsd is OpcVariableNodeInfo variablenode)
+                //{
+                //    OpcNodeId datatypeid = variablenode.DataTypeId;
+                //    OpcDataTypeInfo datatype = client.GetDataTypeSystem().GetType(datatypeid);
+
+                //    Console.WriteLine(datatype.TypeId);
+                //    Console.WriteLine(datatype.Encoding);
+
+                //    Console.WriteLine(datatype.Name);
+
+                //    foreach (OpcDataFieldInfo field in datatype.GetFields())
+                //        Console.WriteLine(".{0} : {1}", field.Name, field.FieldType);
+
+                //    Console.WriteLine();
+                //    Console.WriteLine("data type attributes:");
+                //    Console.WriteLine(
+                //            "\t[opcdatatype(\"{0}\")]",
+                //            datatype.TypeId.ToString(OpcNodeIdFormat.Foundation));
+                //    Console.WriteLine(
+                //            "\t[opcdatatypeencoding(\"{0}\", namespaceuri = \"{1}\")]",
+                //            datatype.Encoding.Id.ToString(OpcNodeIdFormat.Foundation),
+                //            datatype.Encoding.Namespace.Value);
+                //}
+
+
                 IonInputCommand IonInputCommand = client.ReadNode(OPCUAWorkerPaths.IonInputCommand_path).As<IonInputCommand>();
 
+                OPCNotify?.Invoke("Чтение данных перефирийного оборудования");
 
 
 
-
-                FVPStatus FVPStatus = client.ReadNode(OPCUAWorkerPaths.FVPStatus_path).As<FVPStatus>();
+                OPCObjects.FVPStatus = client.ReadNode(OPCUAWorkerPaths.FVPStatus_path).As<FVPStatus>();
+                
 
                 //variable.Alarm_Crio_power_failure = client.ReadNode(OPCUAWorkerPaths.Alarm_Crio_power_failure_path);
                
@@ -268,8 +304,11 @@ namespace KVANT_Scada_2.OPCUAWorker
 
 
                 ReadAnalogValues(client);
+                OPCNotify?.Invoke("Чтение аналоговых сигналов");
                 ReadDiscretValues(client);
+                OPCNotify?.Invoke("Чтение дискретных сигналов");
                 ReadIntegerValues(client);
+                OPCNotify?.Invoke("Чтение целочисленных сигналов");
 
 
 
@@ -292,10 +331,10 @@ namespace KVANT_Scada_2.OPCUAWorker
                 //variable.FT_TT_3 = client.ReadNode(OPCUAWorkerPaths.FT_TT_3_path);
 
 
-                
-                
+
+
                 //variable.HeatAssist_Temp_SP = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Temp_SP_path);
-                
+
                 variable.HeatAssist_Timer = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Timer_path);
                 
                 //variable.Heat_Assist_Timer_SP = client.ReadNode(OPCUAWorkerPaths.Heat_Assist_Timer_SP_path);
@@ -336,8 +375,9 @@ namespace KVANT_Scada_2.OPCUAWorker
                
                
                 client.Disconnect();
+                OPCNotify?.Invoke("Закрытие соединения с контролером");
+                Console.WriteLine("SDASDASDASDASDSA {0}", opcobjects.GetIonInputSetPoint().Heat_U_SP);
 
-                
 
                 OPCObjects.AnalogValues.Add(OPCObjects.BLM_Speed_SP);
                 OPCObjects.AnalogValues.Add(OPCObjects.Camera_Pressure);
@@ -431,9 +471,9 @@ namespace KVANT_Scada_2.OPCUAWorker
                 opcobjects.set_camPrepare(camPrepare);
                 opcobjects.SetIonStatus(IonStatus);
                 opcobjects.SetIonOutputFeedBack(IonOutputFeedBack);
-                opcobjects.SetIonInputSetPoint(IonInputSetPoint);
+                //opcobjects.SetIonInputSetPoint(IonInputSetPoint);
                 opcobjects.SetIonInputCommand(IonInputCommand);
-                opcobjects.SetFVPStatus(FVPStatus);
+                //opcobjects.SetFVPStatus(FVPStatus);
                 opcobjects.SetAnalogInput(variable);
                 opcobjects.setOPCLocker(OPCLocker);
 
@@ -520,10 +560,10 @@ namespace KVANT_Scada_2.OPCUAWorker
         }
         private static void ReadOPCData(object objclient)
         {
+           var objects = OPCObjects.createObjects();
             lock (Objects.OPCObjects.createObjects().getOPCLocker())
             {
                 OpcClient client = (OpcClient)objclient;
-                var objects = OPCObjects.createObjects();
                 var BAV_3_Status =objects.getBAV_3_Status();
                 var BAV_3_Input = objects.getBAV_3_Input();
                 var FVV_S_Status = objects.get_FVV_S_Status();
@@ -543,7 +583,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 var CamPrepare = objects.get_camPrepare();
                 var IonStatus = objects.GetIonStatus();
                 var IonOutputFeedBack = objects.GetIonOutputFeedBack();
-                var IonInputSetPoint = objects.GetIonInputSetPoint();
+                //var IonInputSetPoint = objects.GetIonInputSetPoint();
                 var IonInputCommand = objects.GetIonInputCommand();
                 var FVPStatus = objects.GetFVPStatus();
                 var variable = objects.GetAnalogInput();
@@ -570,10 +610,11 @@ namespace KVANT_Scada_2.OPCUAWorker
                 CamPrepare = client.ReadNode(OPCUAWorkerPaths.CamPrepare_path).As<CamPrepare>();
                 IonStatus = client.ReadNode(OPCUAWorkerPaths.IonStatus_path).As<IonStatus>();
                 IonOutputFeedBack = client.ReadNode(OPCUAWorkerPaths.IonOutputFeedBack_path).As<IonOutputFeedBack>();
-                IonInputSetPoint = client.ReadNode(OPCUAWorkerPaths.IonInputSetPoint_path).As<IonInputSetPoint>();
+                OPCObjects.IonInputSetPoint = client.ReadNode(OPCUAWorkerPaths.IonInputSetPoint_path).As<IonInputSetPoint>();
+                Console.WriteLine("SDASDASDASDASDSA {0}", OPCObjects.IonInputSetPoint.Heat_U_SP);
                 IonInputCommand = client.ReadNode(OPCUAWorkerPaths.IonInputCommand_path).As<IonInputCommand>();
-                FVPStatus = client.ReadNode(OPCUAWorkerPaths.FVPStatus_path).As<FVPStatus>();
-                
+                OPCObjects.FVPStatus = client.ReadNode(OPCUAWorkerPaths.FVPStatus_path).As<FVPStatus>();
+                Console.WriteLine("SDASDASDASDASDSA {0}", OPCObjects.FVPStatus.Remote);
                 //variable.Alarm_Crio_power_failure = client.ReadNode(OPCUAWorkerPaths.Alarm_Crio_power_failure_path);
                 
                 //variable.Alarm_ELI_power_failure = client.ReadNode(OPCUAWorkerPaths.Alarm_ELI_power_failure_path);
@@ -672,9 +713,9 @@ namespace KVANT_Scada_2.OPCUAWorker
                 objects.set_camPrepare(CamPrepare);
                 objects.SetIonStatus(IonStatus);
                 objects.SetIonOutputFeedBack(IonOutputFeedBack);
-                objects.SetIonInputSetPoint(IonInputSetPoint);
+                //objects.SetIonInputSetPoint(IonInputSetPoint);
                 objects.SetIonInputCommand(IonInputCommand);
-                objects.SetFVPStatus(FVPStatus);
+                //objects.SetFVPStatus(FVPStatus);
                 objects.SetAnalogInput(variable);
             }           
 

@@ -9,6 +9,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <ProgressBar x:Name="Main_Load_bar" HorizontalAlignment="Left" Height="33" Margin="258,340,0,0" VerticalAlignment="Top" Width="293" ValueChanged="ProgressBar_ValueChanged"/>
+        <TextBox x:Name="MainConsole" HorizontalAlignment="Left" Height="235" Margin="246,62,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="329"/>
 
     </Grid>
 </Window>

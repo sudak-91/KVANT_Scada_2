@@ -15,15 +15,18 @@ namespace KVANT_Scada_2
     public partial class App : Application
     {
         Timer key;
-        OPCUAWorker.OPCUAWorker opcUaWorker;
+        public OPCUAWorker.OPCUAWorker opcUaWorker;
         DB.Logic.CreateData createData;
+        MainWindow MainWindow;
 
         [STAThread]
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 
+            MainWindow = new MainWindow();
             opcUaWorker = new OPCUAWorker.OPCUAWorker();
             createData = new DB.Logic.CreateData();
+            opcUaWorker.OPCNotify += MainWindow.UpdateMainConsole;
             Thread OPCthread = new Thread(new ThreadStart(opcUaWorker.StartOPCUAClient));
             Thread CreateDataThread = new Thread(new ThreadStart(createData.CreateTables));
             CreateDataThread.Start();

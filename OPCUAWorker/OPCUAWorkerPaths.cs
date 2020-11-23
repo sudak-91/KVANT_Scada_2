@@ -34,7 +34,8 @@ namespace KVANT_Scada_2.OPCUAWorker
         public static string IonOutputFeedBack_path = "ns=3;s=\"Ion_DB\".\"Output_FeedBack\"";
         public static string IonInputSetPoint_path = "ns=3;s=\"Ion_DB\".\"Input_Set_point\"";
         public static string IonInputCommand_path = "ns=3;s=\"Ion_DB\".\"Input Command\"";
-        public static string FVPStatus_path = "ns=3;s=\"FVP_DB\".\"Status\"";
+        public static string FVPStatus_path = "ns=3;s=\"FVP_DB\".\"FVP\".\"Status\"";
+
 
 
 

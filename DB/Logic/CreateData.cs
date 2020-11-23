@@ -12,6 +12,7 @@ namespace KVANT_Scada_2.DB.Logic
 {
     class CreateData
     {
+
         TimerCallback tm;
         Timer timer;
         object SQLLocker;
@@ -25,9 +26,9 @@ namespace KVANT_Scada_2.DB.Logic
         public void CreateTables()
         {
             SQLLocker = new object();
-            objects = Objects.OPCObjects.createObjects();
-            objects.setSQLLocker(SQLLocker);
-            lock (SQLLocker)
+            //objects = Objects.OPCObjects.createObjects();
+            OPCObjects.SQLLocker = SQLLocker;
+            lock (OPCObjects.SQLLocker)
             {
                 using (var context = new MyDBContext())
                 {
@@ -943,7 +944,7 @@ namespace KVANT_Scada_2.DB.Logic
                     {
                         foreach(var intvalue in OPCObjects.IntValues)
                         {
-                            var entitys = context.IntValue.Where(e => e.Path == intvalue.Path);
+                            var entitys = context.IntValue.Where(e => e.Path == intvalue.Path.ToString());
                             foreach(var entity in entitys)
                             {
                                 entity.Value = intvalue.Value;

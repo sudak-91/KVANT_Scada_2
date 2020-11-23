@@ -26,11 +26,13 @@ namespace KVANT_Scada_2
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+        
+        
         
         public MainWindow()
         {
             InitializeComponent();
+            
             
             //opcUaWorker= new OPCUAWorker.OPCUAWorker();
             //createData = new DB.Logic.CreateData();
@@ -98,6 +100,7 @@ namespace KVANT_Scada_2
 
 
         }
+  
 
 
       
@@ -105,6 +108,14 @@ namespace KVANT_Scada_2
         {
 
         }
+
+        public void UpdateMainConsole(string text)
+        {
+
+            Console.WriteLine(text);
+
+        }
+  
         
         
     }
