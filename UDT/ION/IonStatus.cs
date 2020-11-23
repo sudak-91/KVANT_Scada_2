@@ -9,6 +9,10 @@ namespace KVANT_Scada_2.UDT.ION
 {
     [OpcDataType("ns=3;s=DT_\"Ion_DB\".\"Status\"")]
     [OpcDataTypeEncoding("ns=3;s=TE_\"Ion_DB\".\"status\"")]
+    ///<summaray>
+    ///Класс IonStatus является представлением 
+    ///OPC DataType "ns=3;s=DT_\"Ion_DB\".\"Status\"
+    ///</summaray>
     public class IonStatus
     {
         public bool Auto_mode {get;set;}

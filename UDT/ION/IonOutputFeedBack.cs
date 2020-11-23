@@ -9,6 +9,10 @@ namespace KVANT_Scada_2.UDT.ION
 {
     [OpcDataType("ns=3;s=DT_\"Ion_DB\".\"Output_FeedBack\"")]
     [OpcDataTypeEncoding("ns=3;s=TE_\"Ion_DB\".\"Output_FeedBack\"")]
+    ///<summaray>
+    ///Класс IonOutput Feedback является представлением 
+    ///OPC DataType "ns=3;s=DT_\"Ion_DB\".\"Output_FeedBack\"
+    ///</summaray>
     public class IonOutputFeedBack
     {
         public float Anod_I { get; set; }

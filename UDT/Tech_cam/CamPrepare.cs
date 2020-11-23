@@ -9,6 +9,10 @@ namespace KVANT_Scada_2.UDT.Tech_cam
 {
     [OpcDataType("ns=3;s=DT_\"Cam_Prepare\"")]
     [OpcDataTypeEncoding("ns=3;s=TE_\"Cam_Prepare\"")]
+    ///<summaray>
+    ///Класс CamPrepare является представлением 
+    ///OPC DataType "ns=3;s=DT_\"Cam_Prepare\"
+    ///</summaray>
     public class CamPrepare
     {
         public float Open_FVV_B_pressure { get; set; }

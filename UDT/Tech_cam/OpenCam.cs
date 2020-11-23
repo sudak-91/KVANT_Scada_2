@@ -9,6 +9,10 @@ namespace KVANT_Scada_2.UDT.Tech_cam
 {
     [OpcDataType("ns=3;s=DT_\"Open_Cam\"")]
     [OpcDataTypeEncoding("ns=3;s=TE_\"Open_Cam\"")]
+    ///<summaray>
+    ///Класс OpenCam является представлением 
+    ///OPC DataType "ns=3;s=DT_\"Open_Cam\"
+    ///</summaray>
     public class OpenCam
     {
         public UInt16 Stage_1_stage { get; set; }

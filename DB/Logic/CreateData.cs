@@ -708,15 +708,18 @@ namespace KVANT_Scada_2.DB.Logic
             {
                 var ipreheatstage = new IntValueTable
                 {
-                    Name = "PreHeat_Stage"
+                    Name = "PreHeat_Stage",
+                    Path = OPCUAWorkerPaths.PreHeat_Stage_path
                 };
                 var iheatassiststage  = new IntValueTable
                 {
-                    Name = "HeatAssist_Stage"
+                    Name = "HeatAssist_Stage",
+                    Path = OPCUAWorkerPaths.HeatAssist_Stage_path
                 };
                 var itechcamstage = new IntValueTable
                 {
-                    Name = "Tech_cam_STAGE"
+                    Name = "Tech_cam_STAGE",
+                    Path = OPCUAWorkerPaths.Tech_cam_STAGE_path
                 };
                 context.IntValue.Add(iheatassiststage);
                 context.IntValue.Add(ipreheatstage);
@@ -730,10 +733,20 @@ namespace KVANT_Scada_2.DB.Logic
 
         public static void TimerUpdateSQL(object obj)
         {
-                    UpdateCamPrepTable(obj);
+            UpdateCamPrepTable(obj);
                     //UpdateCrioPumpStartTable();
-                    UpdateAnalogValue();
-                    UpdateDigitalValue();
+            UpdateAnalogValue();
+            UpdateDigitalValue();
+            UpdateIntValue();
+            UpdateCrioPumpStartTable();
+            UpdateOpenCamTable();
+            UpdateStopCrioTable();
+            UpdateStopFVPTable();
+            UpdateCrioPump();
+            UpdateFVP();
+            UpdateION();
+            UpdateValves();
+
 
 
 
@@ -803,9 +816,10 @@ namespace KVANT_Scada_2.DB.Logic
                             cp.Stage_0_Stage = opcriopumpstart.Stage_0_Stage;
                             cp.Temperature_SP = opcriopumpstart.Temperature_SP;
                             context.Update(cp);
-                            context.SaveChanges();
+                            
 
                         }
+                        context.SaveChanges();
                         context.Dispose();
                     }
                 }
@@ -825,8 +839,9 @@ namespace KVANT_Scada_2.DB.Logic
                     oc.Stage_1_Return = opcopencamtable.Stage_1_Return;
                     oc.Stage_1_stage = opcopencamtable.Stage_1_stage;
                     context.Update(oc);
-                    context.SaveChanges();
+                    
                 }
+                context.SaveChanges();
             }
         }
         private static void UpdateStopCrioTable()
@@ -842,8 +857,9 @@ namespace KVANT_Scada_2.DB.Logic
                     sc.Stage_2_Return = opcstopcriotable.Stage_2_Return;
                     sc.Stage_2_Stage = opcstopcriotable.Stage_2_Stage;
                     context.Update(sc);
-                    context.SaveChanges();
+                    
                 }
+                context.SaveChanges();
             }
         }
         private static void UpdateStopFVPTable()
@@ -858,8 +874,9 @@ namespace KVANT_Scada_2.DB.Logic
                     sf.Stage_3_Done = opcstopfvp.Stage_3_Done;
                     sf.Stage_3_Return = opcstopfvp.Stage_3_Return;
                     context.Update(sf);
-                    context.SaveChanges();
+                    
                 }
+                context.SaveChanges();
             }
         }
         private static void UpdateAnalogValue()
@@ -916,6 +933,161 @@ namespace KVANT_Scada_2.DB.Logic
                 }
             }
         }
+        private static void UpdateIntValue()
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                lock(OPCObjects.SQLLocker)
+                {
+                    using (var context = new MyDBContext())
+                    {
+                        foreach(var intvalue in OPCObjects.IntValues)
+                        {
+                            var entitys = context.IntValue.Where(e => e.Path == intvalue.Path);
+                            foreach(var entity in entitys)
+                            {
+                                entity.Value = intvalue.Value;
+                                context.IntValue.Update(entity);
+                            }
+                        }
+                        context.SaveChanges();
+                        context.Dispose();
+                    }
+                }
+            }
+        }
+        private static void UpdateCrioPump()
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                lock(OPCObjects.SQLLocker)
+                {
+                    using (var context =new  MyDBContext())
+                    {
+                        var entitys = context.CrioPump.Where(e => e.Id == 1);
+                        foreach(var entity in entitys)
+                        {
+                            entity.iAuto_mode = OPCObjects.CrioInput.Auto_mode;
+                            entity.iCommand_manual = OPCObjects.CrioInput.Command_manual;
+                            entity.sAuto_mode = OPCObjects.CrioStatus.Auto_mode;
+                            entity.sBlocked = OPCObjects.CrioStatus.Blocked;
+                            entity.sError = OPCObjects.CrioStatus.Error;
+                            entity.sPower_On = OPCObjects.CrioStatus.Power_On;
+                            entity.sTurn_On = OPCObjects.CrioStatus.Turn_On;
+                            context.Update(entity);
+                        }
+                        context.SaveChanges();
+
+                    }
+                }
+            }
+        }
+        private static void UpdateFVP()
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                lock(OPCObjects.SQLLocker)
+                {
+                    using(var context = new MyDBContext())
+                    {
+                        var entitys = context.FVP.Where(e => e.Id == 1);
+                        foreach(var entity in entitys)
+                        {
+                            entity.Auto_mode = OPCObjects.FVPStatus.Auto_mode;
+                            entity.Block = OPCObjects.FVPStatus.Block;
+                            entity.Manual_start = OPCObjects.FVPStatus.Manual_start;
+                            entity.Power_On = OPCObjects.FVPStatus.Power_On;
+                            entity.Remote = OPCObjects.FVPStatus.Remote;
+                            entity.Start = OPCObjects.FVPStatus.Start;
+                            entity.Turn_On = OPCObjects.FVPStatus.Turn_On;
+                            context.Update(entity);
+                        }
+                        context.SaveChanges();
+                    }
+                }
+            }
+        }
+        private static void UpdateION()
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                lock(OPCObjects.SQLLocker)
+                {
+                    using(var context = new MyDBContext())
+                    {
+                        var entitys = context.Ion.Where(e => e.Id == 1);
+                        foreach(var entity in entitys)
+                        {
+                            entity.Anod_I = OPCObjects.IonOutputFeedBack.Anod_I;
+                            entity.Anod_I_SP = OPCObjects.IonInputSetPoint.Anod_I_SP;
+                            entity.Anod_P = OPCObjects.IonOutputFeedBack.Anod_P;
+                            entity.Anod_P_SP = OPCObjects.IonInputSetPoint.Anod_P_SP;
+                            entity.Anod_U = OPCObjects.IonOutputFeedBack.Anod_U;
+                            entity.Anod_U_SP = OPCObjects.IonInputSetPoint.Anod_U_SP;
+                            entity.Heat_I = OPCObjects.IonOutputFeedBack.Heat_I;
+                            entity.Heat_I_SP = OPCObjects.IonInputSetPoint.Heat_I_SP;
+                            entity.Heat_P = OPCObjects.IonOutputFeedBack.Heat_P;
+                            entity.Heat_P_SP = OPCObjects.IonInputSetPoint.Heat_P_SP;
+                            entity.Heat_U = OPCObjects.IonOutputFeedBack.Heat_U;
+                            entity.Heat_U_SP = OPCObjects.IonInputSetPoint.Heat_U_SP;
+                            entity.icAuto_mod = OPCObjects.IonInputCommnd.Auto_mod;
+                            entity.icManual_Start = OPCObjects.IonInputCommnd.Manual_Start;
+                            entity.icManual_Stop = OPCObjects.IonInputCommnd.Manual_Stop;
+                            entity.icReset_error = OPCObjects.IonInputCommnd.Reset_error;
+                            entity.icStart = OPCObjects.IonInputCommnd.Start;
+                            entity.icStop = OPCObjects.IonInputCommnd.Stop;
+                            entity.sAuto_mode = OPCObjects.IonStatus.Auto_mode;
+                            entity.sEmergancy_Stop = OPCObjects.IonStatus.Emergancy_Stop;
+                            entity.sFailure = OPCObjects.IonStatus.Failure;
+                            entity.sFilament_Failure = OPCObjects.IonStatus.Filament_Failure;
+                            entity.sInterlock = OPCObjects.IonStatus.Interlock;
+                            entity.sOther_Failure = OPCObjects.IonStatus.Other_Failure;
+                            entity.sPower_Failure = OPCObjects.IonStatus.Power_Failure;
+                            entity.sPower_on = OPCObjects.IonStatus.Power_on;
+                            entity.sPower_Stop = OPCObjects.IonStatus.Power_Stop;
+                            entity.sRepeat_Failure = OPCObjects.IonStatus.Repeat_Failure;
+                            entity.sTemperature_Failure = OPCObjects.IonStatus.Temperature_Failure;
+                            entity.sTemperature_Stop = OPCObjects.IonStatus.Temperature_Stop;
+                            entity.sTurn_off = OPCObjects.IonStatus.Turn_off;
+                            entity.sTurn_On = OPCObjects.IonStatus.Turn_On;
+                            context.Update(entity);
+                        }
+                        context.SaveChanges();
+                    }
+                }
+            }
+        }
+        private static void UpdateValves()
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                lock(OPCObjects.SQLLocker)
+                {
+                    using(var context = new MyDBContext())
+                    {
+                        foreach(var valve in OPCObjects.ValvesInput)
+                        {
+                            var entitys = context.Valve.Where(e => e.Id == valve.Key);
+                            foreach(var entity in entitys)
+                            {
+                                entity.viAuto_mode = valve.Value.Auto_mode;
+                                entity.viMan_command = valve.Value.Man_command;
+                                entity.viService_mode = valve.Value.Service_mode;
+                                entity.vsBlocked = OPCObjects.ValvesStatus[valve.Key].Blocked;
+                                entity.vsClosed = OPCObjects.ValvesStatus[valve.Key].Closed;
+                                entity.vsClosing = OPCObjects.ValvesStatus[valve.Key].Closing;
+                                entity.vsOpened = OPCObjects.ValvesStatus[valve.Key].Opened;
+                                entity.vsOpening = OPCObjects.ValvesStatus[valve.Key].Opening;
+                                entity.vsServiced = OPCObjects.ValvesStatus[valve.Key].Serviced;
+                                context.Update(entity);
+                            }
+                        }
+                        context.SaveChanges();
+                    }
+                }
+            }
+        }
+
 
     }
 }

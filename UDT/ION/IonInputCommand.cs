@@ -9,6 +9,10 @@ namespace KVANT_Scada_2.UDT.ION
 {
     [OpcDataType("ns=3;s=DT_\"Ion_DB\".\"Input Command\"")]
     [OpcDataTypeEncoding("ns=3;s=TE_\"Ion_DB\".\"Input Command\"")]
+    ///<summaray>
+    ///Класс IonInputCommand является представлением 
+    ///OPC DataType "ns=3;s=DT_\"Ion_DB\".\"Input Command\"
+    ///</summaray>
     public class IonInputCommand
     {
         public bool Start {get;set;}

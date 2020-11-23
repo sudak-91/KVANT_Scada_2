@@ -12,7 +12,10 @@ namespace KVANT_Scada_2.UDT.Valve
     [OpcDataType("ns=3;s=DT_\"valve\".\"Status\"")]
     [OpcDataTypeEncoding("ns=3;s=TE_\"valve\".\"Status\"")]
     [ComplexType]
-
+    ///<summaray>
+    ///Класс ValveStatus является представлением 
+    ///OPC DataType "ns=3;s=DT_\"valve\".\"Status\"
+    ///</summaray>
     public class ValveStatus
     {
         public bool Auto_mode { get; set; }

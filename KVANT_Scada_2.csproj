@@ -279,11 +279,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DB\Entity\AnalogaValueTable.cs" />
     <Compile Include="DB\Entity\AnalogLog.cs" />
     <Compile Include="DB\Entity\CamPreapreTable.cs" />
@@ -310,6 +305,7 @@
     <Compile Include="UDT\Crio\CrioStatus.cs" />
     <Compile Include="UDT\DiscreteValue\DiscreteValue.cs" />
     <Compile Include="UDT\FVP\FVPStatus.cs" />
+    <Compile Include="UDT\IntValue\IntValue.cs" />
     <Compile Include="UDT\ION\IonInputCommand.cs" />
     <Compile Include="UDT\ION\IonInputSetPoint.cs" />
     <Compile Include="UDT\ION\IonOutputFeedBack.cs" />
@@ -352,17 +348,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\KVANT_Scada_2.Objects.OPCObjects.datasource" />
     <None Include="Properties\Settings.settings">
@@ -376,5 +361,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

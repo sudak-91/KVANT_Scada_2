@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.OPCUAWorker
 {
+    ///<summaray>
+    ///Класс OPCUAWorekerPath содержит пути ко всем Node
+    ///
+    ///</summaray>
+
     public class OPCUAWorkerPaths
     {
         public static string BAV_3_Status_path = "ns=3;s=\"Valve_DB\".\"BAV_3\".\"Status\"";

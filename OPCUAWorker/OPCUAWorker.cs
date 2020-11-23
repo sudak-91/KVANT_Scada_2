@@ -16,23 +16,36 @@ using KVANT_Scada_2.DB.Entity;
 using System.Threading;
 using Opc.UaFx;
 using KVANT_Scada_2.UDT.DiscreteValue;
+using KVANT_Scada_2.UDT.IntValue;
 
 namespace KVANT_Scada_2.OPCUAWorker
 {
+    ///<summaray>
+    ///Класс OPCUAWoreker реализует логику обмена данными с OPC сервером
+    ///
+    ///</summaray>
+    ///<value name = "timer">Таймер запуска циклической задачи обновления данных</value>
+    ///<value name = "OPCLocker">Блокировщик потока для работы с данными OPC сервер</value>
+    ///<value name = "client">Экземпляр клааса OpcClient</value>
+    ///<value name = "opcobjects">Список всех OPC объектов</value>
     public class OPCUAWorker
     {
         Timer timer;
         object OPCLocker;
         TimerCallback OpcInnerTimer;
         OpcClient client;
-        CamPrepare camPrepare;
-        List<string> AnalogPath;
-
         public OPCObjects opcobjects;
         public OPCUAWorker()
         {
             
         }
+        ///<summaray>
+        ///Метод  ReadAnalogValue осуществляет чтение данных OPC node
+        ///и преобразования в тип float
+        ///</summaray>
+        ///<param name="analogValue">Ссылка на объект AnalogValue</param>
+        ///<param name="Path">Путь до Node</param>
+        ///<param name="client">OpcClient</param>
         private static void ReadAnalogValue(ref AnalogValue analogValue, string Path, OpcClient client)
         {
             OpcValue var = client.ReadNode(Path);
@@ -40,12 +53,37 @@ namespace KVANT_Scada_2.OPCUAWorker
             analogValue.Value = float.Parse(var.ToString());
 
         }
+        ///<summaray>
+        ///Метод  ReadDiscreteValue осуществляет чтение данных OPC node
+        ///и преобразования в тип bool
+        ///</summaray>
+        ///<param name="discreteValue">Ссылка на объект DiscreteValue</param>
+        ///<param name="Path">Путь до Node</param>
+        ///<param name="client">OpcClient</param>
+
         private static void ReadDiscreteValue(ref DiscreteValue discreteValue, string Path, OpcClient client)
         {
             OpcValue var = client.ReadNode(Path);
             discreteValue.Path = Path;
             discreteValue.Value = (bool)var.Value;
         }
+        ///<summaray>
+        ///Метод  ReadIntegerValue осуществляет чтение данных OPC node
+        ///и преобразования в тип int
+        ///</summaray>
+        ///<param name="intValue">Ссылка на объект DiscreteValue</param>
+        ///<param name="Path">Путь до Node</param>
+        ///<param name="client">OpcClient</param>
+        private static void ReadIntegerValue(ref IntValue intValue, string Path, OpcClient client )
+        {
+            OpcValue var = client.ReadNode(Path);
+            intValue.Path = Path;
+            intValue.Value = (int)var.Value;
+        }
+        ///<summaray>
+        ///Метод  ReadAnalogValues осуществляет чтение всех Node аналогового типа в проекте
+        ///</summaray>
+        ///<param name="client">OpcClient</param>
         public static void ReadAnalogValues(OpcClient client)
         {
             ReadAnalogValue(ref Objects.OPCObjects.BLM_Speed_SP, OPCUAWorkerPaths.BLM_Speed_SP_path, client);
@@ -80,6 +118,10 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadAnalogValue(ref OPCObjects.TE_1, OPCUAWorkerPaths.TE_1_path, client);
 
         }
+        ///<summaray>
+        ///Метод  ReadDiscreteValues осуществляет чтение всех Node дискретного типа в проекте
+        ///</summaray>
+        ///<param name="client">OpcClient</param>
         public static void ReadDiscretValues(OpcClient client)
         {
             ReadDiscreteValue(ref OPCObjects.Alarm_Crio_power_failure, OPCUAWorkerPaths.Alarm_Crio_power_failure_path, client);
@@ -112,6 +154,26 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadDiscreteValue(ref OPCObjects.PreHeat_Start, OPCUAWorkerPaths.PreHeat_Start_path, client);
 
         }
+        ///<summaray>
+        ///Метод  ReadIntegerValues осуществляет чтение всех Node целочисленного типа в проекте
+        ///</summaray>
+        ///<param name="client">OpcClient</param>
+        public static void ReadIntegerValues(OpcClient client)
+        {
+
+            //variable.HeatAssist_Stage = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Stage_path);
+            //variable.Tech_cam_STAGE = client.ReadNode(OPCUAWorkerPaths.Tech_cam_STAGE_path);
+            //variable.PreHeat_Stage = client.ReadNode(OPCUAWorkerPaths.PreHeat_Stage_path);
+            ReadIntegerValue(ref OPCObjects.HeatAssist_Stage, OPCUAWorkerPaths.HeatAssist_Stage_path, client);
+            ReadIntegerValue(ref OPCObjects.Tech_cam_STAGE, OPCUAWorkerPaths.Tech_cam_STAGE_path, client);
+            ReadIntegerValue(ref OPCObjects.PreHeat_Stage, OPCUAWorkerPaths.PreHeat_Stage_path, client);
+
+        }
+        ///<summaray>
+        ///Метод  StartOPCUAClient первичное подключени при инициализации системы.
+        ///Выполняет чтение всех переменных.
+        ///Запускает таймер циклического обновления данных
+        ///</summaray>
 
         public void StartOPCUAClient()
         {
@@ -119,7 +181,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             OPCLocker = new object();
             client = new OpcClient("opc.tcp://192.168.0.10:4840/");
             opcobjects = OPCObjects.createObjects();
-            camPrepare = opcobjects.get_camPrepare();
+            
             lock (OPCLocker)
             {
                 client.Connect();
@@ -143,6 +205,12 @@ namespace KVANT_Scada_2.OPCUAWorker
                 ValveStatus SHV_Status = client.ReadNode(OPCUAWorkerPaths.SHV_Status_path).As<ValveStatus>();
                 ValveInput SHV_Input = client.ReadNode(OPCUAWorkerPaths.SHV_Input_path).As<ValveInput>();
                 #endregion
+            
+
+
+
+
+
                 #region Crio_pump
                 CrioInput crioInput = client.ReadNode(OPCUAWorkerPaths.Crio_pump_Input_path).As<CrioInput>();
                 CrioStatus crioStatus = client.ReadNode(OPCUAWorkerPaths.Crio_pump_Status_path).As<CrioStatus>();
@@ -153,7 +221,7 @@ namespace KVANT_Scada_2.OPCUAWorker
 
                 OpenCam OpenCam = client.ReadNode(OPCUAWorkerPaths.OpenCam_path).As<OpenCam>();
                 CrioPumpStart CrioPumpStart = client.ReadNode(OPCUAWorkerPaths.CrioPumpStart_path).As<CrioPumpStart>();
-                camPrepare = client.ReadNode(OPCUAWorkerPaths.CamPrepare_path).As<CamPrepare>();
+                CamPrepare camPrepare = client.ReadNode(OPCUAWorkerPaths.CamPrepare_path).As<CamPrepare>();
                 IonStatus IonStatus = client.ReadNode(OPCUAWorkerPaths.IonStatus_path).As<IonStatus>();
                 IonOutputFeedBack IonOutputFeedBack = client.ReadNode(OPCUAWorkerPaths.IonOutputFeedBack_path).As<IonOutputFeedBack>();
                 IonInputSetPoint IonInputSetPoint = client.ReadNode(OPCUAWorkerPaths.IonInputSetPoint_path).As<IonInputSetPoint>();
@@ -201,7 +269,7 @@ namespace KVANT_Scada_2.OPCUAWorker
 
                 ReadAnalogValues(client);
                 ReadDiscretValues(client);
-
+                ReadIntegerValues(client);
 
 
 
@@ -224,7 +292,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 //variable.FT_TT_3 = client.ReadNode(OPCUAWorkerPaths.FT_TT_3_path);
 
 
-                variable.HeatAssist_Stage = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Stage_path);
+                
                 
                 //variable.HeatAssist_Temp_SP = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Temp_SP_path);
                 
@@ -240,12 +308,12 @@ namespace KVANT_Scada_2.OPCUAWorker
                 //variable.PneumaticPressure = client.ReadNode(OPCUAWorkerPaths.PneumaticPressure_path);
                 
                 
-                variable.PreHeat_Stage = client.ReadNode(OPCUAWorkerPaths.PreHeat_Stage_path);
+                
                 
                 //variable.PreHeat_Temp_SP = client.ReadNode(OPCUAWorkerPaths.PreHeat_Temp_SP_path);
                 
                 variable.PreHeat_Timer = client.ReadNode(OPCUAWorkerPaths.PreHeat_Timer_path);
-                variable.Tech_cam_STAGE = client.ReadNode(OPCUAWorkerPaths.Tech_cam_STAGE_path);
+                
                 //variable.PreHeat_Timer_SP = client.ReadNode(OPCUAWorkerPaths.PreHeat_Timer_SP_path);
 
                 //variable.RRG_9A1_feedback = client.ReadNode(OPCUAWorkerPaths.RRG_9A1_feedback_path);
@@ -331,6 +399,10 @@ namespace KVANT_Scada_2.OPCUAWorker
                 OPCObjects.DiscreteValues.Add(OPCObjects.PreHeat_Done);
                 OPCObjects.DiscreteValues.Add(OPCObjects.PreHeat_Start);
 
+                OPCObjects.IntValues.Add(OPCObjects.HeatAssist_Stage);
+                OPCObjects.IntValues.Add(OPCObjects.Tech_cam_STAGE);
+                OPCObjects.IntValues.Add(OPCObjects.PreHeat_Stage);
+
                
 
 
@@ -364,6 +436,19 @@ namespace KVANT_Scada_2.OPCUAWorker
                 opcobjects.SetFVPStatus(FVPStatus);
                 opcobjects.SetAnalogInput(variable);
                 opcobjects.setOPCLocker(OPCLocker);
+
+
+                OPCObjects.ValvesInput.Add(1, OPCObjects.BAV_3_input);
+                OPCObjects.ValvesStatus.Add(1, OPCObjects.BAV_3_status);
+                OPCObjects.ValvesInput.Add(2, OPCObjects.SHV_Input);
+                OPCObjects.ValvesStatus.Add(2, OPCObjects.SHV_Status);
+                OPCObjects.ValvesInput.Add(3, OPCObjects.FVV_S_Input);
+                OPCObjects.ValvesStatus.Add(3, OPCObjects.FVV_S_Status);
+                OPCObjects.ValvesStatus.Add(4, OPCObjects.FVV_B_Status);
+                OPCObjects.ValvesInput.Add(4, OPCObjects.FVV_B_Input);
+                OPCObjects.ValvesInput.Add(5, OPCObjects.CPV_Input);
+                OPCObjects.ValvesStatus.Add(5, OPCObjects.CPV_Status);
+
             }
             //this.RegisterSubscribe();
 
@@ -420,6 +505,11 @@ namespace KVANT_Scada_2.OPCUAWorker
     
 
         }
+        ///<summaray>
+        ///Метод  Write осуществляет запись Node если у ее модели есть представление
+        ///</summaray>
+        ///<param name="path">Путь к Node</param>
+        ///<param name="obj">Изменененная Нода</param>
         public void Write<T> (string path, T obj)
         {
             var opc = OPCObjects.createObjects();
@@ -516,7 +606,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 //variable.FT_TT_3 = client.ReadNode(OPCUAWorkerPaths.FT_TT_3_path);
                 //variable.HeatAssist_Done = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Done_path);
                 //variable.HeatAssist_Flag = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Flag_path);
-                variable.HeatAssist_Stage = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Stage_path);
+                //variable.HeatAssist_Stage = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Stage_path);
                 //variable.HeatAssist_TempDone = client.ReadNode(OPCUAWorkerPaths.HeatAssist_TempDone_path);
                 //variable.HeatAssist_Temp_SP = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Temp_SP_path);
                 variable.HeatAssist_Timer = client.ReadNode(OPCUAWorkerPaths.HeatAssist_Timer_path);
@@ -527,7 +617,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 //variable.ManualSetTemp = client.ReadNode(OPCUAWorkerPaths.ManualSetTemp_path);
                 //variable.PneumaticPressure = client.ReadNode(OPCUAWorkerPaths.PneumaticPressure_path);
                 //variable.PreHeat_Done = client.ReadNode(OPCUAWorkerPaths.PreHeat_Done_path);
-                variable.PreHeat_Stage = client.ReadNode(OPCUAWorkerPaths.PreHeat_Stage_path);
+                //variable.PreHeat_Stage = client.ReadNode(OPCUAWorkerPaths.PreHeat_Stage_path);
                 //variable.PreHeat_Start = client.ReadNode(OPCUAWorkerPaths.PreHeat_Start_path);
                 //variable.PreHeat_Temp_SP = client.ReadNode(OPCUAWorkerPaths.PreHeat_Temp_SP_path);
                 variable.PreHeat_Timer = client.ReadNode(OPCUAWorkerPaths.PreHeat_Timer_path);
@@ -546,12 +636,12 @@ namespace KVANT_Scada_2.OPCUAWorker
                 //variable.SFT08_FT = client.ReadNode(OPCUAWorkerPaths.SFT08_FT_path);
                 //variable.SFT09_FT = client.ReadNode(OPCUAWorkerPaths.SFT09_FT_path);
                 //variable.SFT10_FT = client.ReadNode(OPCUAWorkerPaths.SFT10_FT_path);
-                variable.Tech_cam_STAGE = client.ReadNode(OPCUAWorkerPaths.Tech_cam_STAGE_path);
+                //variable.Tech_cam_STAGE = client.ReadNode(OPCUAWorkerPaths.Tech_cam_STAGE_path);
                 //variable.TE_1 = client.ReadNode(OPCUAWorkerPaths.TE_1_path);
 
                 ReadAnalogValues(client);
                 ReadDiscretValues(client);
-                
+                ReadIntegerValues(client);
 
 
 

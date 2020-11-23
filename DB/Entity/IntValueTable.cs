@@ -14,5 +14,6 @@ namespace KVANT_Scada_2.DB.Entity
         [Required]
         public string Name { get; set; }
         public int Value { get; set; }
+        public string Path { get; set; }
     }
 }

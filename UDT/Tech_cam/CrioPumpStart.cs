@@ -9,6 +9,10 @@ namespace KVANT_Scada_2.UDT.Tech_cam
 {
     [OpcDataType("ns=3;s=DT_\"CP_check\"")]
     [OpcDataTypeEncoding("ns=3;s=TE_\"CP_check\"")]
+    ///<summaray>
+    ///Класс CrioPumpStart является представлением 
+    ///OPC DataType "ns=3;s=DT_\"CP_check\"""
+    ///</summaray>
     public class CrioPumpStart
     {
         public float Crio_pressure_check_SP { get; set; }

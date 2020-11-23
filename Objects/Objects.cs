@@ -2,6 +2,7 @@
 using KVANT_Scada_2.UDT.Crio;
 using KVANT_Scada_2.UDT.DiscreteValue;
 using KVANT_Scada_2.UDT.FVP;
+using KVANT_Scada_2.UDT.IntValue;
 using KVANT_Scada_2.UDT.ION;
 using KVANT_Scada_2.UDT.Tech_cam;
 using KVANT_Scada_2.UDT.Valve;
@@ -39,6 +40,9 @@ namespace KVANT_Scada_2.Objects
         public static object OPCLocker;
         public static List<AnalogValue> AnalogValues;
         public static List<DiscreteValue> DiscreteValues;
+        public static List<IntValue> IntValues;
+        public static Dictionary<int, ValveInput> ValvesInput;
+        public static Dictionary<int, ValveStatus> ValvesStatus;
         public static AnalogValue SFT01_FT, SFT02_FT, SFT03_FT, SFT04_FT,
                                    SFT05_FT, SFT06_FT, SFT07_FT, SFT08_FT,
                                    SFT09_FT, SFT10_FT, FT_TT_1, FT_TT_2, FT_TT_3,
@@ -60,6 +64,7 @@ namespace KVANT_Scada_2.Objects
                                     Alarm_Indexer_power_failure, Alarm_SSP_power_failure,
                                     Alarm_TV1_power_failure, Alarm_Water_SECOND, Alarm_Hight_Crio_Temp,
                                     Crio_start_signal, Alarm_manual_stop;
+        public static IntValue PreHeat_Stage, HeatAssist_Stage, Tech_cam_STAGE;
 
 
 
@@ -70,6 +75,8 @@ namespace KVANT_Scada_2.Objects
             camPrepare = new CamPrepare();
             AnalogValues = new List<AnalogValue>();
             DiscreteValues = new List<DiscreteValue>();
+            ValvesInput = new Dictionary<int, ValveInput>();
+            ValvesStatus = new Dictionary<int, ValveStatus>();
             SFT01_FT = new AnalogValue();
             SFT02_FT = new AnalogValue();
             SFT03_FT = new AnalogValue();
@@ -128,6 +135,9 @@ namespace KVANT_Scada_2.Objects
             Alarm_Hight_Crio_Temp = new DiscreteValue();
             Crio_start_signal = new DiscreteValue();
             Alarm_manual_stop = new DiscreteValue();
+            PreHeat_Stage = new IntValue();
+            HeatAssist_Stage = new IntValue();
+            Tech_cam_STAGE = new IntValue();
         }
 
         public static OPCObjects createObjects()

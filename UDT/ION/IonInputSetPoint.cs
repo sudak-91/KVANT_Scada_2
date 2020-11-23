@@ -9,6 +9,10 @@ namespace KVANT_Scada_2.UDT.ION
 {
     [OpcDataType("ns=3;s=DT_\"Ion_DB\".\"Input_Set_Point\"")]
     [OpcDataTypeEncoding("ns=3;s=TE_\"Ion_DB\".\"Input_Set_Point\"")]
+    ///<summaray>
+    ///Класс IonInputSetPoint является представлением 
+    ///OPC DataType "ns=3;s=DT_\"Ion_DB\".\"Input_Set_Point\"
+    ///</summaray>
     public class IonInputSetPoint
     {
         public float Anod_I_SP { get; set; }
