@@ -1,0 +1,14 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KVANT_Scada_2"
+        xmlns:Entity="clr-namespace:KVANT_Scada_2.DB.Entity" xmlns:Tech_cam="clr-namespace:KVANT_Scada_2.UDT.Tech_cam" xmlns:OPCUAWorker="clr-namespace:KVANT_Scada_2.OPCUAWorker" x:Class="KVANT_Scada_2.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ProgressBar x:Name="Main_Load_bar" HorizontalAlignment="Left" Height="33" Margin="258,340,0,0" VerticalAlignment="Top" Width="293" ValueChanged="ProgressBar_ValueChanged"/>
+
+    </Grid>
+</Window>
