@@ -3,13 +3,114 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
         xmlns:local="clr-namespace:KVANT_Scada_2"
         xmlns:Entity="clr-namespace:KVANT_Scada_2.DB.Entity" xmlns:Tech_cam="clr-namespace:KVANT_Scada_2.UDT.Tech_cam" xmlns:OPCUAWorker="clr-namespace:KVANT_Scada_2.OPCUAWorker" x:Class="KVANT_Scada_2.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ProgressBar x:Name="Main_Load_bar" HorizontalAlignment="Left" Height="33" Margin="258,340,0,0" VerticalAlignment="Top" Width="293" ValueChanged="ProgressBar_ValueChanged"/>
-        <TextBox x:Name="MainConsole" HorizontalAlignment="Left" Height="235" Margin="246,62,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="329"/>
-
+        Loaded="Window_Loaded"
+        Title="MainWindow" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}" Height="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenHeightKey}}" >
+    <Window.Resources>
+        <cm:BackgroundWorker x:Key="backgroundWorker" DoWork="BackgroundWorker_DoWork"   ></cm:BackgroundWorker>
+    </Window.Resources>
+    <Grid Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}" Background="#FFC7C7C7" Margin="0,0,-8,-25">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="933*"/>
+        </Grid.ColumnDefinitions>
+        <Image Margin="266,450,1047,59" Source="Resources/Tech_cam.png" Grid.Column="2">
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="7"/>
+            </Image.Effect>
+        </Image>
+        <Image Margin="426,153,1248,612" Source="Resources/Криогенный насос CryoTorr10.png" Grid.Column="2">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="7" ShadowDepth="7"/>
+            </Image.Effect>
+        </Image>
+        <Image HorizontalAlignment="Left" Height="154" Margin="14,303,0,0" VerticalAlignment="Top" Width="180" Source="Resources/Форвакуумный насос (Мнемосхема).png" RenderTransformOrigin="-0.2,-1.44" MouseEnter="Image_MouseEnter_1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+        </Image>
+        <Image HorizontalAlignment="Left" Height="56" Margin="462,400,0,0" VerticalAlignment="Top" Width="429" Source="Resources/Затвор шиберный.png" Grid.Column="2">
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="7"/>
+            </Image.Effect>
+        </Image>
+        <Image x:Name="CPV" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="222,316,0,0" VerticalAlignment="Top" Width="50" Source="Resources/Valve_v3.png" IsEnabled="False" RenderTransformOrigin="0.5,0.5">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="FVV_S" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="224,633,0,0" VerticalAlignment="Top" Width="50" Source="Resources/Valve_v3.png" IsEnabled="False" RenderTransformOrigin="0.5,0.5">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="FVV_B" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="224,713,0,0" VerticalAlignment="Top" Width="50" Source="Resources/Valve_v3.png" IsEnabled="False" RenderTransformOrigin="0.5,0.5">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="BAV_3" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="838,705,0,0" VerticalAlignment="Top" Width="50" Source="Resources/Valve_v3.png" IsEnabled="False" RenderTransformOrigin="0.5,0.5">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Grid Grid.Column="2" HorizontalAlignment="Left" Height="206" Margin="368,585,0,0" VerticalAlignment="Top" Width="359">
+            <Image HorizontalAlignment="Left" Height="156" Margin="100,32,0,0" VerticalAlignment="Top" Width="152" Source="Resources/Карусель.png">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Image HorizontalAlignment="Left" Height="58" Margin="0,146,0,0" VerticalAlignment="Top" Width="80" Source="Resources/ИИ.png">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="88" Source="Resources/Нагреватель.png" Margin="0,-1,0,0">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Image HorizontalAlignment="Left" Height="96" Margin="280,101,0,0" VerticalAlignment="Top" Width="62" Source="Resources/Тигель.png">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+        </Grid>
     </Grid>
 </Window>

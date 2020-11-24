@@ -17,6 +17,7 @@ using System.Threading;
 using Opc.UaFx;
 using KVANT_Scada_2.UDT.DiscreteValue;
 using KVANT_Scada_2.UDT.IntValue;
+using System.Windows.Controls;
 
 namespace KVANT_Scada_2.OPCUAWorker
 {
@@ -35,12 +36,17 @@ namespace KVANT_Scada_2.OPCUAWorker
         TimerCallback OpcInnerTimer;
         OpcClient client;
         public delegate void OPCHandler(string message);
+        OPCHandler _opcHandler;
         public event OPCHandler OPCNotify;
         public OPCObjects opcobjects;
         
         public OPCUAWorker()
         {
             opcobjects = OPCObjects.createObjects();
+        }
+        public void RegisterHandler(OPCHandler opcHandler)
+        {
+            _opcHandler = opcHandler;
         }
         ///<summaray>
         ///Метод  ReadAnalogValue осуществляет чтение данных OPC node
@@ -185,7 +191,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             client = new OpcClient("opc.tcp://192.168.0.10:4840/");
             opcobjects = OPCObjects.createObjects();
             OPCObjects.OPCLocker = OPCLocker;
-            OPCNotify.Invoke("Старт OPC соединения");
+            
             lock (OPCObjects.OPCLocker) 
             {
                 client.Connect();
@@ -209,7 +215,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 ValveStatus SHV_Status = client.ReadNode(OPCUAWorkerPaths.SHV_Status_path).As<ValveStatus>();
                 ValveInput SHV_Input = client.ReadNode(OPCUAWorkerPaths.SHV_Input_path).As<ValveInput>();
                 #endregion
-                OPCNotify?.Invoke("Чтение данных ValveStatus и ValveInput");
+                
 
 
 
@@ -262,7 +268,7 @@ namespace KVANT_Scada_2.OPCUAWorker
 
                 IonInputCommand IonInputCommand = client.ReadNode(OPCUAWorkerPaths.IonInputCommand_path).As<IonInputCommand>();
 
-                OPCNotify?.Invoke("Чтение данных перефирийного оборудования");
+               
 
 
 
@@ -304,11 +310,11 @@ namespace KVANT_Scada_2.OPCUAWorker
 
 
                 ReadAnalogValues(client);
-                OPCNotify?.Invoke("Чтение аналоговых сигналов");
+               
                 ReadDiscretValues(client);
-                OPCNotify?.Invoke("Чтение дискретных сигналов");
+                
                 ReadIntegerValues(client);
-                OPCNotify?.Invoke("Чтение целочисленных сигналов");
+               
 
 
 
@@ -375,7 +381,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                
                
                 //client.Disconnect();
-                OPCNotify?.Invoke("Закрытие соединения с контролером");
+                
                 Console.WriteLine("SDASDASDASDASDSA {0}", opcobjects.GetIonInputSetPoint().Heat_U_SP);
 
 
@@ -495,7 +501,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             OpcInnerTimer = new TimerCallback(TimerRead);
             timer = new Timer(OpcInnerTimer, client, 0, 2000);
 
-
+            _opcHandler("OPC Server data read");
 
 
 
@@ -717,13 +723,15 @@ namespace KVANT_Scada_2.OPCUAWorker
                 objects.SetIonInputCommand(IonInputCommand);
                 //objects.SetFVPStatus(FVPStatus);
                 objects.SetAnalogInput(variable);
-            }           
+            }
+           
 
         }
         public  void TimerRead(object obj)
         {
             Console.WriteLine("OPCUpdate");
             ReadOPCData(obj);
+            _opcHandler("OPC Server data update");
         }
     }
 }

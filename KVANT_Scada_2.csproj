@@ -219,6 +219,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.4.7.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
     <Reference Include="System.IO.Pipelines, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -299,6 +300,11 @@
     <Compile Include="Objects\Objects.cs" />
     <Compile Include="OPCUAWorker\OPCUAWorker.cs" />
     <Compile Include="OPCUAWorker\OPCUAWorkerPaths.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
     <Compile Include="UDT\AnalogInput\AnalogInput.cs" />
     <Compile Include="UDT\AnalogValue\AnalogValue.cs" />
     <Compile Include="UDT\Crio\CrioInput.cs" />
@@ -348,6 +354,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\KVANT_Scada_2.Objects.OPCObjects.datasource" />
     <None Include="Properties\Settings.settings">
@@ -361,6 +371,50 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Tech_cam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Tech_cam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Криогенный насос CryoTorr10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Криогенный насос CryoTorr10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Главный.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Форвакуумный насос %28Мнемосхема%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Затвор шиберный.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Valve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Valve_V2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Valve_v3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Карусель.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ИИ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Нагреватель.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Тигель.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

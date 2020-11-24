@@ -18,22 +18,47 @@ using Opc.UaFx;
 using System.Threading;
 using KVANT_Scada_2.DB;
 using KVANT_Scada_2.Objects;
+using System.ComponentModel;
 
 namespace KVANT_Scada_2
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+
     public partial class MainWindow : Window
     {
-        
-        
-        
+        public OPCUAWorker.OPCUAWorker opcUaWorker;
+        public static TextBox tb;
+        public static string ConsoleMessage
+        {
+            get
+            {
+                return _consoleMessage;
+            }
+            set
+            {
+                _consoleMessage = value;
+                if(_consoleMessage == value)
+                {
+                    MainWindow mw = new MainWindow();
+                    mw.UpdateMainConsole();
+                }
+            }
+        }
+
+        public static string _consoleMessage { get; private set; }
+
+        //private BackgroundWorker backgroundWorker;
+
+
         public MainWindow()
         {
+            
+            //opcUaWorker.OPCNotify += OpcUaWorker_OPCNotify;
             InitializeComponent();
-            
-            
+                      
+            //backgroundWorker = ((BackgroundWorker)this.FindResource("backgroundWorker"));
             //opcUaWorker= new OPCUAWorker.OPCUAWorker();
             //createData = new DB.Logic.CreateData();
             //Thread OPCthread = new Thread(new ThreadStart(opcUaWorker.StartOPCUAClient));
@@ -42,7 +67,7 @@ namespace KVANT_Scada_2
             // OPCthread.Start();
             //Thread thread = new Thread(new ThreadStart(StartTimer));
             //thread.Start();
-            
+
             //this.RunUpdates();
 
 
@@ -100,23 +125,43 @@ namespace KVANT_Scada_2
 
 
         }
-  
 
+        public void OpcUaWorker_OPCNotify(string text)
+        {
+            Console.WriteLine(text);
+            
+            //UpdateMainConsole();
+            //backgroundWorker.RunWorkerAsync();
+        }
 
-      
         private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
         }
 
-        public void UpdateMainConsole(string text)
+        public  void UpdateMainConsole()
         {
 
-            Console.WriteLine(text);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+        
+        }
+
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            
+        }
+
+        private void image_MouseEnter()
+        {
 
         }
-  
-        
-        
+
+        private void Image_MouseEnter_1(object sender, MouseEventArgs e)
+        {
+           
+        }
     }
 }
