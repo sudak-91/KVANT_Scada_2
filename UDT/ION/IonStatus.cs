@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.UDT.ION
 {
-    [OpcDataType("ns=3;s=DT_\"Ion_DB\".\"Status\"")]
-    [OpcDataTypeEncoding("ns=3;s=TE_\"Ion_DB\".\"status\"")]
+    [OpcDataType("ns=3;s=TD_\"IonStatus\"")]
+    [OpcDataTypeEncoding("ns=3;s=TE_\"IonStatus\"")]
     ///<summaray>
     ///Класс IonStatus является представлением 
     ///OPC DataType "ns=3;s=DT_\"Ion_DB\".\"Status\"

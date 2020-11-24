@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.UDT.ION
 {
-    [OpcDataType("ns=3;s=DT_\"Ion_DB\".\"Output_FeedBack\"")]
-    [OpcDataTypeEncoding("ns=3;s=TE_\"Ion_DB\".\"Output_FeedBack\"")]
+    [OpcDataType("ns=3;s=TD_\"IonOutpuFeedback\"")]
+    [OpcDataTypeEncoding("ns=3;s=TE_\"IonOutpuFeedback\"")]
     ///<summaray>
     ///Класс IonOutput Feedback является представлением 
     ///OPC DataType "ns=3;s=DT_\"Ion_DB\".\"Output_FeedBack\"

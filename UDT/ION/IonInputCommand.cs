@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.UDT.ION
 {
-    [OpcDataType("ns=3;s=DT_\"Ion_DB\".\"Input Command\"")]
-    [OpcDataTypeEncoding("ns=3;s=TE_\"Ion_DB\".\"Input Command\"")]
+    [OpcDataType("ns=3;s=TD_\"IonInputCommand\"")]
+    [OpcDataTypeEncoding("ns=3;s=TE_\"IonInputCommand\"")]
     ///<summaray>
     ///Класс IonInputCommand является представлением 
     ///OPC DataType "ns=3;s=DT_\"Ion_DB\".\"Input Command\"

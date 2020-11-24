@@ -374,7 +374,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                
                
                
-                client.Disconnect();
+                //client.Disconnect();
                 OPCNotify?.Invoke("Закрытие соединения с контролером");
                 Console.WriteLine("SDASDASDASDASDSA {0}", opcobjects.GetIonInputSetPoint().Heat_U_SP);
 
