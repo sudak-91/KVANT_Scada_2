@@ -22,7 +22,7 @@ namespace KVANT_Scada_2 {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource1 {
+    public class Resource1 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace KVANT_Scada_2 {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KVANT_Scada_2.Resource1", typeof(Resource1).Assembly);
@@ -51,7 +51,7 @@ namespace KVANT_Scada_2 {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tech_cam {
+        public static System.Drawing.Bitmap Tech_cam {
             get {
                 object obj = ResourceManager.GetObject("Tech_cam", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Valve {
+        public static System.Drawing.Bitmap Valve {
             get {
                 object obj = ResourceManager.GetObject("Valve", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Valve_V2 {
+        public static System.Drawing.Bitmap Valve_V2 {
             get {
                 object obj = ResourceManager.GetObject("Valve_V2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Valve_v3 {
+        public static System.Drawing.Bitmap Valve_v3 {
             get {
                 object obj = ResourceManager.GetObject("Valve_v3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Затвор_шиберный {
+        public static System.Drawing.Bitmap Затвор_шиберный {
             get {
                 object obj = ResourceManager.GetObject("Затвор_шиберный", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ИИ {
+        public static System.Drawing.Bitmap ИИ {
             get {
                 object obj = ResourceManager.GetObject("ИИ", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Карусель {
+        public static System.Drawing.Bitmap Карусель {
             get {
                 object obj = ResourceManager.GetObject("Карусель", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Криогенный_насос_CryoTorr10 {
+        public static System.Drawing.Bitmap Криогенный_насос_CryoTorr10 {
             get {
                 object obj = ResourceManager.GetObject("Криогенный_насос_CryoTorr10", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Нагреватель {
+        public static System.Drawing.Bitmap Нагреватель {
             get {
                 object obj = ResourceManager.GetObject("Нагреватель", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Тигель {
+        public static System.Drawing.Bitmap Тигель {
             get {
                 object obj = ResourceManager.GetObject("Тигель", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace KVANT_Scada_2 {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Форвакуумный_насос__Мнемосхема_ {
+        public static System.Drawing.Bitmap Форвакуумный_насос__Мнемосхема_ {
             get {
                 object obj = ResourceManager.GetObject("Форвакуумный_насос__Мнемосхема_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

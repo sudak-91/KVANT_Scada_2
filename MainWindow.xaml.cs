@@ -19,6 +19,7 @@ using System.Threading;
 using KVANT_Scada_2.DB;
 using KVANT_Scada_2.Objects;
 using System.ComponentModel;
+using KVANT_Scada_2.GUI;
 
 namespace KVANT_Scada_2
 {
@@ -30,6 +31,7 @@ namespace KVANT_Scada_2
     {
         public OPCUAWorker.OPCUAWorker opcUaWorker;
         public static TextBox tb;
+        GUI_Logic GUI;
         public static string ConsoleMessage
         {
             get
@@ -57,7 +59,8 @@ namespace KVANT_Scada_2
             
             //opcUaWorker.OPCNotify += OpcUaWorker_OPCNotify;
             InitializeComponent();
-                      
+            GUI = new GUI_Logic();
+                     
             //backgroundWorker = ((BackgroundWorker)this.FindResource("backgroundWorker"));
             //opcUaWorker= new OPCUAWorker.OPCUAWorker();
             //createData = new DB.Logic.CreateData();
@@ -146,7 +149,7 @@ namespace KVANT_Scada_2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-        
+            
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -162,6 +165,41 @@ namespace KVANT_Scada_2
         private void Image_MouseEnter_1(object sender, MouseEventArgs e)
         {
            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void FVP_Open_Click(object sender, RoutedEventArgs e)
+        {
+
+            Thread FVPGuiThread = new Thread(delegate ()
+            {
+                FVP_GUI w = new FVP_GUI();
+                w.Show();
+                System.Windows.Threading.Dispatcher.Run();
+            });
+            FVPGuiThread.SetApartmentState(ApartmentState.STA);
+            FVPGuiThread.Start();
+
+
+
+        }
+
+        private void CrioPumpStart_Click(object sender, RoutedEventArgs e)
+        {
+
+            Thread CrionGuiThread = new Thread(delegate ()
+            {
+                Crio_GUI w = new Crio_GUI();
+                w.Show();
+                System.Windows.Threading.Dispatcher.Run();
+            });
+            CrionGuiThread.SetApartmentState(ApartmentState.STA);
+            CrionGuiThread.Start();
+
         }
     }
 }

@@ -1,0 +1,54 @@
+﻿<Window x:Class="KVANT_Scada_2.GUI.FVP_GUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
+        mc:Ignorable="d"
+        Title="FVP_GUI" Height="450" Width="300">
+    <Grid>
+        <GroupBox Header="Состояние" HorizontalAlignment="Left" Height="154" Margin="19,7,0,0" VerticalAlignment="Top" Width="253">
+            <Canvas x:Name="FVPStatus" Margin="45,10,49,-2">
+                <Ellipse x:Name="FVPPowerOn" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" StrokeThickness="2" Canvas.Top="7"/>
+                <Label Content="Питание" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Canvas.Left="13"/>
+                <Ellipse x:Name="FVPAutoMode" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" StrokeThickness="2" Canvas.Top="27"/>
+                <Label Content="Автоматичсекий режим" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Canvas.Left="13" Canvas.Top="21"/>
+                <Ellipse x:Name="FVPManualMode" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" StrokeThickness="2" Canvas.Top="46"/>
+                <Label Content="Ручной режим" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Canvas.Left="13" Canvas.Top="40"/>
+                <Ellipse x:Name="FVPBlock" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" StrokeThickness="2" Canvas.Top="65"/>
+                <Label Content="Блокировка" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Canvas.Left="14" Canvas.Top="59"/>
+                <Ellipse x:Name="FVPService" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" StrokeThickness="2" Canvas.Top="83"/>
+                <Label Content="Сервисный режим" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Canvas.Left="14" Canvas.Top="77"/>
+                <Ellipse x:Name="FVPTurnOn" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" StrokeThickness="2" Canvas.Top="103" RenderTransformOrigin="0.578,2.444"/>
+                <Label Content="В работе" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Canvas.Left="13" Canvas.Top="97"/>
+
+            </Canvas>
+        </GroupBox>
+        <Button x:Name="btnFVPAutoMode" Content="Автоматический режим" HorizontalAlignment="Left" Height="25" Margin="10,176,0,0" VerticalAlignment="Top" Width="149" Click="btnFVPAutoMode_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="btnFVPManualMode" Content="Ручной режим" HorizontalAlignment="Left" Height="25" Margin="8,212,0,0" VerticalAlignment="Top" Width="149">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="btnFVPOpen" Content="Открыть" HorizontalAlignment="Left" Height="25" Margin="9,246,0,0" VerticalAlignment="Top" Width="149" IsDefault="True">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="btnFVPClose" Content="Закрыть" HorizontalAlignment="Left" Height="25" Margin="9,281,0,0" VerticalAlignment="Top" Width="149" IsDefault="True">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="btnFVPService" Content="Сервис" HorizontalAlignment="Left" Height="25" Margin="8,316,0,0" VerticalAlignment="Top" Width="149" IsDefault="True">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+
+    </Grid>
+</Window>

@@ -39,7 +39,7 @@ namespace KVANT_Scada_2
             opcUaWorker.RegisterHandler(new OPCUAWorker.OPCUAWorker.OPCHandler(OpcUaWorker_OPCNotify));
             MainWindow = new MainWindow();
             MainWindow.Show();
-            ref TextBox tb = ref MainWindow.MainConsole;
+           
             //opcUaWorker.OPCNotify += OpcUaWorker_OPCNotify;
 
             ConsoleWrite();
@@ -54,9 +54,7 @@ namespace KVANT_Scada_2
         
         private void OpcUaWorker_OPCNotify(string text)
         {
-            ref TextBox tb = ref MainWindow.MainConsole;
-            tb.Text = "asdfasdasdsadasd";
-
+          
             //MainWindow.UpdateMainConsole();
             //throw new NotImplementedException();
         }

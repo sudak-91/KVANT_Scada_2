@@ -64,7 +64,9 @@ namespace KVANT_Scada_2.Objects
                                     Alarm_Indexer_power_failure, Alarm_SSP_power_failure,
                                     Alarm_TV1_power_failure, Alarm_Water_SECOND, Alarm_Hight_Crio_Temp,
                                     Crio_start_signal, Alarm_manual_stop;
-        public static IntValue PreHeat_Stage, HeatAssist_Stage, Tech_cam_STAGE;
+        public static IntValue PreHeat_Stage;
+        public static IntValue HeatAssist_Stage;
+        public static IntValue Tech_cam_STAGE;
 
 
 

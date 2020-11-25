@@ -297,6 +297,13 @@
     <Compile Include="DB\Entity\Valves.cs" />
     <Compile Include="DB\Logic\CreateData.cs" />
     <Compile Include="DB\MyDBContext.cs" />
+    <Compile Include="GUI\Crio_GUI.xaml.cs">
+      <DependentUpon>Crio_GUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FVP_GUI.xaml.cs">
+      <DependentUpon>FVP_GUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\GUI_Logic.cs" />
     <Compile Include="Objects\Objects.cs" />
     <Compile Include="OPCUAWorker\OPCUAWorker.cs" />
     <Compile Include="OPCUAWorker\OPCUAWorkerPaths.cs" />
@@ -323,6 +330,14 @@
     <Compile Include="UDT\Tech_cam\StopFVP.cs" />
     <Compile Include="UDT\Valve\ValveInput.cs" />
     <Compile Include="UDT\Valve\ValveStatus.cs" />
+    <Page Include="GUI\Crio_GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\FVP_GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -355,7 +370,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource1.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -416,5 +431,6 @@
   <ItemGroup>
     <Resource Include="Resources\Тигель.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
