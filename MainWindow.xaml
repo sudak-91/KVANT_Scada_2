@@ -91,7 +91,11 @@
             </Image.RenderTransform>
         </Image>
         <Grid Grid.Column="2" HorizontalAlignment="Left" Height="206" Margin="368,585,0,0" VerticalAlignment="Top" Width="359">
-            <Image HorizontalAlignment="Left" Height="156" Margin="100,32,0,0" VerticalAlignment="Top" Width="152" Source="Resources/Карусель.png">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="83*"/>
+                <ColumnDefinition Width="277*"/>
+            </Grid.ColumnDefinitions>
+            <Image HorizontalAlignment="Left" Height="156" Margin="17.5,32,0,0" VerticalAlignment="Top" Width="152" Source="Resources/Карусель.png" Grid.Column="1">
                 <Image.Effect>
                     <DropShadowEffect/>
                 </Image.Effect>
@@ -101,16 +105,17 @@
                     <DropShadowEffect/>
                 </Image.Effect>
             </Image>
-            <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="88" Source="Resources/Нагреватель.png" Margin="0,-1,0,0">
+            <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="91" Source="Resources/Нагреватель.png" Margin="34,-34,0,0" Grid.ColumnSpan="2">
                 <Image.Effect>
                     <DropShadowEffect/>
                 </Image.Effect>
             </Image>
-            <Image HorizontalAlignment="Left" Height="96" Margin="280,101,0,0" VerticalAlignment="Top" Width="62" Source="Resources/Тигель.png">
+            <Image HorizontalAlignment="Left" Height="96" Margin="197.5,101,0,0" VerticalAlignment="Top" Width="62" Source="Resources/Тигель.png" Grid.Column="1">
                 <Image.Effect>
                     <DropShadowEffect/>
                 </Image.Effect>
             </Image>
         </Grid>
+        <TextBox x:Name="MainConsole" Grid.Column="2" HorizontalAlignment="Left" Height="276" Margin="1222,194,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="463"/>
     </Grid>
 </Window>

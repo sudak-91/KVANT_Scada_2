@@ -35,7 +35,9 @@ namespace KVANT_Scada_2.OPCUAWorker
         object OPCLocker;
         TimerCallback OpcInnerTimer;
         OpcClient client;
-        public delegate void OPCHandler(string message);
+        public delegate void OPCHandler(string text);
+
+
         OPCHandler _opcHandler;
         public event OPCHandler OPCNotify;
         public OPCObjects opcobjects;
@@ -501,7 +503,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             OpcInnerTimer = new TimerCallback(TimerRead);
             timer = new Timer(OpcInnerTimer, client, 0, 2000);
 
-            _opcHandler("OPC Server data read");
+            _opcHandler("OPC DONE");
 
 
 
