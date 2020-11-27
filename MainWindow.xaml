@@ -119,13 +119,13 @@
             <Ellipse x:Name="Driver" Grid.Column="1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="44" Margin="71,79,0,0" Stroke="Black" VerticalAlignment="Top" Width="44" StrokeThickness="4"/>
             <Ellipse x:Name="Ion" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="44" Margin="18,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="44" StrokeThickness="4"/>
         </Grid>
-        <TextBox x:Name="ForVac_pressure" Grid.Column="2" HorizontalAlignment="Left" Height="22" Margin="233,493,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124">
+        <TextBox x:Name="ForVac_pressure" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="18,528,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Grid.ColumnSpan="2">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
         </TextBox>
-        <Label Content="Давленив форвакуумной линии" HorizontalAlignment="Left" Margin="199,470,0,0" VerticalAlignment="Top" FontFamily="Lucida Console" Grid.Column="2"/>
-        <Border x:Name="Crio" BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="90" Margin="635,220,0,0" VerticalAlignment="Top" Width="227">
+        <Label Content="Давленив форвакуумной линии" HorizontalAlignment="Left" Margin="6,504,0,0" VerticalAlignment="Top" FontFamily="Lucida Console" Grid.ColumnSpan="3"/>
+        <Border x:Name="Crio" BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="90" Margin="886,240,0,0" VerticalAlignment="Top" Width="226">
             <Canvas Margin="0,10,89,66">
                 <TextBox x:Name="Crio_pressure" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="92">
                     <TextBox.Effect>
@@ -141,7 +141,7 @@
                 <Label Content="Давление" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="70" FontFamily="Lucida Console"/>
             </Canvas>
         </Border>
-        <Label Content="Криогенный насос" Grid.Column="2" HorizontalAlignment="Left" Margin="636,194,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontFamily="Lucida Console"/>
+        <Label Content="Криогенный насос" Grid.Column="2" HorizontalAlignment="Left" Margin="886,214,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontFamily="Lucida Console"/>
         <Ellipse x:Name="BAV_3" Grid.Column="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="38" Margin="843,736,0,0" Stroke="Black" VerticalAlignment="Top" Width="38" StrokeThickness="2"/>
         <Ellipse x:Name="FVV_B" Grid.Column="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="38" Margin="229,744,0,0" Stroke="Black" VerticalAlignment="Top" Width="38" StrokeThickness="2"/>
         <Ellipse x:Name="FVV_S" Grid.Column="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="38" Margin="229,664,0,0" Stroke="Black" VerticalAlignment="Top" Width="38" StrokeThickness="2"/>
@@ -165,7 +165,7 @@
         <Path Grid.Column="2" Data="M1.5000203,1.5000034 L51.50002,1.5000034" Fill="Blue" HorizontalAlignment="Left" Height="3" Margin="912.083,753.659,0,0" Stroke="Blue" StrokeThickness="3" VerticalAlignment="Top" Width="68.625" StrokeDashArray="1 0" StrokeStartLineCap="Triangle" Stretch="Fill"/>
         <Label Content="Воздух" Grid.Column="2" HorizontalAlignment="Left" Height="27.659" Margin="919.25,736.625,0,0" VerticalAlignment="Top" Width="55.583" FontFamily="Lucida Console"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="72" Margin="6,931,0,0" VerticalAlignment="Top" Width="193"/>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="75" Margin="789,536,0,0" VerticalAlignment="Top" Width="237">
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="75" Margin="885,371,0,0" VerticalAlignment="Top" Width="237">
             <Canvas Margin="5,10,55,47">
                 <TextBox x:Name="Main_pressure" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="94">
                     <TextBox.Effect>
@@ -181,10 +181,10 @@
                 </TextBox>
             </Canvas>
         </Border>
-        <Label Content="Камера" Grid.Column="2" HorizontalAlignment="Left" Margin="790,508,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontFamily="Lucida Console"/>
+        <Label Content="Камера" Grid.Column="2" HorizontalAlignment="Left" Margin="886,343,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontFamily="Lucida Console"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="75" Margin="10,44,0,0" VerticalAlignment="Top" Width="1418"/>
         <Label Content="Меню" Grid.Column="2" HorizontalAlignment="Left" Height="28" Margin="1,16,0,0" VerticalAlignment="Top" Width="101" FontFamily="Lucida Console" FontSize="18" FontWeight="Bold"/>
         <Button x:Name="FVP_Open" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Grid.Column="1" Margin="8,296,0,0" Height="180" Click="FVP_Open_Click" Opacity="0"/>
-        <Button x:Name="CrioPumpStart" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="256" Margin="413,145,0,0" VerticalAlignment="Top" Width="257" Opacity="0" Click="CrioPumpStart_Click"/>
+        <Button x:Name="CrioPumpStart" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="256" Margin="413,144,0,0" VerticalAlignment="Top" Width="257" Opacity="0" Click="CrioPumpStart_Click"/>
     </Grid>
 </Window>

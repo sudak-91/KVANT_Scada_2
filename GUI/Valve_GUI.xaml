@@ -1,0 +1,34 @@
+﻿<Window x:Class="KVANT_Scada_2.GUI.Valve_GUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
+        mc:Ignorable="d"
+        Title="Valve_GUI" Height="450" Width="300">
+    <Grid>
+        <GroupBox Header="Состояния" HorizontalAlignment="Left" Height="147" Margin="8,11,0,0" VerticalAlignment="Top" Width="267">
+            <Canvas Margin="49,0,46,-3">
+                <Ellipse x:Name="ValveAutoMode" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="6"/>
+                <Label Content="Автоматический режим" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="145" Canvas.Left="15"/>
+                <Ellipse x:Name="ValveManuakMode" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="25"/>
+                <Label Content="Ручной режим" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="144" Canvas.Left="15" Canvas.Top="19"/>
+                <Ellipse x:Name="ValveOpened" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="45"/>
+                <Label Content="Клапан открыт" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="144" Canvas.Left="15" Canvas.Top="39"/>
+                <Ellipse x:Name="ValveClosed" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="65"/>
+                <Label Content="Клапан закрыт" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="144" Canvas.Left="15" Canvas.Top="59"/>
+                <Ellipse x:Name="ValveBlocked" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="85"/>
+                <Label Content="Блокировка" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="144" Canvas.Left="15" Canvas.Top="79"/>
+                <Ellipse x:Name="ValveService" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="105"/>
+                <Label Content="Сервисный режим" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="144" Canvas.Left="15" Canvas.Top="99"/>
+
+            </Canvas>
+        </GroupBox>
+        <Button x:Name="AutoModeOn" Content="Автоматический режим" HorizontalAlignment="Left" Height="32" Margin="15,166,0,0" VerticalAlignment="Top" Width="259"/>
+        <Button x:Name="ManualModeOn" Content="Ручной режим" HorizontalAlignment="Left" Height="32" Margin="14,205,0,0" VerticalAlignment="Top" Width="259"/>
+        <Button x:Name="Open" Content="Открыть" HorizontalAlignment="Left" Height="32" Margin="15,247,0,0" VerticalAlignment="Top" Width="259"/>
+        <Button x:Name="Close" Content="Закрыть" HorizontalAlignment="Left" Height="32" Margin="14,289,0,0" VerticalAlignment="Top" Width="259"/>
+        <Button x:Name="ServiceMode" Content="Сервисный режим" HorizontalAlignment="Left" Height="32" Margin="13,332,0,0" VerticalAlignment="Top" Width="259"/>
+
+    </Grid>
+</Window>

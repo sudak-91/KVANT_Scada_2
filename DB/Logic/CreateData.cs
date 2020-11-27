@@ -489,6 +489,26 @@ namespace KVANT_Scada_2.DB.Logic
                     Name = "BLM_Speed_SP",
                     Path = OPCUAWorkerPaths.BLM_Speed_SP_path
                 };
+                var rrrg1_k = new AnalogaValueTable
+                {
+                    Name = "K_RRG1",
+                    Path = OPCUAWorkerPaths.K_RRG1_path
+                };
+                var rrrg2_k = new AnalogaValueTable
+                {
+                    Name = "K_RRG2",
+                    Path = OPCUAWorkerPaths.K_RRG2_path
+                };
+                var rrrg3_k = new AnalogaValueTable
+                {
+                    Name = "K_RRG3",
+                    Path = OPCUAWorkerPaths.K_RRG3_path
+                };
+                var rrrg4_k = new AnalogaValueTable
+                {
+                    Name = "K_RRG4",
+                    Path = OPCUAWorkerPaths.K_RRG4_path
+                };
                 context.AnalogValue.Add(rft_tt_1);
                 context.AnalogValue.Add(rft_tt_2);
                 context.AnalogValue.Add(rft_tt_3);
@@ -519,6 +539,10 @@ namespace KVANT_Scada_2.DB.Logic
                 context.AnalogValue.Add(rcampres);
                 context.AnalogValue.Add(rcriopres);
                 context.AnalogValue.Add(rcriotemp);
+                context.AnalogValue.Add(rrrg1_k);
+                context.AnalogValue.Add(rrrg2_k);
+                context.AnalogValue.Add(rrrg3_k);
+                context.AnalogValue.Add(rrrg4_k);
                 context.SaveChanges();
 
             }

@@ -127,6 +127,10 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadAnalogValue(ref OPCObjects.SFT09_FT, OPCUAWorkerPaths.SFT09_FT_path, client);
             ReadAnalogValue(ref OPCObjects.SFT10_FT, OPCUAWorkerPaths.SFT10_FT_path, client);
             ReadAnalogValue(ref OPCObjects.TE_1, OPCUAWorkerPaths.TE_1_path, client);
+            ReadAnalogValue(ref OPCObjects.K_RRG1, OPCUAWorkerPaths.K_RRG1_path, client);
+            ReadAnalogValue(ref OPCObjects.K_RRG2, OPCUAWorkerPaths.K_RRG2_path, client);
+            ReadAnalogValue(ref OPCObjects.K_RRG3, OPCUAWorkerPaths.K_RRG3_path, client);
+            ReadAnalogValue(ref OPCObjects.K_RRG4, OPCUAWorkerPaths.K_RRG4_path, client);
 
         }
         ///<summaray>

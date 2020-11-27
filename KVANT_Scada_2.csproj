@@ -300,10 +300,25 @@
     <Compile Include="GUI\Crio_GUI.xaml.cs">
       <DependentUpon>Crio_GUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Driver-GUI.xaml.cs">
+      <DependentUpon>Driver-GUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\FVP_GUI.xaml.cs">
       <DependentUpon>FVP_GUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\GUI_Logic.cs" />
+    <Compile Include="GUI\Heat_GUI.xaml.cs">
+      <DependentUpon>Heat_GUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Ion_GUI.xaml.cs">
+      <DependentUpon>Ion_GUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\RRG_GUI.xaml.cs">
+      <DependentUpon>RRG_GUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Valve_GUI.xaml.cs">
+      <DependentUpon>Valve_GUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Objects\Objects.cs" />
     <Compile Include="OPCUAWorker\OPCUAWorker.cs" />
     <Compile Include="OPCUAWorker\OPCUAWorkerPaths.cs" />
@@ -334,7 +349,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Driver-GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\FVP_GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Heat_GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Ion_GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\RRG_GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Valve_GUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

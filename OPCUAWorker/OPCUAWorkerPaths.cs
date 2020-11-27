@@ -102,5 +102,9 @@ namespace KVANT_Scada_2.OPCUAWorker
         public static string Tech_cam_STAGE_path = "ns=3;s=\"Tech_Cam_Logic\".\"STAGE\"";
         public static string Crio_start_signal_path = "ns=3;s=\"Tech_Cam_Logic\".\"Crio_start_signal\"";
         public static string Alarm_manual_Stop_path = "ns=3;s=\"Tech_Cam_Logic\".\"Alarm_manual_Stop\"";
+        public static string K_RRG1_path = "ns=3;s=\"RRG_DB\".\"K_RRG1\"";
+        public static string K_RRG2_path = "ns=3;s=\"RRG_DB\".\"K_RRG2\"";
+        public static string K_RRG3_path = "ns=3;s=\"RRG_DB\".\"K_RRG3\"";
+        public static string K_RRG4_path = "ns=3;s=\"RRG_DB\".\"K_RRG4\"";
     }
 }

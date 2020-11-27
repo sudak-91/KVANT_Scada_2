@@ -52,7 +52,8 @@ namespace KVANT_Scada_2.Objects
                                     Camera_Pressure, Main_Pressure, Crio_Temperature,
                                     PreHeat_Temp_SP, HeatAssist_Temp_SP,
                                     PreHeat_Timer_SP, HeatAssist_Timer_SP,
-                                    ManualSetTemp, BLM_Speed, BLM_Speed_SP;
+                                    ManualSetTemp, BLM_Speed, BLM_Speed_SP,
+                                    K_RRG1, K_RRG2, K_RRG3, K_RRG4;
         public static DiscreteValue PreHeat_Done, HeatAssist_Done, PreHeat_Start,
                                     HeatAssist_Flag, Heat_Done, HeatAssist_TempDone,
                                     Heat_Assit_On, BLM_Start, BLM_Stop, BLM_Remote_Control_Done,
@@ -92,6 +93,10 @@ namespace KVANT_Scada_2.Objects
             FT_TT_1 = new AnalogValue();
             FT_TT_2 = new AnalogValue();
             FT_TT_3 = new AnalogValue();
+            K_RRG1 = new AnalogValue();
+            K_RRG2 = new AnalogValue();
+            K_RRG3 = new AnalogValue();
+            K_RRG4 = new AnalogValue();
             RRG_9A1_feedback = new AnalogValue();
             RRG_9A2_feedback = new AnalogValue();
             RRG_9A3_feedback = new AnalogValue();
