@@ -694,6 +694,16 @@ namespace KVANT_Scada_2.DB.Logic
                     Name = "Alarm_manual_Stop",
                     Path = OPCUAWorkerPaths.Alarm_manual_Stop_path
                 };
+                var bmanualstop = new DigitalValueTable
+                {
+                    Name = "Manual_Stop",
+                    Path = OPCUAWorkerPaths.StopProcessSignal_path
+                };
+                var bstartprocesssignal = new DigitalValueTable
+                {
+                    Name = "Start_Process",
+                    Path = OPCUAWorkerPaths.StartProcessSignal_path
+                };
                 context.DigitalValue.Add(balarmcriopowerfailure);
                 context.DigitalValue.Add(balarmelipowerfailure);
                 context.DigitalValue.Add(balarmfloatheaterpowerfailure);
@@ -722,6 +732,8 @@ namespace KVANT_Scada_2.DB.Logic
                 context.DigitalValue.Add(bheatdone);
                 context.DigitalValue.Add(bpreheatdone);
                 context.DigitalValue.Add(bpreheatstart);
+                context.DigitalValue.Add(bmanualstop);
+                context.DigitalValue.Add(bstartprocesssignal);
                 context.SaveChanges();
 
             }
@@ -746,9 +758,15 @@ namespace KVANT_Scada_2.DB.Logic
                     Name = "Tech_cam_STAGE",
                     Path = OPCUAWorkerPaths.Tech_cam_STAGE_path
                 };
+                var ifullcyclestage = new IntValueTable
+                {
+                    Name = "Full_Cycle_Stage",
+                    Path = OPCUAWorkerPaths.FullCycleStage_path
+                };
                 context.IntValue.Add(iheatassiststage);
                 context.IntValue.Add(ipreheatstage);
                 context.IntValue.Add(itechcamstage);
+                context.IntValue.Add(ifullcyclestage);
                 context.SaveChanges();
             }
         }

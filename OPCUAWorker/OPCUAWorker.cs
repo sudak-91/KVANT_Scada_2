@@ -167,6 +167,8 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadDiscreteValue(ref OPCObjects.Heat_Done, OPCUAWorkerPaths.Heat_Done_path, client);
             ReadDiscreteValue(ref OPCObjects.PreHeat_Done, OPCUAWorkerPaths.PreHeat_Done_path, client);
             ReadDiscreteValue(ref OPCObjects.PreHeat_Start, OPCUAWorkerPaths.PreHeat_Start_path, client);
+            ReadDiscreteValue(ref OPCObjects.StartProcessSignal, OPCUAWorkerPaths.StartProcessSignal_path, client);
+            ReadDiscreteValue(ref OPCObjects.StopProcessSignal, OPCUAWorkerPaths.StopProcessSignal_path, client);
 
         }
         ///<summaray>
@@ -182,6 +184,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadIntegerValue(ref OPCObjects.HeatAssist_Stage, OPCUAWorkerPaths.HeatAssist_Stage_path, client);
             ReadIntegerValue(ref OPCObjects.Tech_cam_STAGE, OPCUAWorkerPaths.Tech_cam_STAGE_path, client);
             ReadIntegerValue(ref OPCObjects.PreHeat_Stage, OPCUAWorkerPaths.PreHeat_Stage_path, client);
+            ReadIntegerValue(ref OPCObjects.FullCycleStage, OPCUAWorkerPaths.FullCycleStage_path, client);
 
         }
         ///<summaray>
@@ -421,6 +424,10 @@ namespace KVANT_Scada_2.OPCUAWorker
                 OPCObjects.AnalogValues.Add(OPCObjects.SFT09_FT);
                 OPCObjects.AnalogValues.Add(OPCObjects.SFT10_FT);
                 OPCObjects.AnalogValues.Add(OPCObjects.TE_1);
+                OPCObjects.AnalogValues.Add(OPCObjects.K_RRG1);
+                OPCObjects.AnalogValues.Add(OPCObjects.K_RRG2);
+                OPCObjects.AnalogValues.Add(OPCObjects.K_RRG3);
+                OPCObjects.AnalogValues.Add(OPCObjects.K_RRG4);
 
                 OPCObjects.DiscreteValues.Add(OPCObjects.Alarm_Crio_power_failure);
                 OPCObjects.DiscreteValues.Add(OPCObjects.Alarm_ELI_Power_failure);
@@ -450,6 +457,8 @@ namespace KVANT_Scada_2.OPCUAWorker
                 OPCObjects.DiscreteValues.Add(OPCObjects.Heat_Done);
                 OPCObjects.DiscreteValues.Add(OPCObjects.PreHeat_Done);
                 OPCObjects.DiscreteValues.Add(OPCObjects.PreHeat_Start);
+                OPCObjects.DiscreteValues.Add(OPCObjects.StopProcessSignal);
+                OPCObjects.DiscreteValues.Add(OPCObjects.StartProcessSignal);
 
                 OPCObjects.IntValues.Add(OPCObjects.HeatAssist_Stage);
                 OPCObjects.IntValues.Add(OPCObjects.Tech_cam_STAGE);
@@ -562,7 +571,7 @@ namespace KVANT_Scada_2.OPCUAWorker
         ///</summaray>
         ///<param name="path">Путь к Node</param>
         ///<param name="obj">Изменененная Нода</param>
-        public void Write<T> (string path, T obj)
+        public static void Write<T> (string path, T obj)
         {
             var opc = OPCObjects.createObjects();
             var client = opc.get_OpcClietn();
