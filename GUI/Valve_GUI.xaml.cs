@@ -19,9 +19,10 @@ namespace KVANT_Scada_2.GUI
     /// </summary>
     public partial class Valve_GUI : Window
     {
-        public Valve_GUI()
+        public Valve_GUI( string name)
         {
             InitializeComponent();
+            this.Title = name;
         }
     }
 }

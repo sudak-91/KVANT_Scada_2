@@ -8,7 +8,7 @@
         xmlns:Entity="clr-namespace:KVANT_Scada_2.DB.Entity" xmlns:Tech_cam="clr-namespace:KVANT_Scada_2.UDT.Tech_cam" xmlns:OPCUAWorker="clr-namespace:KVANT_Scada_2.OPCUAWorker" xmlns:IntValue="clr-namespace:KVANT_Scada_2.UDT.IntValue" xmlns:ION="clr-namespace:KVANT_Scada_2.UDT.ION" x:Class="KVANT_Scada_2.MainWindow"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}" Height="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenHeightKey}}" >
+        Title="MainWindow" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}" Height="1080" >
     <Window.Resources>
         <cm:BackgroundWorker x:Key="backgroundWorker" DoWork="BackgroundWorker_DoWork"   />
     </Window.Resources>
@@ -23,7 +23,7 @@
                 <DropShadowEffect ShadowDepth="7"/>
             </Image.Effect>
         </Image>
-        <Image x:Name="CrioPump_img" Margin="426,153,1248,612" Source="Resources/Криогенный насос CryoTorr10.png" Grid.Column="2">
+        <Image x:Name="CrioPump_img" Margin="426,116,1248,649" Source="Resources/Криогенный насос CryoTorr10.png" Grid.Column="2">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="7" ShadowDepth="7"/>
             </Image.Effect>
@@ -33,7 +33,7 @@
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image HorizontalAlignment="Left" Height="56" Margin="462,400,0,0" VerticalAlignment="Top" Width="429" Source="Resources/Затвор шиберный.png" Grid.Column="2">
+        <Image HorizontalAlignment="Left" Height="56" Margin="462,394,0,0" VerticalAlignment="Top" Width="429" Source="Resources/Затвор шиберный.png" Grid.Column="2">
             <Image.Effect>
                 <DropShadowEffect ShadowDepth="7"/>
             </Image.Effect>
@@ -185,7 +185,7 @@
         <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="75" Margin="10,44,0,0" VerticalAlignment="Top" Width="1418"/>
         <Label Content="Меню" Grid.Column="2" HorizontalAlignment="Left" Height="28" Margin="1,16,0,0" VerticalAlignment="Top" Width="101" FontFamily="Lucida Console" FontSize="18" FontWeight="Bold"/>
         <Button x:Name="FVP_Open" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Grid.Column="1" Margin="8,296,0,0" Height="180" Click="FVP_Open_Click" Opacity="0"/>
-        <Button x:Name="CrioPumpStart" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="256" Margin="413,144,0,0" VerticalAlignment="Top" Width="257" Opacity="0" Click="CrioPumpStart_Click"/>
+        <Button x:Name="CrioPumpStart" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="256" Margin="413,140,0,0" VerticalAlignment="Top" Width="257" Opacity="0" Click="CrioPumpStart_Click"/>
         <GroupBox Grid.Column="2" Header="Состояние вакуумной системы" HorizontalAlignment="Left" Height="142" Margin="1124,148,0,0" VerticalAlignment="Top" Width="247">
             <Canvas x:Name="CameraStatus" Margin="15,15,18,19">
                 <Ellipse x:Name="CrioStartDone" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="7"/>
@@ -195,11 +195,11 @@
                 <Ellipse x:Name="AtmosDone" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="51"/>
                 <Label Content="В камеру напущена атмосфера" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="19" Canvas.Top="44"/>
                 <Ellipse x:Name="DoorOpen" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="73"/>
-                <Label Content="Дверь камеры открыта" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="19" Canvas.Top="66"/>
+                <Label Content="Дверь камеры закрыта" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="19" Canvas.Top="66"/>
             </Canvas>
         </GroupBox>
-        <GroupBox Grid.Column="2" Header="Этапы полного цикла напыления" HorizontalAlignment="Left" Height="168" Margin="1389,148,0,0" VerticalAlignment="Top" Width="230">
-            <Canvas Margin="9,14,2,9">
+        <GroupBox Grid.Column="2" Header="Этапы полного цикла напыления" HorizontalAlignment="Left" Height="163" Margin="1124,305,0,0" VerticalAlignment="Top" Width="247">
+            <Canvas Margin="15,14,-4,9">
                 <Ellipse x:Name="FullStage0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="7"/>
                 <Label Content="Подготовка камеры" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="18"/>
                 <Ellipse x:Name="FullStage1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="33"/>
@@ -212,5 +212,49 @@
                 <Label Content="Открытие камеры" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="18" Canvas.Top="96"/>
             </Canvas>
         </GroupBox>
+        <GroupBox Grid.Column="2" Header="Ошибки системы" HorizontalAlignment="Left" Height="368" Margin="1125,480,0,0" VerticalAlignment="Top" Width="355">
+            <Canvas Margin="13,17,16,9">
+                <Ellipse x:Name="AlarmOpenDoor" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="-1.133,0.4" Canvas.Top="7"/>
+                <Label Content="Дверь камеры открыта" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26"/>
+                <Ellipse x:Name="AlarmWaterCrio" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="28"/>
+                <Label Content="Охлаждение криогенного насоса" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="21"/>
+                <Ellipse x:Name="AlarmHightPnePress" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="49"/>
+                <Label Content="Высокое давление в пневмосистеме" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="42"/>
+                <Ellipse x:Name="AlarmLowPnePress" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="70"/>
+                <Label Content="Низкое давление в пневмосистеме" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="63"/>
+                <Ellipse x:Name="AlarmCrioPower" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="91"/>
+                <Label Content="Ошибка питания крионасоса" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="84"/>
+                <Ellipse x:Name="AlarmQartzPower" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="112"/>
+                <Label Content="Ошибка питания кварцевого датчика" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="105"/>
+                <Ellipse x:Name="AlarmELIPower" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="133"/>
+                <Label Content="Ошибка питания ЭЛИ" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="126"/>
+                <Ellipse x:Name="AlarmFloatHeaterPower" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="154"/>
+                <Label Content="Ошибка питания проточного нагревателя" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="147"/>
+                <Ellipse x:Name="AlarmIonPower" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="174"/>
+                <Label Content="Ошибка питания ионного источника" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="168"/>
+                <Ellipse x:Name="AlarmFVPPower" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="196"/>
+                <Label Content="Ошибка питания форвакуумного насоса" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="189"/>
+                <Ellipse x:Name="AlarmInderxerPower" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="217"/>
+                <Label Content="Ошибка питания индексатора ELI" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="210"/>
+                <Ellipse x:Name="AlarmSSPPower" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="237"/>
+                <Label Content="Ошибка питания самовсасывающего насоса" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="230"/>
+                <Ellipse x:Name="AlarmTV1Power" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="258"/>
+                <Label Content="Ошибка питания нагервателей" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="251"/>
+                <Ellipse x:Name="AlarmWaterSecond" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="279"/>
+                <Label Content="Отсутствие протока во втором контуре охлаждения" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="272"/>
+                <Ellipse x:Name="AlarmHightCrioTemp" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.467,0.511" Canvas.Top="300"/>
+                <Label Content="Высокая температура крионасоса" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="293"/>
+            </Canvas>
+        </GroupBox>
+        <Button x:Name="BAV3_GUI" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="79" Margin="801,717,0,0" VerticalAlignment="Top" Width="118" Opacity="0" Click="BAV3_GUI_Click"/>
+        <Button x:Name="SHV_GUI" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="49" Margin="458,398,0,0" VerticalAlignment="Top" Width="410" Opacity="0" Click="SHV_GUI_Click"/>
+        <Button x:Name="CPV_GUI" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="70" Margin="188,334,0,0" VerticalAlignment="Top" Width="116" Opacity="0" Click="CPV_GUI_Click"/>
+        <Button x:Name="FVV_S_GUI" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="70" Margin="189,651,0,0" VerticalAlignment="Top" Width="116" Opacity="0" Click="FVV_S_GUI_Click"/>
+        <Button x:Name="FVV_B_GUI" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="71" Margin="188,728,0,0" VerticalAlignment="Top" Width="118" Opacity="0" Click="FVV_B_GUI_Click"/>
+        <Button x:Name="Driver_GUI" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="157" Margin="468,617,0,0" VerticalAlignment="Top" Width="157" Opacity="0" Click="Driver_GUI_Click"/>
+        <Ellipse x:Name="HeatON_signal" Grid.Column="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="30" Margin="453,550,0,0" Stroke="Black" VerticalAlignment="Top" Width="30"/>
+        <Button x:Name="IonGUI_ON" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="60" Margin="364,730,0,0" VerticalAlignment="Top" Width="90" Opacity="0" Click="IonGUI_ON_Click"/>
+        <Button x:Name="HeaterGUI_ON" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="76" Margin="401,548,0,0" VerticalAlignment="Top" Width="94" Opacity="0" Click="HeaterGUI_ON_Click"/>
+        <CheckBox x:Name="HeatAssistcheckBox" Content="Нагрев при напылении" Grid.Column="2" HorizontalAlignment="Left" Height="16" Margin="18,140,0,0" VerticalAlignment="Top" Width="175" Checked="HeatAssistcheckBox_Checked" Unchecked="HeatAssistcheckBox_Unchecked"/>
     </Grid>
 </Window>

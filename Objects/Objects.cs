@@ -144,7 +144,7 @@ namespace KVANT_Scada_2.Objects
             Crio_start_signal = new DiscreteValue();
             Alarm_manual_stop = new DiscreteValue();
             StartProcessSignal = new DiscreteValue();
-            StartProcessSignal = new DiscreteValue();
+            StopProcessSignal = new DiscreteValue();
             PreHeat_Stage = new IntValue();
             HeatAssist_Stage = new IntValue();
             Tech_cam_STAGE = new IntValue();
@@ -152,6 +152,30 @@ namespace KVANT_Scada_2.Objects
             IntValues = new List<IntValue>();
             FVPStatus = new FVPStatus();
             IonInputSetPoint = new IonInputSetPoint();
+            OPCLocker = new object();
+            SQLLocker = new object();
+            BAV_3_status = new ValveStatus();
+            FVV_S_Status = new ValveStatus();
+            FVV_B_Status = new ValveStatus();
+            CPV_Status = new ValveStatus(); 
+            SHV_Status = new ValveStatus();
+            BAV_3_input = new ValveInput(); 
+            FVV_S_Input = new ValveInput(); 
+            FVV_B_Input = new ValveInput(); 
+            CPV_Input = new ValveInput(); 
+            SHV_Input = new ValveInput();
+            camPrepare = new CamPrepare();
+            CrioPumpStart = new CrioPumpStart();
+            openCam = new OpenCam();
+            StopCrio = new StopCrio();
+            StopFVP = new StopFVP();
+            IonInputCommnd = new IonInputCommand();
+            IonInputSetPoint = new IonInputSetPoint();
+            IonOutputFeedBack = new IonOutputFeedBack();
+            IonStatus = new IonStatus();
+            FVPStatus = new FVPStatus();
+            CrioInput = new CrioInput();
+            CrioStatus = new CrioStatus();
         }
 
         public static OPCObjects createObjects()

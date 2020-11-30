@@ -306,7 +306,6 @@
     <Compile Include="GUI\FVP_GUI.xaml.cs">
       <DependentUpon>FVP_GUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\GUI_Logic.cs" />
     <Compile Include="GUI\Heat_GUI.xaml.cs">
       <DependentUpon>Heat_GUI.xaml</DependentUpon>
     </Compile>

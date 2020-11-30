@@ -168,7 +168,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadDiscreteValue(ref OPCObjects.PreHeat_Done, OPCUAWorkerPaths.PreHeat_Done_path, client);
             ReadDiscreteValue(ref OPCObjects.PreHeat_Start, OPCUAWorkerPaths.PreHeat_Start_path, client);
             ReadDiscreteValue(ref OPCObjects.StartProcessSignal, OPCUAWorkerPaths.StartProcessSignal_path, client);
-            ReadDiscreteValue(ref OPCObjects.StopProcessSignal, OPCUAWorkerPaths.StopProcessSignal_path, client);
+            //ReadDiscreteValue(ref OPCObjects.StopProcessSignal, OPCUAWorkerPaths.StopProcessSignal_path, client);
 
         }
         ///<summaray>
@@ -184,7 +184,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadIntegerValue(ref OPCObjects.HeatAssist_Stage, OPCUAWorkerPaths.HeatAssist_Stage_path, client);
             ReadIntegerValue(ref OPCObjects.Tech_cam_STAGE, OPCUAWorkerPaths.Tech_cam_STAGE_path, client);
             ReadIntegerValue(ref OPCObjects.PreHeat_Stage, OPCUAWorkerPaths.PreHeat_Stage_path, client);
-            ReadIntegerValue(ref OPCObjects.FullCycleStage, OPCUAWorkerPaths.FullCycleStage_path, client);
+            //ReadIntegerValue(ref OPCObjects.FullCycleStage, OPCUAWorkerPaths.FullCycleStage_path, client);
 
         }
         ///<summaray>
@@ -199,6 +199,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             OPCLocker = new object();
             client = new OpcClient("opc.tcp://192.168.0.10:4840/");
             opcobjects = OPCObjects.createObjects();
+            OPCObjects.client = client;
             OPCObjects.OPCLocker = OPCLocker;
             
             lock (OPCObjects.OPCLocker) 
@@ -579,6 +580,17 @@ namespace KVANT_Scada_2.OPCUAWorker
        
 
         }
+        public static void WriteDi(string path, bool obj)
+        {
+
+            var client = OPCObjects.client;
+            lock(OPCObjects.OPCLocker)
+            {
+                client.Connect();
+                client.WriteNode(path, obj);
+            }
+           
+        }
         private static void ReadOPCData(object objclient)
         {
            var objects = OPCObjects.createObjects();
@@ -747,6 +759,10 @@ namespace KVANT_Scada_2.OPCUAWorker
             Console.WriteLine("OPCUpdate");
             ReadOPCData(obj);
             _opcHandler("OPC Server data update");
+        }
+        public void Dispose()
+        {
+
         }
     }
 }
