@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="RRG_GUI" Height="300.2" Width="450">
+        Title="RRG_GUI" Height="300.2" Width="450" Loaded="Window_Loaded">
     <Grid>
         <GroupBox Header="Текущий расход" HorizontalAlignment="Left" Height="60" Margin="6,5,0,0" VerticalAlignment="Top" Width="432" BorderThickness="2">
             <Canvas Margin="-4,2,-10,9">
@@ -13,10 +13,10 @@
                 <Label Content="РРГ-2" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="112"/>
                 <Label Content="РРГ-3" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="225"/>
                 <Label Content="РРГ-4" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="331"/>
-                <TextBox x:Name="RGG_1_Feebback" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="0.00l/h" VerticalAlignment="Top" Width="49" Canvas.Left="39" Canvas.Top="4"/>
-                <TextBox x:Name="RGG_2_Feebback" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="50" Canvas.Left="156" Canvas.Top="4"/>
-                <TextBox x:Name="RGG_3_Feebback" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="49" Canvas.Left="268" Canvas.Top="4"/>
-                <TextBox x:Name="RGG_4_Feebback" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="49" Canvas.Left="373" Canvas.Top="4"/>
+                <TextBox x:Name="RRG_1_Feebback" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="0.00l/h" VerticalAlignment="Top" Width="49" Canvas.Left="39" Canvas.Top="4"/>
+                <TextBox x:Name="RRG_2_Feebback" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="50" Canvas.Left="156" Canvas.Top="4"/>
+                <TextBox x:Name="RRG_3_Feebback" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="49" Canvas.Left="268" Canvas.Top="4"/>
+                <TextBox x:Name="RRG_4_Feebback" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="49" Canvas.Left="373" Canvas.Top="4"/>
 
             </Canvas>
         </GroupBox>

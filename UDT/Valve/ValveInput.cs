@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.UDT.Valve
 {
-    [OpcDataType("ns=3;s=DT_\"valve\".\"Input\"")]
-    [OpcDataTypeEncoding("ns=3;s=TE_\"valve\".\"Input\"")]
-    [ComplexType]
+    [OpcDataType("ns=3;s=DT_\"ValveInput\"")]
+    [OpcDataTypeEncoding("ns=3;s=TE_\"ValveInput\"")]
+
     ///<summaray>
     ///Класс ValveInput является представлением 
     ///OPC DataType "ns=3;s=DT_\"valve\".\"Input\"

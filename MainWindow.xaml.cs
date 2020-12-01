@@ -79,7 +79,7 @@ namespace KVANT_Scada_2
             });
             UpdateTimer = new Timer(UpdateTimerCallBack, null, 0, 1000);
 
-            
+
             //backgroundWorker = ((BackgroundWorker)this.FindResource("backgroundWorker"));
             //opcUaWorker= new OPCUAWorker.OPCUAWorker();
             //createData = new DB.Logic.CreateData();
@@ -113,35 +113,35 @@ namespace KVANT_Scada_2
 
 
 
-            //var client = new OpcClient("opc.tcp://192.168.0.10:4840/");
-            //client.Connect();
+            var client = new OpcClient("opc.tcp://192.168.0.10:4840/");
+            client.Connect();
 
-            //var node = client.BrowseNode("ns=3;s=\"Tech_Cam_Logic\".\"Stop_Crio\"");
+            var node = client.BrowseNode("ns=3;s=\"VT\".\"TV\"");
 
-            //if (node is OpcVariableNodeInfo variablenode)
-            //{
-            //    OpcNodeId datatypeid = variablenode.DataTypeId;
-            //    OpcDataTypeInfo datatype = client.GetDataTypeSystem().GetType(datatypeid);
+            if (node is OpcVariableNodeInfo variablenode)
+            {
+                OpcNodeId datatypeid = variablenode.DataTypeId;
+                OpcDataTypeInfo datatype = client.GetDataTypeSystem().GetType(datatypeid);
 
-            //    Console.WriteLine(datatype.TypeId);
-            //    Console.WriteLine(datatype.Encoding);
+                Console.WriteLine(datatype.TypeId);
+                Console.WriteLine(datatype.Encoding);
 
-            //    Console.WriteLine(datatype.Name);
+                Console.WriteLine(datatype.Name);
 
-            //    foreach (OpcDataFieldInfo field in datatype.GetFields())
-            //        Console.WriteLine(".{0} : {1}", field.Name, field.FieldType);
+                foreach (OpcDataFieldInfo field in datatype.GetFields())
+                    Console.WriteLine(".{0} : {1}", field.Name, field.FieldType);
 
-            //    Console.WriteLine();
-            //    Console.WriteLine("data type attributes:");
-            //    Console.WriteLine(
-            //            "\t[opcdatatype(\"{0}\")]",
-            //            datatype.TypeId.ToString(OpcNodeIdFormat.Foundation));
-            //    Console.WriteLine(
-            //            "\t[opcdatatypeencoding(\"{0}\", namespaceuri = \"{1}\")]",
-            //            datatype.Encoding.Id.ToString(OpcNodeIdFormat.Foundation),
-            //            datatype.Encoding.Namespace.Value);
-            //}
-            //Console.WriteLine("А я из основного потока. Просто надо так сделать");
+                Console.WriteLine();
+                Console.WriteLine("data type attributes:");
+                Console.WriteLine(
+                        "\t[opcdatatype(\"{0}\")]",
+                        datatype.TypeId.ToString(OpcNodeIdFormat.Foundation));
+                Console.WriteLine(
+                        "\t[opcdatatypeencoding(\"{0}\", namespaceuri = \"{1}\")]",
+                        datatype.Encoding.Id.ToString(OpcNodeIdFormat.Foundation),
+                        datatype.Encoding.Namespace.Value);
+            }
+            Console.WriteLine("А я из основного потока. Просто надо так сделать");
 
 
 
@@ -436,7 +436,7 @@ namespace KVANT_Scada_2
         {
             Thread BAV_3_GuiThread = new Thread(delegate ()
             {
-                Valve_GUI w = new Valve_GUI("Клапан напуска");
+                Valve_GUI w = new Valve_GUI("Клапан напуска", ref OPCObjects.BAV_3_input, ref  OPCObjects.BAV_3_status, OPCUAWorker.OPCUAWorkerPaths.BAV_3_Input_path, OPCUAWorker.OPCUAWorkerPaths.BAV_3_Status_path);
                 w.Show();
                 System.Windows.Threading.Dispatcher.Run();
             });
@@ -448,7 +448,7 @@ namespace KVANT_Scada_2
         {
             Thread SHV_GuiThread = new Thread(delegate ()
             {
-                Valve_GUI w = new Valve_GUI("Шиберный затвор");
+                Valve_GUI w = new Valve_GUI("Шиберный затвор", ref OPCObjects.SHV_Input, ref  OPCObjects.SHV_Status, OPCUAWorker.OPCUAWorkerPaths.SHV_Input_path, OPCUAWorker.OPCUAWorkerPaths.SHV_Status_path);
                 w.Show();
                 System.Windows.Threading.Dispatcher.Run();
             });
@@ -461,7 +461,7 @@ namespace KVANT_Scada_2
         {
             Thread CPV_GuiThread = new Thread(delegate ()
             {
-                Valve_GUI w = new Valve_GUI("Клапан крионасоса");
+                Valve_GUI w = new Valve_GUI("Клапан крионасоса", ref OPCObjects.CPV_Input,  ref OPCObjects.CPV_Status, OPCUAWorker.OPCUAWorkerPaths.CPV_Input_path, OPCUAWorker.OPCUAWorkerPaths.CPV_Status_path);
                 w.Show();
                 System.Windows.Threading.Dispatcher.Run();
             });
@@ -474,7 +474,7 @@ namespace KVANT_Scada_2
         {
             Thread FVV_S_GuiThread = new Thread(delegate ()
             {
-                Valve_GUI w = new Valve_GUI("Клапан маленького сечения");
+                Valve_GUI w = new Valve_GUI("Клапан маленького сечения", ref OPCObjects.FVV_S_Input, ref  OPCObjects.FVV_S_Status, OPCUAWorker.OPCUAWorkerPaths.FVV_S_Input_path, OPCUAWorker.OPCUAWorkerPaths.FVV_S_Status_path);
                 w.Show();
                 System.Windows.Threading.Dispatcher.Run();
             });
@@ -487,7 +487,7 @@ namespace KVANT_Scada_2
         {
             Thread FVV_B_GuiThread = new Thread(delegate ()
             {
-                Valve_GUI w = new Valve_GUI("Клапан большого сечения");
+                Valve_GUI w = new Valve_GUI("Клапан большого сечения", ref OPCObjects.FVV_B_Input, ref OPCObjects.FVV_B_Status, OPCUAWorker.OPCUAWorkerPaths.FVV_B_Input_path, OPCUAWorker.OPCUAWorkerPaths.FVV_B_Status_path);
                 w.Show();
                 System.Windows.Threading.Dispatcher.Run();
             });

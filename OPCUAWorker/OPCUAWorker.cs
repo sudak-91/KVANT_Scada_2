@@ -131,6 +131,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadAnalogValue(ref OPCObjects.K_RRG2, OPCUAWorkerPaths.K_RRG2_path, client);
             ReadAnalogValue(ref OPCObjects.K_RRG3, OPCUAWorkerPaths.K_RRG3_path, client);
             ReadAnalogValue(ref OPCObjects.K_RRG4, OPCUAWorkerPaths.K_RRG4_path, client);
+            ReadAnalogValue(ref OPCObjects.RRG_Pressure_SP, OPCUAWorkerPaths.RRG_Pressure_SP, client);
 
         }
         ///<summaray>
@@ -429,6 +430,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 OPCObjects.AnalogValues.Add(OPCObjects.K_RRG2);
                 OPCObjects.AnalogValues.Add(OPCObjects.K_RRG3);
                 OPCObjects.AnalogValues.Add(OPCObjects.K_RRG4);
+                OPCObjects.AnalogValues.Add(OPCObjects.RRG_Pressure_SP);
 
                 OPCObjects.DiscreteValues.Add(OPCObjects.Alarm_Crio_power_failure);
                 OPCObjects.DiscreteValues.Add(OPCObjects.Alarm_ELI_Power_failure);
@@ -574,9 +576,13 @@ namespace KVANT_Scada_2.OPCUAWorker
         ///<param name="obj">Изменененная Нода</param>
         public static void Write<T> (string path, T obj)
         {
-            var opc = OPCObjects.createObjects();
-            var client = opc.get_OpcClietn();
-            client.WriteNode(path, obj);
+            
+            var client = OPCObjects.client;
+            lock (OPCObjects.OPCLocker)
+            {
+                client.Connect();
+                client.WriteNode(path, obj);
+            }
        
 
         }
@@ -594,7 +600,7 @@ namespace KVANT_Scada_2.OPCUAWorker
         private static void ReadOPCData(object objclient)
         {
            var objects = OPCObjects.createObjects();
-            lock (Objects.OPCObjects.createObjects().getOPCLocker())
+            lock (OPCObjects.OPCLocker)
             {
                 OpcClient client = (OpcClient)objclient;
                 var BAV_3_Status =objects.getBAV_3_Status();
@@ -633,7 +639,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 CPV_Status = client.ReadNode(OPCUAWorkerPaths.CPV_Status_path).As<ValveStatus>();
                 CPV_Input = client.ReadNode(OPCUAWorkerPaths.CPV_Input_path).As<ValveInput>();
                 SHV_Status = client.ReadNode(OPCUAWorkerPaths.SHV_Status_path).As<ValveStatus>();
-                SHV_Input = client.ReadNode(OPCUAWorkerPaths.SHV_Input_path).As<ValveInput>();
+                //SHV_Input = client.ReadNode(OPCUAWorkerPaths.SHV_Input_path).As<ValveInput>();
                 crioInput = client.ReadNode(OPCUAWorkerPaths.Crio_pump_Input_path).As<CrioInput>();
                 crioStatus = client.ReadNode(OPCUAWorkerPaths.Crio_pump_Status_path).As<CrioStatus>();
                 StopFVP = client.ReadNode(OPCUAWorkerPaths.StopFVP_path).As<StopFVP>();

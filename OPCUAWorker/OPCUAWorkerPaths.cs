@@ -57,6 +57,7 @@ namespace KVANT_Scada_2.OPCUAWorker
         public static string RRG_9A3_feedback_path = "ns=3;s=\"ain_db\".\"RRG_9A3_feedback\".\"Value\"";
         public static string RRG_9A4_feedback_path = "ns=3;s=\"ain_db\".\"RRG_9A4_feedback\".\"Value\"";
         public static string TE_1_path = "ns=3;s=\"ain_db\".\"1TE1\".\"Value\"";
+        public static string RRG_Pressure_SP = "ns=3;s=\"PID_DB\".\"Setpoint\"";
         public static string PneumaticPressure_path = "ns=3;s=\"ain_db\".\"Pne_Press\".\"Value\"";
         public static string CrioPressure_path = "ns=3;s=\"WRG_APG_Pressure\".\"Crio_press\".\"OUT\"";
         public static string CameraPressure_path = "ns=3;s=\"WRG_APG_Pressure\".\"Cam_press\".\"OUT\"";

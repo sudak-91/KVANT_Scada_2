@@ -509,6 +509,11 @@ namespace KVANT_Scada_2.DB.Logic
                     Name = "K_RRG4",
                     Path = OPCUAWorkerPaths.K_RRG4_path
                 };
+                var rrrg_pres_sp = new AnalogaValueTable
+                {
+                    Name = "RRG_Pressure_SP",
+                    Path = OPCUAWorkerPaths.RRG_Pressure_SP
+                };
                 context.AnalogValue.Add(rft_tt_1);
                 context.AnalogValue.Add(rft_tt_2);
                 context.AnalogValue.Add(rft_tt_3);
@@ -543,6 +548,7 @@ namespace KVANT_Scada_2.DB.Logic
                 context.AnalogValue.Add(rrrg2_k);
                 context.AnalogValue.Add(rrrg3_k);
                 context.AnalogValue.Add(rrrg4_k);
+                context.AnalogValue.Add(rrrg_pres_sp);
                 context.SaveChanges();
 
             }
