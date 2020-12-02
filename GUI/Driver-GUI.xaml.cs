@@ -1,7 +1,9 @@
-﻿using System;
+﻿using KVANT_Scada_2.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,9 +21,71 @@ namespace KVANT_Scada_2.GUI
     /// </summary>
     public partial class Driver_GUI : Window
     {
+        private SolidColorBrush on, error, neutral;
+        private TimerCallback timerCallback;
+        private Timer timer;
         public Driver_GUI()
         {
+            on = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+            error = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            neutral = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+            timerCallback = new TimerCallback(Update_GUI);
+            timer = new Timer(timerCallback, null, 0, 1000);
             InitializeComponent();
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.BLM_Start.Value = true;
+                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.BLM_Start.Path, OPCObjects.BLM_Start.Value);
+            }
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            lock (OPCObjects.OPCLocker)
+            {
+                OPCObjects.BLM_Stop.Value = true;
+                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.BLM_Stop.Path, OPCObjects.BLM_Stop.Value);
+            }
+
+        }
+
+        private void Reconnect_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+               
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                SpeedSP.Text = OPCObjects.BLM_Speed_SP.Value.ToString();
+            }
+            
+        }
+        private void Update_GUI(object obj)
+        {
+            Dispatcher.Invoke(()=>
+            {
+                lock(OPCObjects.OPCLocker)
+                {
+                    if(OPCObjects.BLM_Remote_Control_Done.Value)
+                    {
+                        RemoreControl.Fill = on;
+                    }
+                    else
+                    {
+                        RemoreControl.Fill = neutral;
+                    }
+                }
+            });
+
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="FVP_GUI" Height="450" Width="300">
+        Title="FVP_GUI" Height="450" Width="300" Loaded="Window_Loaded">
     <Grid>
         <GroupBox Header="Состояние" HorizontalAlignment="Left" Height="154" Margin="19,7,0,0" VerticalAlignment="Top" Width="253">
             <Canvas x:Name="FVPStatus" Margin="45,10,49,-2">
@@ -29,22 +29,22 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="btnFVPManualMode" Content="Ручной режим" HorizontalAlignment="Left" Height="25" Margin="8,212,0,0" VerticalAlignment="Top" Width="149">
+        <Button x:Name="btnFVPManualMode" Content="Ручной режим" HorizontalAlignment="Left" Height="25" Margin="8,212,0,0" VerticalAlignment="Top" Width="149" Click="btnFVPManualMode_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="btnFVPOpen" Content="Открыть" HorizontalAlignment="Left" Height="25" Margin="9,246,0,0" VerticalAlignment="Top" Width="149" IsDefault="True">
+        <Button x:Name="btnFVPOpen" Content="Открыть" HorizontalAlignment="Left" Height="25" Margin="9,246,0,0" VerticalAlignment="Top" Width="149" IsDefault="True" Click="btnFVPOpen_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="btnFVPClose" Content="Закрыть" HorizontalAlignment="Left" Height="25" Margin="9,281,0,0" VerticalAlignment="Top" Width="149" IsDefault="True">
+        <Button x:Name="btnFVPClose" Content="Закрыть" HorizontalAlignment="Left" Height="25" Margin="9,281,0,0" VerticalAlignment="Top" Width="149" IsDefault="True" Click="btnFVPClose_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="btnFVPService" Content="Сервис" HorizontalAlignment="Left" Height="25" Margin="8,316,0,0" VerticalAlignment="Top" Width="149" IsDefault="True">
+        <Button x:Name="btnFVPService" Content="Сервис" HorizontalAlignment="Left" Height="25" Margin="8,316,0,0" VerticalAlignment="Top" Width="149" IsDefault="True" Click="btnFVPService_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

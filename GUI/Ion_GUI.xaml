@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="Ion_GUI" Height="450" Width="722">
+        Title="Ion_GUI" Height="450" Width="722" Loaded="Window_Loaded">
     <Grid>
         <GroupBox x:Name="Anod" Header="Анод" HorizontalAlignment="Left" Height="124" Margin="28,58,0,0" VerticalAlignment="Top" Width="230">
             <Canvas x:Name="AnodRT" Margin="3,15,3,8">
@@ -49,30 +49,37 @@
                         <Label Content="Мощность" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Canvas.Top="53"/>
                         <TextBox x:Name="HeatSPI" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Canvas.Left="92" Canvas.Top="3"/>
                         <TextBox x:Name="HeatSPU" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Canvas.Left="92" Canvas.Top="30"/>
-                        <TextBox x:Name="HeatP1" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Canvas.Left="92" Canvas.Top="56"/>
+                        <TextBox x:Name="HeatSPP" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Canvas.Left="92" Canvas.Top="56"/>
 
                     </Canvas>
                 </GroupBox>
             </Canvas>
         </GroupBox>
-        <Button x:Name="SaveSP" Content="Сохранить" HorizontalAlignment="Left" Height="26" Margin="387,382,0,0" VerticalAlignment="Top" Width="123">
+        <Button x:Name="SaveSP" Content="Сохранить" HorizontalAlignment="Left" Height="26" Margin="387,382,0,0" VerticalAlignment="Top" Width="123" Click="SaveSP_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Margin="23,16,0,0" Stroke="Black" VerticalAlignment="Top" Width="15"/>
+        <Ellipse x:Name="PowerOn" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Margin="23,16,0,0" Stroke="Black" VerticalAlignment="Top" Width="15"/>
         <Label Content="Питание ионного источника" HorizontalAlignment="Left" Margin="43,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="IonStart" Content="Старт ИИ" HorizontalAlignment="Left" Height="26" Margin="570,69,0,0" VerticalAlignment="Top" Width="123">
+        <Button x:Name="IonStart" Content="Старт ИИ" HorizontalAlignment="Left" Height="26" Margin="570,69,0,0" VerticalAlignment="Top" Width="123" Click="IonStart_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="IonStop" Content="Cтоп ИИ" HorizontalAlignment="Left" Height="26" Margin="570,107,0,0" VerticalAlignment="Top" Width="123">
+        <Button x:Name="IonStop" Content="Cтоп ИИ" HorizontalAlignment="Left" Height="26" Margin="570,107,0,0" VerticalAlignment="Top" Width="123" Click="IonStop_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="IonError" Content="Сброс ошибки ИИ" HorizontalAlignment="Left" Height="26" Margin="570,148,0,0" VerticalAlignment="Top" Width="123">
+        <Button x:Name="IonError" Content="Сброс ошибки ИИ" HorizontalAlignment="Left" Height="26" Margin="570,148,0,0" VerticalAlignment="Top" Width="123" Click="IonError_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Ellipse x:Name="AutoMode" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Margin="256,17,0,0" Stroke="Black" VerticalAlignment="Top" Width="15"/>
+        <Label Content="Автоматический режим." HorizontalAlignment="Left" Margin="280,11,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="IonAutoMode" Content="Автоматический" HorizontalAlignment="Left" Height="26" Margin="570,189,0,0" VerticalAlignment="Top" Width="123" Click="IonAutoMode_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

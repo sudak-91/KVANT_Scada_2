@@ -33,14 +33,14 @@
 
             </Canvas>
         </GroupBox>
-        <Button x:Name="SaveRRG_K" Content="Сохранить" HorizontalAlignment="Left" Height="22" Margin="16,196,0,0" VerticalAlignment="Top" Width="90">
+        <Button x:Name="SaveRRG_K" Content="Сохранить" HorizontalAlignment="Left" Height="22" Margin="16,196,0,0" VerticalAlignment="Top" Width="90" Click="SaveRRG_K_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
         <Label Content="Уставка давления&#xD;&#xA;для ПИД регулятора" HorizontalAlignment="Left" Margin="136,82,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="RRG_PID_SP" HorizontalAlignment="Left" Height="23" Margin="269,92,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="SaveRRGPIDSP" Content="Применить" HorizontalAlignment="Left" Margin="314,126,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="SaveRRGPIDSP" Content="Применить" HorizontalAlignment="Left" Margin="314,126,0,0" VerticalAlignment="Top" Width="76" Click="SaveRRGPIDSP_Click"/>
 
     </Grid>
 </Window>

@@ -132,6 +132,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             ReadAnalogValue(ref OPCObjects.K_RRG3, OPCUAWorkerPaths.K_RRG3_path, client);
             ReadAnalogValue(ref OPCObjects.K_RRG4, OPCUAWorkerPaths.K_RRG4_path, client);
             ReadAnalogValue(ref OPCObjects.RRG_Pressure_SP, OPCUAWorkerPaths.RRG_Pressure_SP, client);
+            ReadAnalogValue(ref OPCObjects.PidHeatMode, OPCUAWorkerPaths.PidHeatMode_path, client);
 
         }
         ///<summaray>
@@ -431,6 +432,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 OPCObjects.AnalogValues.Add(OPCObjects.K_RRG3);
                 OPCObjects.AnalogValues.Add(OPCObjects.K_RRG4);
                 OPCObjects.AnalogValues.Add(OPCObjects.RRG_Pressure_SP);
+                OPCObjects.AnalogValues.Add(OPCObjects.PidHeatMode);
 
                 OPCObjects.DiscreteValues.Add(OPCObjects.Alarm_Crio_power_failure);
                 OPCObjects.DiscreteValues.Add(OPCObjects.Alarm_ELI_Power_failure);

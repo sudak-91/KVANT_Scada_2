@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="Crio_GUI" Height="450" Width="300">
+        Title="Crio_GUI" Height="450" Width="300" Loaded="Window_Loaded">
     <Grid>
         <GroupBox Header="Состояния" HorizontalAlignment="Left" Height="151" Margin="13,19,0,0" VerticalAlignment="Top" Width="261"/>
         <Canvas Margin="60,50,73,254">
@@ -23,10 +23,10 @@
             <Label Content="В работе" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="145" Canvas.Left="14" Canvas.Top="91"/>
 
         </Canvas>
-        <Button Name ="AutoMode"  Content="Автоматический режим" HorizontalAlignment="Left" Height="29" Margin="25,187,0,0" VerticalAlignment="Top" Width="230"/>
-        <Button x:Name ="ManualMode"  Content="Ручной режим" HorizontalAlignment="Left" Height="29" Margin="25,222,0,0" VerticalAlignment="Top" Width="230"/>
-        <Button x:Name ="Start"  Content="Пуск" HorizontalAlignment="Left" Height="29" Margin="26,259,0,0" VerticalAlignment="Top" Width="230"/>
-        <Button x:Name ="Stop"  Content="Стоп" HorizontalAlignment="Left" Height="29" Margin="27,293,0,0" VerticalAlignment="Top" Width="230"/>
+        <Button Name ="AutoMode"  Content="Автоматический режим" HorizontalAlignment="Left" Height="29" Margin="25,187,0,0" VerticalAlignment="Top" Width="230" Click="AutoMode_Click"/>
+        <Button x:Name ="ManualMode"  Content="Ручной режим" HorizontalAlignment="Left" Height="29" Margin="25,222,0,0" VerticalAlignment="Top" Width="230" Click="ManualMode_Click"/>
+        <Button x:Name ="Start"  Content="Пуск" HorizontalAlignment="Left" Height="29" Margin="26,259,0,0" VerticalAlignment="Top" Width="230" Click="Start_Click"/>
+        <Button x:Name ="Stop"  Content="Стоп" HorizontalAlignment="Left" Height="29" Margin="27,293,0,0" VerticalAlignment="Top" Width="230" Click="Stop_Click"/>
 
     </Grid>
 </Window>

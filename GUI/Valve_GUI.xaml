@@ -28,7 +28,7 @@
         <Button x:Name="ManualModeOn" Content="Ручной режим" HorizontalAlignment="Left" Height="32" Margin="14,205,0,0" VerticalAlignment="Top" Width="259" Click="ManualModeOn_Click"/>
         <Button x:Name="Open" Content="Открыть" HorizontalAlignment="Left" Height="32" Margin="15,247,0,0" VerticalAlignment="Top" Width="259" Click="Open_Click"/>
         <Button x:Name="Close" Content="Закрыть" HorizontalAlignment="Left" Height="32" Margin="14,289,0,0" VerticalAlignment="Top" Width="259" Click="Close_Click"/>
-        <Button x:Name="ServiceMode" Content="Сервисный режим" HorizontalAlignment="Left" Height="32" Margin="13,332,0,0" VerticalAlignment="Top" Width="259"/>
+        <Button x:Name="ServiceMode" Content="Сервисный режим" HorizontalAlignment="Left" Height="32" Margin="13,332,0,0" VerticalAlignment="Top" Width="259" Click="ServiceMode_Click"/>
 
     </Grid>
 </Window>

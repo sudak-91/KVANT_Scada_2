@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="Heat_GUI" Height="393.533" Width="425.6">
+        Title="Heat_GUI" Height="393.533" Width="425.6" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -28,17 +28,17 @@
 
             </Canvas>
         </GroupBox>
-        <Button x:Name="PreHeatSave" Content="Сохранить" HorizontalAlignment="Left" Height="26" Margin="274,21,0,0" VerticalAlignment="Top" Width="86">
+        <Button x:Name="PreHeatSave" Content="Сохранить" HorizontalAlignment="Left" Height="26" Margin="274,21,0,0" VerticalAlignment="Top" Width="86" Click="PreHeatSave_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="HeatAssistSave" Content="Сохранить" HorizontalAlignment="Left" Height="26" Margin="274,148,0,0" VerticalAlignment="Top" Width="86">
+        <Button x:Name="HeatAssistSave" Content="Сохранить" HorizontalAlignment="Left" Height="26" Margin="274,148,0,0" VerticalAlignment="Top" Width="86" Click="HeatAssistSave_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="HeatManual" Content="Ручное управление" HorizontalAlignment="Left" Height="32" Margin="270,269,0,0" VerticalAlignment="Top" Width="122">
+        <Button x:Name="HeatManual" Content="Ручное управление" HorizontalAlignment="Left" Height="32" Margin="270,269,0,0" VerticalAlignment="Top" Width="122" Click="HeatManual_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

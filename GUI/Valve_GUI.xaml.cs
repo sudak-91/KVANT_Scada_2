@@ -37,12 +37,13 @@ namespace KVANT_Scada_2.GUI
         {
             lock (OPCObjects.OPCLocker)
             {
-               
-                
-               
-              
-                Console.WriteLine("###################################################3");
-               
+
+
+
+
+                var client = OPCObjects.client;
+                client.Connect();
+                Input = client.ReadNode(inputPath).As<ValveInput>();
                    
                   
                 //var client = OPCObjects.client;
@@ -62,7 +63,9 @@ namespace KVANT_Scada_2.GUI
             //OPCUAWorker.OPCUAWorker.Write<ValveInput>(this.inputPath, Input);
             lock (OPCObjects.OPCLocker)
             {
-                
+                var client = OPCObjects.client;
+                client.Connect();
+                Input = client.ReadNode(inputPath).As<ValveInput>();
                 Input.Auto_mode = false;
                 OPCUAWorker.OPCUAWorker.Write<ValveInput>(inputPath, Input);
 
@@ -72,14 +75,37 @@ namespace KVANT_Scada_2.GUI
 
         private void Open_Click(object sender, RoutedEventArgs e)
         {
+            var client = OPCObjects.client;
+            client.Connect();
+            Input = client.ReadNode(inputPath).As<ValveInput>();
             Input.Man_command = true;
             OPCUAWorker.OPCUAWorker.Write<ValveInput>(this.inputPath, Input);
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            var client = OPCObjects.client;
+            client.Connect();
+            Input = client.ReadNode(inputPath).As<ValveInput>();
             Input.Man_command = false;
             OPCUAWorker.OPCUAWorker.Write<ValveInput>(this.inputPath, Input);
+        }
+
+        private void ServiceMode_Click(object sender, RoutedEventArgs e)
+        {
+            var client = OPCObjects.client;
+            client.Connect();
+            Input = client.ReadNode(inputPath).As<ValveInput>();
+            if(Input.Service_mode)
+            {
+                Input.Service_mode = false;
+            }
+            else
+            {
+                Input.Service_mode = true;
+            }
+            OPCUAWorker.OPCUAWorker.Write<ValveInput>(this.inputPath, Input);
+
         }
 
         public Valve_GUI( string name, ref ValveInput valveInput,  ref ValveStatus valveStatus, string inputPath, string statusPath)
@@ -144,6 +170,14 @@ namespace KVANT_Scada_2.GUI
                     else
                     {
                         ValveOpened.Fill = neutral;
+                    }
+                    if(Status.Serviced)
+                    {
+                        ValveService.Fill = on;
+                    }
+                    else
+                    {
+                        ValveService.Fill = neutral;
                     }
                 }
             });

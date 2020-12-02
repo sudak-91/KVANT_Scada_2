@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="Driver_GUI" Height="300" Width="450">
+        Title="Driver_GUI" Height="300" Width="450" Loaded="Window_Loaded">
     <Grid>
         <Label Content="Сокорость вращения" HorizontalAlignment="Left" Margin="20,88,0,0" VerticalAlignment="Top"/>
         <GroupBox Header="Состояние" HorizontalAlignment="Left" Height="58" Margin="10,11,0,0" VerticalAlignment="Top" Width="411">
@@ -14,10 +14,10 @@
                 <Label Content="Соединение с блоком управения" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="20"/>
             </Canvas>
         </GroupBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,92,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="91"/>
-        <Button x:Name="Start" Content="Старт" HorizontalAlignment="Left" Height="29" Margin="35,149,0,0" VerticalAlignment="Top" Width="192"/>
-        <Button x:Name="Stop" Content="Стоп" HorizontalAlignment="Left" Height="29" Margin="35,188,0,0" VerticalAlignment="Top" Width="192"/>
-        <Button x:Name="Reconnect" Content="Повторное соединение" HorizontalAlignment="Left" Height="29" Margin="34,226,0,0" VerticalAlignment="Top" Width="192"/>
+        <TextBox x:Name="SpeedSP" HorizontalAlignment="Left" Height="23" Margin="160,92,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="91"/>
+        <Button x:Name="Start" Content="Старт" HorizontalAlignment="Left" Height="29" Margin="35,149,0,0" VerticalAlignment="Top" Width="192" Click="Start_Click"/>
+        <Button x:Name="Stop" Content="Стоп" HorizontalAlignment="Left" Height="29" Margin="35,188,0,0" VerticalAlignment="Top" Width="192" Click="Stop_Click"/>
+        <Button x:Name="Reconnect" Content="Повторное соединение" HorizontalAlignment="Left" Height="29" Margin="34,226,0,0" VerticalAlignment="Top" Width="192" Click="Reconnect_Click"/>
 
     </Grid>
 </Window>
