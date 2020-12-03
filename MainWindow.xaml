@@ -12,18 +12,19 @@
     <Window.Resources>
         <cm:BackgroundWorker x:Key="backgroundWorker" DoWork="BackgroundWorker_DoWork"   />
     </Window.Resources>
-    <Grid Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}" Background="#FFC7C7C7" Margin="0,0,-8,-25">
+    <Grid x:Name="StopFVP" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}" Background="#FFC7C7C7" Margin="0,0,-8,-25">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="16*"/>
-            <ColumnDefinition Width="933*"/>
+            <ColumnDefinition Width="826*"/>
+            <ColumnDefinition Width="107*"/>
         </Grid.ColumnDefinitions>
-        <Image Margin="266,450,1047,59" Source="Resources/Tech_cam.png" Grid.Column="2">
+        <Image Margin="266,450,833,59" Source="Resources/Tech_cam.png" Grid.Column="2">
             <Image.Effect>
                 <DropShadowEffect ShadowDepth="7"/>
             </Image.Effect>
         </Image>
-        <Image x:Name="CrioPump_img" Margin="426,116,1248,649" Source="Resources/Криогенный насос CryoTorr10.png" Grid.Column="2">
+        <Image x:Name="CrioPump_img" Margin="426,116,1034,649" Source="Resources/Криогенный насос CryoTorr10.png" Grid.Column="2">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="7" ShadowDepth="7"/>
             </Image.Effect>
@@ -163,7 +164,7 @@
         <Path Grid.Column="2" Data="M350.333,765.503 L385.00042,765.503" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="3" Margin="295.333,763,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="3" VerticalAlignment="Top" Width="37.667"/>
         <Path Grid.Column="2" Data="M809,758.5 L868.5,758.5" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="3" Margin="754,753.659,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="3" VerticalAlignment="Top" Width="59.688"/>
         <Path Grid.Column="2" Data="M1.5000203,1.5000034 L51.50002,1.5000034" Fill="Blue" HorizontalAlignment="Left" Height="3" Margin="912.083,753.659,0,0" Stroke="Blue" StrokeThickness="3" VerticalAlignment="Top" Width="68.625" StrokeDashArray="1 0" StrokeStartLineCap="Triangle" Stretch="Fill"/>
-        <Label Content="Воздух" Grid.Column="2" HorizontalAlignment="Left" Height="27.659" Margin="919.25,736.625,0,0" VerticalAlignment="Top" Width="55.583" FontFamily="Lucida Console"/>
+        <Label Content="Воздух" Grid.Column="2" HorizontalAlignment="Left" Height="27" Margin="919,737,0,0" VerticalAlignment="Top" Width="56" FontFamily="Lucida Console"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="72" Margin="6,931,0,0" VerticalAlignment="Top" Width="193"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="75" Margin="644,296,0,0" VerticalAlignment="Top" Width="237">
             <Canvas Margin="5,10,55,47">
@@ -182,8 +183,36 @@
             </Canvas>
         </Border>
         <Label Content="Камера" Grid.Column="2" HorizontalAlignment="Left" Margin="645,268,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontFamily="Lucida Console"/>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="75" Margin="10,44,0,0" VerticalAlignment="Top" Width="1418"/>
-        <Label Content="Меню" Grid.Column="2" HorizontalAlignment="Left" Height="28" Margin="1,16,0,0" VerticalAlignment="Top" Width="101" FontFamily="Lucida Console" FontSize="18" FontWeight="Bold"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="63" Margin="10,44,0,0" VerticalAlignment="Top" Width="582">
+            <Canvas Margin="10,10,77,23">
+                <Button x:Name="StopCrio" Content="Стоп Крионасоса" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="102" Click="StopCrio_Click" Canvas.Left="115">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="CrioStart" Content="Старт Крионасоса" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="102" Click="CrioStart_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="CamPrepare" Content="Откачка камеры" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="102" Click="CamPrepare_Click" Canvas.Left="342">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="OpenCam" Content="Открытие камеры" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="102" Click="OpenCam_Click" Canvas.Left="229">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="StopFVPBTN" Content="Остановка ФВН" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="102" Click="Button_Click_1" Canvas.Left="455">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+            </Canvas>
+        </Border>
+        <Label Content="Процессы вакуумной системы" HorizontalAlignment="Left" Height="28" Margin="7,20,0,0" VerticalAlignment="Top" Width="305" FontFamily="Lucida Console" FontSize="18" FontWeight="Bold" RenderTransformOrigin="0.356,0.393" Grid.ColumnSpan="3"/>
         <Button x:Name="FVP_Open" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Grid.Column="1" Margin="8,296,0,0" Height="180" Click="FVP_Open_Click" Opacity="0"/>
         <Button x:Name="CrioPumpStart" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="256" Margin="413,140,0,0" VerticalAlignment="Top" Width="257" Opacity="0" Click="CrioPumpStart_Click"/>
         <GroupBox Grid.Column="2" Header="Состояние вакуумной системы" HorizontalAlignment="Left" Height="142" Margin="1124,148,0,0" VerticalAlignment="Top" Width="247">
@@ -256,5 +285,25 @@
         <Button x:Name="IonGUI_ON" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="60" Margin="364,730,0,0" VerticalAlignment="Top" Width="90" Opacity="0" Click="IonGUI_ON_Click"/>
         <Button x:Name="HeaterGUI_ON" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Height="76" Margin="401,548,0,0" VerticalAlignment="Top" Width="94" Opacity="0" Click="HeaterGUI_ON_Click"/>
         <CheckBox x:Name="HeatAssistcheckBox" Content="Нагрев при напылении" Grid.Column="2" HorizontalAlignment="Left" Height="16" Margin="18,140,0,0" VerticalAlignment="Top" Width="175" Checked="HeatAssistcheckBox_Checked" Unchecked="HeatAssistcheckBox_Unchecked"/>
+        <GroupBox Grid.Column="2" Header="Напыление" HorizontalAlignment="Left" Height="75" Margin="597,34,0,0" VerticalAlignment="Top" Width="373">
+            <Canvas Margin="5,3,53,4">
+                <Button x:Name="StartELI" Content="Пуск напыления" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="102" Click="StartELI_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="StopELI" Content="Остановка напыления" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="133" Click="StopELI_Click" Canvas.Left="108" Background="#FFEC7C7C">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="PreHeatProc" Content="Препрогрев" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="102" Click="PreHeatProc_Click" Canvas.Left="248">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+            </Canvas>
+        </GroupBox>
+        <Button x:Name="Signin" Content="Авторизоваться" Grid.Column="3" HorizontalAlignment="Left" Height="71" Margin="78,45,0,0" VerticalAlignment="Top" Width="106"/>
     </Grid>
 </Window>

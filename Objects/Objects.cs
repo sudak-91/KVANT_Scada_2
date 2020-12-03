@@ -1,4 +1,5 @@
-﻿using KVANT_Scada_2.UDT;
+﻿using KVANT_Scada_2.DB.Entity;
+using KVANT_Scada_2.UDT;
 using KVANT_Scada_2.UDT.Crio;
 using KVANT_Scada_2.UDT.DiscreteValue;
 using KVANT_Scada_2.UDT.FVP;
@@ -69,6 +70,7 @@ namespace KVANT_Scada_2.Objects
         public static IntValue HeatAssist_Stage;
         public static IntValue Tech_cam_STAGE;
         public static IntValue FullCycleStage;
+        public static User user;
 
 
 
@@ -178,6 +180,7 @@ namespace KVANT_Scada_2.Objects
             FVPStatus = new FVPStatus();
             CrioInput = new CrioInput();
             CrioStatus = new CrioStatus();
+            user = new User();
         }
 
         public static OPCObjects createObjects()

@@ -312,6 +312,9 @@
     <Compile Include="GUI\Ion_GUI.xaml.cs">
       <DependentUpon>Ion_GUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\RRG_GUI.xaml.cs">
       <DependentUpon>RRG_GUI.xaml</DependentUpon>
     </Compile>
@@ -361,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Ion_GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

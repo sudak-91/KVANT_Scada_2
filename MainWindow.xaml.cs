@@ -35,24 +35,8 @@ namespace KVANT_Scada_2
         TimerCallback UpdateTimerCallBack;
         Timer UpdateTimer;
         private SolidColorBrush on, error, neutral;
-        public static string ConsoleMessage
-        {
-            get
-            {
-                return _consoleMessage;
-            }
-            set
-            {
-                _consoleMessage = value;
-                if(_consoleMessage == value)
-                {
-                    MainWindow mw = new MainWindow();
-                    mw.UpdateMainConsole();
-                }
-            }
-        }
+        
 
-        public static string _consoleMessage { get; private set; }
 
         //private BackgroundWorker backgroundWorker;
 
@@ -72,7 +56,7 @@ namespace KVANT_Scada_2
             PnePressure.IsReadOnly = true;
             CamTemperature.IsReadOnly = true;
             Crio_temperature.IsReadOnly = true;
-
+          
             
             UpdateTimerCallBack = new TimerCallback(delegate  {
                 UpdateGUI(null); 
@@ -80,34 +64,7 @@ namespace KVANT_Scada_2
             UpdateTimer = new Timer(UpdateTimerCallBack, null, 0, 1000);
 
 
-            //backgroundWorker = ((BackgroundWorker)this.FindResource("backgroundWorker"));
-            //opcUaWorker= new OPCUAWorker.OPCUAWorker();
-            //createData = new DB.Logic.CreateData();
-            //Thread OPCthread = new Thread(new ThreadStart(opcUaWorker.StartOPCUAClient));
-            //Thread CreateDataThread = new Thread(new ThreadStart(createData.CreateTables));
-            // CreateDataThread.Start();
-            // OPCthread.Start();
-            //Thread thread = new Thread(new ThreadStart(StartTimer));
-            //thread.Start();
-
-            //this.RunUpdates();
-
-
-
-            //while (OPCthread.IsAlive)
-            //{
-            //    Main_Load_bar.Value += 1;
-            //}
-
-
-
-
-            //Objects.OPCObjects opcObject = Objects.OPCObjects.createObjects();
-            //UDT.Valve.ValveStatus BAV_3_Status = opcObject.getBAV_3_Status();
-            //Console.WriteLine(BAV_3_Status.Auto_mode);
-            //valve = new UDT.Valve.ValveUDT();
-            // UDT.Valve.ValveUDT valve = client.ReadNode("ns=3;s=\"Valve_DB\".\"BAV_3\"").As<UDT.Valve.ValveUDT>();
-            //OpcClient client = opcObject.get_OpcClietn();
+    
 
 
 
@@ -152,22 +109,17 @@ namespace KVANT_Scada_2
         {
             Console.WriteLine(text);
             
-            //UpdateMainConsole();
-            //backgroundWorker.RunWorkerAsync();
+          
         }
 
-        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
 
-        }
-
-        public  void UpdateMainConsole()
-        {
-
-        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+           
+           
+                
+                
             
         }
 
@@ -189,6 +141,14 @@ namespace KVANT_Scada_2
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+        private void UserCheck()
+        {
+            if(OPCObjects.user.Role == 0)
+            {
+                CrioStart.IsEnabled = false;
+                StopCrio.IsEnabled = false;
+            }
         }
 
         private void FVP_Open_Click(object sender, RoutedEventArgs e)
@@ -425,6 +385,102 @@ namespace KVANT_Scada_2
                         HeatAssistcheckBox.IsChecked = OPCObjects.HeatAssist_Flag.Value;
                         Firstcheck = true;
                     }
+                    if(OPCObjects.Tech_cam_STAGE.Value == 3)
+                    {
+                        CamPrepare.Background = on;
+                    }
+                    else
+                    {
+                        CamPrepare.Background = neutral;
+                    }
+                    if(OPCObjects.Tech_cam_STAGE.Value == 2)
+                    {
+                        CamPrepare.Background = on;
+                    }
+                    else
+                    {
+                        CamPrepare.Background = neutral;
+                    }
+                    if(OPCObjects.Tech_cam_STAGE.Value == 4)
+                    {
+                        StopCrio.Background = on;
+                    }
+                    else
+                    {
+                        StopCrio.Background = neutral;
+                    }
+                    if(OPCObjects.Tech_cam_STAGE.Value == 5)
+                    {
+                        StopFVPBTN.Background = on;
+                    }
+                    else
+                    {
+                        StopFVPBTN.Background = neutral;
+                    }
+                    if(OPCObjects.Crio_start_signal.Value)
+                    {
+                        CrioStart.Background = on;
+                    }
+                    else
+                    {
+                        CrioStart.Background = neutral;
+                    }
+                    if(OPCObjects.StartProcessSignal.Value)
+                    {
+                        StartELI.Background = on;
+                    }
+                    else
+                    {
+                        StartELI.Background = neutral;
+                    }
+                    if(OPCObjects.BAV_3_status.Opened)
+                    {
+                        BAV_3.Fill = on;
+                    }
+                    else
+                    {
+                        BAV_3.Fill = neutral;
+                    }
+                    if(OPCObjects.CPV_Status.Opened)
+                    {
+                        CPV.Fill = on;
+                    }
+                    else
+                    {
+                        CPV.Fill = neutral;
+                    }
+                    if(OPCObjects.FVV_B_Status.Opened)
+                    {
+                        FVV_B.Fill = on;
+                    }
+                    else
+                    {
+                        FVV_B.Fill = neutral;
+                    }
+                    if(OPCObjects.FVV_S_Status.Opened)
+                    {
+                        FVV_S.Fill = on;
+                    }
+                    else
+                    {
+                        FVV_S.Fill = neutral;
+                    }
+                    if(OPCObjects.FVPStatus.Turn_On)
+                    {
+                        FVP.Fill = on;
+                    }
+                    else
+                    {
+                        FVP.Fill = neutral;
+                    }
+                    if(OPCObjects.CrioStatus.Turn_On)
+                    {
+                        CrioPump.Fill = on;
+                    }
+                    else
+                    {
+                        CrioPump.Fill = neutral;
+                    }
                     
 
                 }
@@ -518,6 +574,87 @@ namespace KVANT_Scada_2
         private void HeatAssistcheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             OPCUAWorker.OPCUAWorker.WriteDi(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Flag_path, (bool)HeatAssistcheckBox.IsChecked);
+        }
+
+        private void CrioStart_Click(object sender, RoutedEventArgs e)
+        {
+            if (OPCObjects.user.Role == 0)
+            {
+                MessageBox.Show("Не хвататет прав доступа");
+
+            }
+            else
+            {
+                lock (OPCObjects.OPCLocker)
+                {
+                    OPCObjects.Crio_start_signal.Value = true;
+                    OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.Crio_start_signal.Path, OPCObjects.Crio_start_signal.Value);
+                }
+
+            }
+        }
+
+        private void StopCrio_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.Tech_cam_STAGE.Value = 4;
+                OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
+            }
+        }
+
+        private void CamPrepare_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.Tech_cam_STAGE.Value = 2;
+                OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
+            }
+        }
+
+        private void OpenCam_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.Tech_cam_STAGE.Value = 3;
+                OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.Tech_cam_STAGE.Value = 5;
+                OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
+            }
+        }
+
+        private void StartELI_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.StartProcessSignal.Value = true;
+                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.StartProcessSignal.Path, OPCObjects.StartProcessSignal.Value);
+            }
+        }
+
+        private void StopELI_Click(object sender, RoutedEventArgs e)
+        {
+            lock (OPCObjects.OPCLocker)
+            {
+                OPCObjects.StopProcessSignal.Value = true;
+                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.StopProcessSignal.Path, OPCObjects.StopProcessSignal.Value);
+            }
+        }
+
+        private void PreHeatProc_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.PreHeat_Start.Value = true;
+                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.PreHeat_Start.Path, OPCObjects.PreHeat_Start.Value);
+            }
         }
 
         private void IonGUI_ON_Click(object sender, RoutedEventArgs e)
