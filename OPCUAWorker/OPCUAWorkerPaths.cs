@@ -111,5 +111,7 @@ namespace KVANT_Scada_2.OPCUAWorker
         public static string StopProcessSignal_path = "ns=3;s=\"ELI_DB\".\"Manual_stop\"";
         public static string FullCycleStage_path = "ns=3;s=\"ELI_DB\".\"Full_Cycle_Satge\"";
         public static string PidHeatMode_path = "ns=3;s=\"TEMP_PID_DB\".\"Mode_real\"";
+        public static string ELI_complete_path = "ns=3;s\"ELI_DB\".\"ELI_complete\"";
+        public static string ELI_access_path = "ns=3;s\"ELI_DB\".\"ELI_Access\"";
     }
 }

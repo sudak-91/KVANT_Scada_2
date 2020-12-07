@@ -45,6 +45,7 @@ namespace KVANT_Scada_2.DB.Logic
                     CreateAnalogTable(context);
                     CreateDigitalTable(context);
                     CreateIntTable(context);
+                    createUserTable(context);
                     context.SaveChanges();
                     context.Dispose();
                 } 
@@ -238,6 +239,22 @@ namespace KVANT_Scada_2.DB.Logic
                 }
                 
            
+
+        }
+        private static void createUserTable(MyDBContext context)
+        {
+            var ituser = context.User.Where(x => x.Login == "Sudalin");
+            if (ituser.Count() == 0)
+            {
+                var user = new User
+                {
+                    Login = "Sudalin",
+                    Password = "12345",
+                    Role = 9
+                };
+                context.User.Add(user);
+                context.SaveChanges();
+            }
 
         }
         private static void CreateValveTable(MyDBContext context)
@@ -710,6 +727,17 @@ namespace KVANT_Scada_2.DB.Logic
                     Name = "Start_Process",
                     Path = OPCUAWorkerPaths.StartProcessSignal_path
                 };
+                var beliaccess = new DigitalValueTable
+                {
+                    Name = "ELI_access",
+                    Path = OPCUAWorkerPaths.ELI_access_path
+                };
+                var belicmplete = new DigitalValueTable
+                {
+                    Name='ELI_complete',
+                    Path = OPCUAWorkerPaths.ELI_complete_path
+                };
+
                 context.DigitalValue.Add(balarmcriopowerfailure);
                 context.DigitalValue.Add(balarmelipowerfailure);
                 context.DigitalValue.Add(balarmfloatheaterpowerfailure);
@@ -740,6 +768,8 @@ namespace KVANT_Scada_2.DB.Logic
                 context.DigitalValue.Add(bpreheatstart);
                 context.DigitalValue.Add(bmanualstop);
                 context.DigitalValue.Add(bstartprocesssignal);
+                context.DigitalValue.Add(beliaccess);
+                context.DigitalValue.Add(belicmplete);
                 context.SaveChanges();
 
             }
@@ -944,8 +974,16 @@ namespace KVANT_Scada_2.DB.Logic
                             {
                                 entity.Value = analogvalue.Value;
                                 context.AnalogValue.Update(entity);
-                                
+                                var newlog = new AnalogLog
+                                {
+                                    dateTime = DateTime.Now,
+                                    Name = entity.Name,
+                                    Value = analogvalue.Value
+                                };
+                                context.AnalogLog.Add(newlog);
+
                             }
+                         
                            
                         }
                         context.SaveChanges();
@@ -971,6 +1009,12 @@ namespace KVANT_Scada_2.DB.Logic
                             {
                                 entity.Value = discretevalue.Value;
                                 context.DigitalValue.Update(entity);
+                                var newlog = new DigitalLog {
+                                    Name = entity.Name,
+                                    dateTime = DateTime.Now,
+                                    Value = discretevalue.Value
+                                };
+                                context.DigitalLog.Add(newlog);
 
                             }
 
@@ -1136,7 +1180,25 @@ namespace KVANT_Scada_2.DB.Logic
                 }
             }
         }
+        public static void AddOperatoAction(string Login, string Action)
+        {
+            lock (OPCObjects.SQLLocker)
+            {
+                using (var context = new MyDBContext())
+                {
+                   
+                    var action = new OperatorLog
+                    {
+                        Login = Login,
+                        Action = Action,
+                        dateTime = DateTime.Now
+                    };
 
+                    context.operatorLogs.Add(action);
+                    context.SaveChanges();
+                    context.Dispose();
 
+                }
+            }
     }
 }

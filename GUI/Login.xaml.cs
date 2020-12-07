@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KVANT_Scada_2.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,33 @@ namespace KVANT_Scada_2.GUI
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void Signin_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new DB.MyDBContext())
+            {
+                var users = context.User.Where(u => u.Login == Username.Text);
+                foreach(var user in users)
+                {
+                    if(user.Password == Password.Text)
+                    {
+                        OPCObjects.user = user;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неверный логин или пароль");
+                    }
+
+                }
+                
+            }
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

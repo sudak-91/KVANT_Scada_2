@@ -20,6 +20,7 @@ using KVANT_Scada_2.DB;
 using KVANT_Scada_2.Objects;
 using System.ComponentModel;
 using KVANT_Scada_2.GUI;
+using KVANT_Scada_2.DB.Logic;
 
 namespace KVANT_Scada_2
 {
@@ -193,6 +194,60 @@ namespace KVANT_Scada_2
                     PnePressure.Text = OPCObjects.Pneumatic_Pressure.Value.ToString() + "bar";
                     Crio_temperature.Text = OPCObjects.Crio_Temperature.Value.ToString() + "K";
                     CamTemperature.Text = OPCObjects.TE_1.Value.ToString();
+                    User_login_name.Content = OPCObjects.user.Login;
+                    if(OPCObjects.user.Role == 0)
+                    {
+                        FVP_Open.IsEnabled = false;
+                        CrioPumpStart.IsEnabled = false;
+                        CPV_GUI.IsEnabled = false;
+                        FVV_S_GUI.IsEnabled = false;
+                        FVV_B_GUI.IsEnabled = false;
+                        BAV3_GUI.IsEnabled = false;
+                        IonGUI_ON.IsEnabled = false;
+                        Driver_GUI.IsEnabled = false;
+                        HeaterGUI_ON.IsEnabled = false;
+                        CrioStart.IsEnabled = false;
+                        StopCrio.IsEnabled = false;
+                        OpenCam.IsEnabled = false;
+                        CamPrepare.IsEnabled = false;
+                        StopFVPBTN.IsEnabled = false;
+                        StartELI.IsEnabled = false;
+                        StopELI.IsEnabled = false;
+                        PreHeatProc.IsEnabled = false;
+                        Register_GUI.IsEnabled = false;
+                        Signin.IsEnabled = true;
+                        Signin.Visibility = Visibility.Visible;
+                        Logout.Visibility = Visibility.Hidden;
+                    }
+                    if(OPCObjects.user.Role == 9)
+                    {
+                        FVP_Open.IsEnabled = true;
+                        CrioPumpStart.IsEnabled = true;
+                        CPV_GUI.IsEnabled = true;
+                        FVV_S_GUI.IsEnabled = true;
+                        FVV_B_GUI.IsEnabled = true;
+                        BAV3_GUI.IsEnabled = true;
+                        IonGUI_ON.IsEnabled = true;
+                        Driver_GUI.IsEnabled = true;
+                        HeaterGUI_ON.IsEnabled = true;
+                        CrioStart.IsEnabled = true;
+                        StopCrio.IsEnabled = true;
+                        OpenCam.IsEnabled = true;
+                        CamPrepare.IsEnabled = true;
+                        StopFVPBTN.IsEnabled = true;
+                        StartELI.IsEnabled = true;
+                        StopELI.IsEnabled = true;
+                        PreHeatProc.IsEnabled = true;
+                        Register_GUI.IsEnabled = true;
+
+                    }
+                    if(OPCObjects.user.Role!=0)
+                    {
+                        Signin.IsEnabled = false;
+                        Signin.Visibility = Visibility.Hidden;
+                        Logout.Visibility = Visibility.Visible;
+
+                    }
 
 
                     if(OPCObjects.Alarm_Open_door.Value)
@@ -481,6 +536,22 @@ namespace KVANT_Scada_2
                     {
                         CrioPump.Fill = neutral;
                     }
+                    if(OPCObjects.ELI_access.Value)
+                    {
+                        Eli_access.Fill = on;
+                    }
+                    else
+                    {
+                        Eli_access.Fill = error;
+                    }
+                    if(OPCObjects.ELI_complete.Value)
+                    {
+                        Eli_complete.Fill = on;
+                    }
+                    else
+                    {
+                        Eli_complete.Fill = neutral;
+                    }
                     
 
                 }
@@ -569,11 +640,13 @@ namespace KVANT_Scada_2
         {
 
             OPCUAWorker.OPCUAWorker.WriteDi(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Flag_path, (bool)HeatAssistcheckBox.IsChecked);
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Включение ассистирования при напылении");
         }
 
         private void HeatAssistcheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             OPCUAWorker.OPCUAWorker.WriteDi(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Flag_path, (bool)HeatAssistcheckBox.IsChecked);
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Отключение ассистирования при напылении");
         }
 
         private void CrioStart_Click(object sender, RoutedEventArgs e)
@@ -590,6 +663,7 @@ namespace KVANT_Scada_2
                     OPCObjects.Crio_start_signal.Value = true;
                     OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.Crio_start_signal.Path, OPCObjects.Crio_start_signal.Value);
                 }
+                CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматического включения крионасоса");
 
             }
         }
@@ -601,6 +675,7 @@ namespace KVANT_Scada_2
                 OPCObjects.Tech_cam_STAGE.Value = 4;
                 OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
             }
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматической остановки крионасоса");
         }
 
         private void CamPrepare_Click(object sender, RoutedEventArgs e)
@@ -610,6 +685,7 @@ namespace KVANT_Scada_2
                 OPCObjects.Tech_cam_STAGE.Value = 2;
                 OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
             }
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматической откачки камеры");
         }
 
         private void OpenCam_Click(object sender, RoutedEventArgs e)
@@ -619,6 +695,7 @@ namespace KVANT_Scada_2
                 OPCObjects.Tech_cam_STAGE.Value = 3;
                 OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
             }
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматического напуска камеры");
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -628,6 +705,7 @@ namespace KVANT_Scada_2
                 OPCObjects.Tech_cam_STAGE.Value = 5;
                 OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
             }
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматической остановки ФВН");
         }
 
         private void StartELI_Click(object sender, RoutedEventArgs e)
@@ -637,6 +715,7 @@ namespace KVANT_Scada_2
                 OPCObjects.StartProcessSignal.Value = true;
                 OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.StartProcessSignal.Path, OPCObjects.StartProcessSignal.Value);
             }
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск напыления");
         }
 
         private void StopELI_Click(object sender, RoutedEventArgs e)
@@ -646,6 +725,7 @@ namespace KVANT_Scada_2
                 OPCObjects.StopProcessSignal.Value = true;
                 OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.StopProcessSignal.Path, OPCObjects.StopProcessSignal.Value);
             }
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Ручная остановка напыления");
         }
 
         private void PreHeatProc_Click(object sender, RoutedEventArgs e)
@@ -655,6 +735,53 @@ namespace KVANT_Scada_2
                 OPCObjects.PreHeat_Start.Value = true;
                 OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.PreHeat_Start.Path, OPCObjects.PreHeat_Start.Value);
             }
+            CreateData.AddOperatoAction(OPCObjects.user.Login, "Включение режима препрогрева");
+        }
+    
+
+        private void Signin_Click(object sender, RoutedEventArgs e)
+        {
+            Thread USER_GuiThread = new Thread(delegate ()
+            {
+                Login w = new Login();
+                w.Show();
+                System.Windows.Threading.Dispatcher.Run();
+            });
+            USER_GuiThread.SetApartmentState(ApartmentState.STA);
+            USER_GuiThread.Start();
+
+        }
+
+        private void Register_GUI_Click(object sender, RoutedEventArgs e)
+        {
+            Thread Register_GuiThread = new Thread(delegate ()
+            {
+                Register_GUI w = new Register_GUI();
+                w.Show();
+                System.Windows.Threading.Dispatcher.Run();
+            });
+            Register_GuiThread.SetApartmentState(ApartmentState.STA);
+            Register_GuiThread.Start();
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            OPCObjects.user.Role = 0;
+            OPCObjects.user.Login = "";
+
+        }
+
+        private void RRG_GUI_Click(object sender, RoutedEventArgs e)
+        {
+            Thread RRG_GUIthread = new Thread(delegate ()
+            {
+                RRG_GUI w = new RRG_GUI();
+                w.Show();
+                System.Windows.Threading.Dispatcher.Run();
+            });
+            RRG_GUIthread.SetApartmentState(ApartmentState.STA);
+            RRG_GUIthread.Start();
+
         }
 
         private void IonGUI_ON_Click(object sender, RoutedEventArgs e)

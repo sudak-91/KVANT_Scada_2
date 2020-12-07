@@ -15,7 +15,7 @@ namespace KVANT_Scada_2.DB.Entity
         public string Name { get; set; }
         
         public float Value { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime dateTime { get; set; }
         
 
     }

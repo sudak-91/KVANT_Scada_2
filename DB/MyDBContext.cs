@@ -26,6 +26,7 @@ namespace KVANT_Scada_2.DB
         public DbSet<User> User { get; set; }
         public DbSet<AnalogLog>AnalogLog { get; set; }
         public DbSet<DigitalLog> DigitalLog { get; set; } 
+        public DbSet<OperatorLog> operatorLogs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -89,8 +90,16 @@ namespace KVANT_Scada_2.DB
             {
                 entity.HasKey(e => e.Id);
             });
-            modelBuilder.Entity<AnalogLog>();
-            modelBuilder.Entity<DigitalLog>();
+            modelBuilder.Entity<AnalogLog>(entity => {
+                entity.HasKey(e => e.Id);
+            });
+            modelBuilder.Entity<DigitalLog>(entity => {
+                entity.HasKey(e => e.Id);
+            });
+            modelBuilder.Entity<OperatorLog>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+            });
         
      
         }

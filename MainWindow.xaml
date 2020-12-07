@@ -8,7 +8,7 @@
         xmlns:Entity="clr-namespace:KVANT_Scada_2.DB.Entity" xmlns:Tech_cam="clr-namespace:KVANT_Scada_2.UDT.Tech_cam" xmlns:OPCUAWorker="clr-namespace:KVANT_Scada_2.OPCUAWorker" xmlns:IntValue="clr-namespace:KVANT_Scada_2.UDT.IntValue" xmlns:ION="clr-namespace:KVANT_Scada_2.UDT.ION" x:Class="KVANT_Scada_2.MainWindow"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}" Height="1080" >
+        Title="DanaScada V2.0" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}" Height="1080" ResizeMode="NoResize" >
     <Window.Resources>
         <cm:BackgroundWorker x:Key="backgroundWorker" DoWork="BackgroundWorker_DoWork"   />
     </Window.Resources>
@@ -116,11 +116,11 @@
                     <DropShadowEffect/>
                 </Image.Effect>
             </Image>
-            <Ellipse x:Name="ELI" Grid.Column="1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="44" Margin="206,116,0,0" Stroke="Black" VerticalAlignment="Top" Width="44" StrokeThickness="4"/>
+            <Ellipse x:Name="ELI" Grid.Column="1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="206,116,0,46" Stroke="Black" Width="44" StrokeThickness="4"/>
             <Ellipse x:Name="Driver" Grid.Column="1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="44" Margin="71,79,0,0" Stroke="Black" VerticalAlignment="Top" Width="44" StrokeThickness="4"/>
             <Ellipse x:Name="Ion" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="44" Margin="18,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="44" StrokeThickness="4"/>
         </Grid>
-        <TextBox x:Name="ForVac_pressure" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="18,528,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Grid.ColumnSpan="2">
+        <TextBox x:Name="ForVac_pressure" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="18,528,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Grid.ColumnSpan="2" IsReadOnly="True">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
@@ -128,12 +128,12 @@
         <Label Content="Давленив форвакуумной линии" HorizontalAlignment="Left" Margin="6,504,0,0" VerticalAlignment="Top" FontFamily="Lucida Console" Grid.ColumnSpan="3"/>
         <Border x:Name="Crio" BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="90" Margin="645,165,0,0" VerticalAlignment="Top" Width="226">
             <Canvas Margin="0,10,89,66">
-                <TextBox x:Name="Crio_pressure" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="92">
+                <TextBox x:Name="Crio_pressure" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="92" IsReadOnly="True">
                     <TextBox.Effect>
                         <DropShadowEffect/>
                     </TextBox.Effect>
                 </TextBox>
-                <TextBox x:Name="Crio_temperature" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="92" Canvas.Top="35">
+                <TextBox x:Name="Crio_temperature" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="92" Canvas.Top="35" IsReadOnly="True">
                     <TextBox.Effect>
                         <DropShadowEffect/>
                     </TextBox.Effect>
@@ -168,14 +168,14 @@
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="72" Margin="6,931,0,0" VerticalAlignment="Top" Width="193"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="75" Margin="644,296,0,0" VerticalAlignment="Top" Width="237">
             <Canvas Margin="5,10,55,47">
-                <TextBox x:Name="Main_pressure" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="94">
+                <TextBox x:Name="Main_pressure" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="94" IsReadOnly="True">
                     <TextBox.Effect>
                         <DropShadowEffect/>
                     </TextBox.Effect>
                 </TextBox>
                 <Label Content="Давление" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="124" FontFamily="Lucida Console" Canvas.Left="13"/>
                 <Label Content="Температура" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Lucida Console" Height="22" Width="124" Canvas.Top="29"/>
-                <TextBox x:Name="CamTemperature" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="94" Canvas.Top="29">
+                <TextBox x:Name="CamTemperature" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="124" Canvas.Left="94" Canvas.Top="29" IsReadOnly="True">
                     <TextBox.Effect>
                         <DropShadowEffect/>
                     </TextBox.Effect>
@@ -304,6 +304,22 @@
                 </Button>
             </Canvas>
         </GroupBox>
-        <Button x:Name="Signin" Content="Авторизоваться" Grid.Column="3" HorizontalAlignment="Left" Height="71" Margin="78,45,0,0" VerticalAlignment="Top" Width="106"/>
+        <Button x:Name="Signin" Content="Авторизоваться" Grid.Column="3" HorizontalAlignment="Left" Height="71" Margin="48,93,0,0" VerticalAlignment="Top" Width="106" Click="Signin_Click"/>
+        <Button x:Name="Register_GUI" Content="Регистрация" Grid.Column="2" HorizontalAlignment="Left" Height="39" Margin="1200,53,0,0" VerticalAlignment="Top" Width="117" Click="Register_GUI_Click"/>
+        <Label x:Name="User_login_name" Content="Label" Grid.Column="3" HorizontalAlignment="Left" Margin="9,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.061,0.308"/>
+        <Button x:Name="Logout" Content="Выход" Grid.Column="3" HorizontalAlignment="Left" Height="26" Margin="146,34,0,0" VerticalAlignment="Top" Width="57" Click="Logout_Click"/>
+        <GroupBox Grid.Column="2" Header="ЭЛИ" HorizontalAlignment="Left" Height="92" Margin="1412,146,0,0" VerticalAlignment="Top" Width="231">
+            <Canvas Margin="4,12,-1,63">
+                <Ellipse x:Name="Eli_access" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="7"/>
+                <Ellipse x:Name="Eli_complete" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="28"/>
+                <Label Content="Разрешение на работу ЭЛИ" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="22"/>
+                <Label Content="Процесс напыления завершен" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="22" Canvas.Top="21"/>
+            </Canvas>
+        </GroupBox>
+        <Button x:Name="RRG_GUI" Content="РРГ" Grid.Column="2" HorizontalAlignment="Left" Height="40" Margin="995,54,0,0" VerticalAlignment="Top" Width="102" Click="RRG_GUI_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
     </Grid>
 </Window>

@@ -65,7 +65,8 @@ namespace KVANT_Scada_2.Objects
                                     Alarm_Ion_power_failure, Alarm_FVP_power_failure,
                                     Alarm_Indexer_power_failure, Alarm_SSP_power_failure,
                                     Alarm_TV1_power_failure, Alarm_Water_SECOND, Alarm_Hight_Crio_Temp,
-                                    Crio_start_signal, Alarm_manual_stop, StartProcessSignal, StopProcessSignal;
+                                    Crio_start_signal, Alarm_manual_stop, StartProcessSignal, StopProcessSignal,
+                                    ELI_complete, ELI_access;
         public static IntValue PreHeat_Stage;
         public static IntValue HeatAssist_Stage;
         public static IntValue Tech_cam_STAGE;
@@ -149,6 +150,8 @@ namespace KVANT_Scada_2.Objects
             Alarm_manual_stop = new DiscreteValue();
             StartProcessSignal = new DiscreteValue();
             StopProcessSignal = new DiscreteValue();
+            ELI_complete = new DiscreteValue();
+            ELI_access = new DiscreteValue();
             PreHeat_Stage = new IntValue();
             HeatAssist_Stage = new IntValue();
             Tech_cam_STAGE = new IntValue();

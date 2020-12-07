@@ -291,6 +291,7 @@
     <Compile Include="DB\Entity\IntValueTable.cs" />
     <Compile Include="DB\Entity\Ion.cs" />
     <Compile Include="DB\Entity\OpenCamTable.cs" />
+    <Compile Include="DB\Entity\OperatorLog.cs" />
     <Compile Include="DB\Entity\StopCrioTable.cs" />
     <Compile Include="DB\Entity\StopFVPTable.cs" />
     <Compile Include="DB\Entity\User.cs" />
@@ -314,6 +315,9 @@
     </Compile>
     <Compile Include="GUI\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Register_GUI.xaml.cs">
+      <DependentUpon>Register_GUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\RRG_GUI.xaml.cs">
       <DependentUpon>RRG_GUI.xaml</DependentUpon>
@@ -368,6 +372,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Register_GUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

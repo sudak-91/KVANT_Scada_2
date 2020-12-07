@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="RRG_GUI" Height="300.2" Width="450" Loaded="Window_Loaded">
+        Title="РРГ" Height="300.2" Width="450" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
         <GroupBox Header="Текущий расход" HorizontalAlignment="Left" Height="60" Margin="6,5,0,0" VerticalAlignment="Top" Width="432" BorderThickness="2">
             <Canvas Margin="-4,2,-10,9">

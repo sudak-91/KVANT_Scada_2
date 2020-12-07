@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="Login" Width="300" Height="200">
+        Title="Вход" Width="300" Height="200" ResizeMode="NoResize">
     <Grid>
         <TextBox x:Name="Username" HorizontalAlignment="Left" Height="20" Margin="108,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
         <Label Content="Логин" HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="Password" HorizontalAlignment="Left" Height="20" Margin="109,70,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170" MaxLength="8" IsUndoEnabled="True"/>
         <Label Content="Пароль" HorizontalAlignment="Left" Margin="25,67,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="Signin" Content="Войти" HorizontalAlignment="Left" Height="26" Margin="55,116,0,0" VerticalAlignment="Top" Width="70"/>
-        <Button x:Name="Exit" Content="Выйти" HorizontalAlignment="Left" Height="26" Margin="145,116,0,0" VerticalAlignment="Top" Width="70"/>
+        <Button x:Name="Signin" Content="Войти" HorizontalAlignment="Left" Height="26" Margin="55,116,0,0" VerticalAlignment="Top" Width="70" Click="Signin_Click"/>
+        <Button x:Name="Exit" Content="Выйти" HorizontalAlignment="Left" Height="26" Margin="145,116,0,0" VerticalAlignment="Top" Width="70" Click="Exit_Click"/>
 
     </Grid>
 </Window>

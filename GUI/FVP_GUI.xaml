@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="FVP_GUI" Height="450" Width="300" Loaded="Window_Loaded">
+        Title="ФВП" Height="450" Width="300" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
         <GroupBox Header="Состояние" HorizontalAlignment="Left" Height="154" Margin="19,7,0,0" VerticalAlignment="Top" Width="253">
             <Canvas x:Name="FVPStatus" Margin="45,10,49,-2">

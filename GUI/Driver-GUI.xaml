@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
         mc:Ignorable="d"
-        Title="Driver_GUI" Height="300" Width="450" Loaded="Window_Loaded">
+        Title="Привод вращения карусели" Height="300" Width="450" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="142*"/>
+            <ColumnDefinition Width="79*"/>
+        </Grid.ColumnDefinitions>
         <Label Content="Сокорость вращения" HorizontalAlignment="Left" Margin="20,88,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="Состояние" HorizontalAlignment="Left" Height="58" Margin="10,11,0,0" VerticalAlignment="Top" Width="411">
+        <GroupBox Header="Состояние" HorizontalAlignment="Left" Height="58" Margin="10,11,0,0" VerticalAlignment="Top" Width="411" Grid.ColumnSpan="2">
             <Canvas Margin="5,5,181,4">
                 <Ellipse x:Name="RemoreControl" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Stroke="Black" VerticalAlignment="Top" Width="15" Canvas.Top="6"/>
                 <Label Content="Соединение с блоком управения" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="20"/>

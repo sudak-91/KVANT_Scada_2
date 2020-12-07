@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.DB.Entity
 {
-    public class DigitalLog:DigitalValueTable
+    public class DigitalLog
     {
 
         [Key]
@@ -15,7 +15,7 @@ namespace KVANT_Scada_2.DB.Entity
         [Required]
         public string Name { get; set; }
         public bool Value { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime dateTime { get; set; }
         
     }
 }
