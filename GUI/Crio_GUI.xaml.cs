@@ -92,10 +92,12 @@ namespace KVANT_Scada_2.GUI
                     if(OPCObjects.CrioStatus.Auto_mode)
                     {
                         CrioAutoMode.Fill = on;
+                        CrioManualMode.Fill = neutral;
                     }
                     else
                     {
                         CrioAutoMode.Fill = neutral;
+                        CrioManualMode.Fill = on;
                     }
 
                     if(OPCObjects.CrioStatus.Blocked)

@@ -74,7 +74,7 @@ namespace KVANT_Scada_2
             var client = new OpcClient("opc.tcp://192.168.0.10:4840/");
             client.Connect();
 
-            var node = client.BrowseNode("ns=3;s=\"VT\".\"TV\"");
+            var node = client.BrowseNode("ns=3;s=\"Crio_DB\".\"Crio\".\"Input\"");
 
             if (node is OpcVariableNodeInfo variablenode)
             {

@@ -56,10 +56,10 @@ namespace KVANT_Scada_2.GUI
         {
             lock (OPCObjects.OPCLocker)
             {
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG1_path, float.Parse(RRG_1_K.Text));
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG2_path, float.Parse(RRG_2_K.Text));
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG3_path, float.Parse(RRG_3_K.Text));
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG4_path, float.Parse(RRG_4_K.Text));
+                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG1_path, float.Parse(RRG_1_K.Text.Replace(".", ",")));
+                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG2_path, float.Parse(RRG_2_K.Text.Replace(".",",")));
+                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG3_path, float.Parse(RRG_3_K.Text.Replace(".", ",")));
+                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG4_path, float.Parse(RRG_4_K.Text.Replace(".", ",")));
             }
         }
 

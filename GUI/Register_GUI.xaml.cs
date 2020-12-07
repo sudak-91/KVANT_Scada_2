@@ -49,6 +49,7 @@ namespace KVANT_Scada_2.GUI
                         };
                         context.User.Add(newuser);
                         context.SaveChanges();
+                        context.Dispose();
                         MessageBox.Show("Пользователь создан");
 
                     }

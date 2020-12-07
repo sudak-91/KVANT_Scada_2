@@ -108,10 +108,10 @@ namespace KVANT_Scada_2.OPCUAWorker
         public static string K_RRG3_path = "ns=3;s=\"RRG_DB\".\"K_RRG3\"";
         public static string K_RRG4_path = "ns=3;s=\"RRG_DB\".\"K_RRG4\"";
         public static string StartProcessSignal_path = "ns=3;s=\"ELI_DB\".\"Start_signal\"";
-        public static string StopProcessSignal_path = "ns=3;s=\"ELI_DB\".\"Manual_stop\"";
+        public static string StopProcessSignal_path = "ns=3;s=\"ELI_DB\".\"Manual_Stop\"";
         public static string FullCycleStage_path = "ns=3;s=\"ELI_DB\".\"Full_Cycle_Satge\"";
         public static string PidHeatMode_path = "ns=3;s=\"TEMP_PID_DB\".\"Mode_real\"";
-        public static string ELI_complete_path = "ns=3;s\"ELI_DB\".\"ELI_complete\"";
-        public static string ELI_access_path = "ns=3;s\"ELI_DB\".\"ELI_Access\"";
+        public static string ELI_complete_path = "ns=3;s=\"ELI_DB\".\"ELI_complete\"";
+        public static string ELI_access_path = "ns=3;s=\"ELI_DB\".\"ELI_Access\"";
     }
 }
