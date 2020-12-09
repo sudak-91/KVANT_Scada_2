@@ -65,5 +65,10 @@ namespace KVANT_Scada_2.GUI
 
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 }

@@ -93,6 +93,11 @@ namespace KVANT_Scada_2.GUI
             }
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UpdateTimer.Dispose();
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lock (OPCObjects.OPCLocker)

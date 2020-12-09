@@ -38,6 +38,8 @@ namespace KVANT_Scada_2.GUI
         {
             lock(OPCObjects.OPCLocker)
             {
+                OPCObjects.BLM_Stop.Value = false;
+                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.BLM_Stop.Path, OPCObjects.BLM_Stop.Value);
                 OPCObjects.BLM_Start.Value = true;
                 OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.BLM_Start.Path, OPCObjects.BLM_Start.Value);
             }
@@ -49,7 +51,10 @@ namespace KVANT_Scada_2.GUI
             {
                 OPCObjects.BLM_Stop.Value = true;
                 OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.BLM_Stop.Path, OPCObjects.BLM_Stop.Value);
+                OPCObjects.BLM_Start.Value = false;
+                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.BLM_Start.Path, OPCObjects.BLM_Start.Value);
             }
+        
 
         }
 

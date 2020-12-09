@@ -203,12 +203,14 @@ namespace KVANT_Scada_2.OPCUAWorker
             OPCLocker = new object();
             client = new OpcClient("opc.tcp://192.168.0.10:4840/");
             opcobjects = OPCObjects.createObjects();
+            
             OPCObjects.client = client;
             OPCObjects.OPCLocker = OPCLocker;
+            OPCObjects.client.Connect();
             
             lock (OPCObjects.OPCLocker) 
             {
-                client.Connect();
+                //client.Connect();
                 #region BAV_3
                 ValveStatus BAV_3_Status = client.ReadNode(OPCUAWorkerPaths.BAV_3_Status_path).As<ValveStatus>();
                 ValveInput BAV_3_Input = client.ReadNode(OPCUAWorkerPaths.BAV_3_Input_path).As<ValveInput>();
@@ -502,7 +504,7 @@ namespace KVANT_Scada_2.OPCUAWorker
                 opcobjects.SetIonStatus(IonStatus);
                 opcobjects.SetIonOutputFeedBack(IonOutputFeedBack);
                 //opcobjects.SetIonInputSetPoint(IonInputSetPoint);
-                opcobjects.SetIonInputCommand(IonInputCommand);
+               // opcobjects.SetIonInputCommand(IonInputCommand);
                 //opcobjects.SetFVPStatus(FVPStatus);
                 opcobjects.SetAnalogInput(variable);
                 opcobjects.setOPCLocker(OPCLocker);
@@ -586,7 +588,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             var client = OPCObjects.client;
             lock (OPCObjects.OPCLocker)
             {
-                client.Connect();
+                //client.Connect();
                 client.WriteNode(path, obj);
             }
        
@@ -598,7 +600,7 @@ namespace KVANT_Scada_2.OPCUAWorker
             var client = OPCObjects.client;
             lock(OPCObjects.OPCLocker)
             {
-                client.Connect();
+                //client.Connect();
                 client.WriteNode(path, obj);
             }
            
@@ -635,7 +637,7 @@ namespace KVANT_Scada_2.OPCUAWorker
 
             
            
-                client.Connect();
+                //client.Connect();
                 BAV_3_Status = client.ReadNode(OPCUAWorkerPaths.BAV_3_Status_path).As<ValveStatus>();
                 BAV_3_Input = client.ReadNode(OPCUAWorkerPaths.BAV_3_Input_path).As<ValveInput>();
                 FVV_S_Status = client.ReadNode(OPCUAWorkerPaths.FVV_S_Status_path).As<ValveStatus>();
@@ -733,7 +735,7 @@ namespace KVANT_Scada_2.OPCUAWorker
 
 
 
-                client.Disconnect();
+                //client.Disconnect();
 
 
 

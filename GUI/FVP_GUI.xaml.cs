@@ -41,6 +41,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.FVPStatus.Auto_mode = true;
+                OPCObjects.FVPStatus.Remote = false;
                 OPCUAWorker.OPCUAWorker.Write<FVPStatus>(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path, OPCObjects.FVPStatus);
             }
         }
@@ -55,6 +56,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.FVPStatus.Auto_mode = false;
+                OPCObjects.FVPStatus.Remote = true;
                 OPCUAWorker.OPCUAWorker.Write<FVPStatus>(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path, OPCObjects.FVPStatus);
             }
         }
@@ -75,6 +77,12 @@ namespace KVANT_Scada_2.GUI
                 OPCObjects.FVPStatus.Manual_start = false;
                 OPCUAWorker.OPCUAWorker.Write<FVPStatus>(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path, OPCObjects.FVPStatus);
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+           
+            UpdateTimer.Dispose();
         }
 
         private void btnFVPService_Click(object sender, RoutedEventArgs e)

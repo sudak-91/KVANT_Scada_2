@@ -906,57 +906,84 @@ namespace KVANT_Scada_2.DB.Logic
         }
         private static void UpdateOpenCamTable()
         {
-            using (var context = new MyDBContext())
+            lock(OPCObjects.OPCLocker)
             {
-                var opcopencamtable = Objects.OPCObjects.createObjects().GetOpenCam();
-                var opencamvalues = context.OpenCam.Where(e => e.Id == 1);
-                foreach (var oc in opencamvalues)
+                lock(OPCObjects.SQLLocker)
                 {
-                    oc.Access = opcopencamtable.Access;
-                    oc.Heat_cam = opcopencamtable.Heat_cam;
-                    oc.Stage_1_done = opcopencamtable.Stage_1_done;
-                    oc.Stage_1_Return = opcopencamtable.Stage_1_Return;
-                    oc.Stage_1_stage = opcopencamtable.Stage_1_stage;
-                    context.Update(oc);
+                    using (var context = new MyDBContext())
+                    {
+                        var opcopencamtable = Objects.OPCObjects.createObjects().GetOpenCam();
+                        var opencamvalues = context.OpenCam.Where(e => e.Id == 1);
+                        foreach (var oc in opencamvalues)
+                        {
+                            oc.Access = opcopencamtable.Access;
+                            oc.Heat_cam = opcopencamtable.Heat_cam;
+                            oc.Stage_1_done = opcopencamtable.Stage_1_done;
+                            oc.Stage_1_Return = opcopencamtable.Stage_1_Return;
+                            oc.Stage_1_stage = opcopencamtable.Stage_1_stage;
+                            context.Update(oc);
+
+                        }
+                        context.SaveChanges();
+                        context.Dispose();
+                    }
 
                 }
-                context.SaveChanges();
+
             }
+            
         }
         private static void UpdateStopCrioTable()
         {
-            using (var context = new MyDBContext())
+            lock(OPCObjects.OPCLocker)
             {
-                var opcstopcriotable = Objects.OPCObjects.createObjects().GetStopCrio();
-                var stopcriovalues = context.StopCrio.Where(e => e.Id == 1);
-                foreach (var sc in stopcriovalues)
+                lock(OPCObjects.SQLLocker)
                 {
-                    sc.Access = opcstopcriotable.Access;
-                    sc.Stage_2_done = opcstopcriotable.Stage_2_done;
-                    sc.Stage_2_Return = opcstopcriotable.Stage_2_Return;
-                    sc.Stage_2_Stage = opcstopcriotable.Stage_2_Stage;
-                    context.Update(sc);
+                    using (var context = new MyDBContext())
+                    {
+                        var opcstopcriotable = Objects.OPCObjects.createObjects().GetStopCrio();
+                        var stopcriovalues = context.StopCrio.Where(e => e.Id == 1);
+                        foreach (var sc in stopcriovalues)
+                        {
+                            sc.Access = opcstopcriotable.Access;
+                            sc.Stage_2_done = opcstopcriotable.Stage_2_done;
+                            sc.Stage_2_Return = opcstopcriotable.Stage_2_Return;
+                            sc.Stage_2_Stage = opcstopcriotable.Stage_2_Stage;
+                            context.Update(sc);
 
-                }
-                context.SaveChanges();
+                        }
+                        context.SaveChanges();
+                        context.Dispose();
+
+                    }
+                }           
             }
         }
         private static void UpdateStopFVPTable()
         {
-            using (var context = new MyDBContext())
+            lock (OPCObjects.OPCLocker)
             {
-                var opcstopfvp = Objects.OPCObjects.createObjects().GetStopFVP();
-                var stopfvpvalues = context.StopFVP.Where(e => e.Id == 1);
-                foreach (var sf in stopfvpvalues)
+                lock(OPCObjects.SQLLocker)
                 {
-                    sf.Access = opcstopfvp.Access;
-                    sf.Stage_3_Done = opcstopfvp.Stage_3_Done;
-                    sf.Stage_3_Return = opcstopfvp.Stage_3_Return;
-                    context.Update(sf);
+                    using (var context = new MyDBContext())
+                    {
+                        var opcstopfvp = Objects.OPCObjects.createObjects().GetStopFVP();
+                        var stopfvpvalues = context.StopFVP.Where(e => e.Id == 1);
+                        foreach (var sf in stopfvpvalues)
+                        {
+                            sf.Access = opcstopfvp.Access;
+                            sf.Stage_3_Done = opcstopfvp.Stage_3_Done;
+                            sf.Stage_3_Return = opcstopfvp.Stage_3_Return;
+                            context.Update(sf);
+
+                        }
+                        context.SaveChanges();
+                        context.Dispose();
+                    }
 
                 }
-                context.SaveChanges();
             }
+           
         }
         private static void UpdateAnalogValue()
         {
@@ -1071,6 +1098,7 @@ namespace KVANT_Scada_2.DB.Logic
                             context.Update(entity);
                         }
                         context.SaveChanges();
+                        context.Dispose();
 
                     }
                 }
@@ -1097,6 +1125,8 @@ namespace KVANT_Scada_2.DB.Logic
                             context.Update(entity);
                         }
                         context.SaveChanges();
+                        context.Dispose();
+
                     }
                 }
             }
@@ -1147,6 +1177,8 @@ namespace KVANT_Scada_2.DB.Logic
                             context.Update(entity);
                         }
                         context.SaveChanges();
+                        context.Dispose();
+
                     }
                 }
             }
@@ -1177,6 +1209,8 @@ namespace KVANT_Scada_2.DB.Logic
                             }
                         }
                         context.SaveChanges();
+                        context.Dispose();
+
                     }
                 }
             }
@@ -1187,6 +1221,7 @@ namespace KVANT_Scada_2.DB.Logic
             {
                 using (var context = new MyDBContext())
                 {
+                    
 
                     var action = new OperatorLog
                     {
@@ -1198,6 +1233,7 @@ namespace KVANT_Scada_2.DB.Logic
                     context.operatorLogs.Add(action);
                     context.SaveChanges();
                     context.Dispose();
+
 
                 }
             }
