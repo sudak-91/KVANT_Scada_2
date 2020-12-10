@@ -1,4 +1,6 @@
-﻿using Opc.UaFx;
+﻿
+using Opc.Ua;
+using Opc.Ua.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.UDT.Tech_cam
 {
-    [OpcDataType("ns=3;s=DT_\"CP_check\"")]
-    [OpcDataTypeEncoding("ns=3;s=TE_\"CP_check\"")]
+   
     ///<summaray>
     ///Класс CrioPumpStart является представлением 
     ///OPC DataType "ns=3;s=DT_\"CP_check\"""
@@ -23,6 +24,53 @@ namespace KVANT_Scada_2.UDT.Tech_cam
         public bool Access { get; set; }
         public bool Return_error { get; set; }
         public bool Stage_0_CompliteP { get; set; }
+        private static string Path;
+        public CrioPumpStart(string path)
+        {
+            Path = path;
+        }
+        public static void ReadValue(ref Session session, ref CrioPumpStart cp)
+        {
+            DataValue opcStage_0_Cam_prepare_stage = session.ReadValue(NodeId.Parse(Path + ".\"Stage_0_Stage\""));
+            DataValue opcComplete = session.ReadValue(NodeId.Parse(Path + ".\"Stage_0_Complite\""));
+            DataValue opcAccess = session.ReadValue(NodeId.Parse(Path + ".\"Access\""));
+
+            cp.Stage_0_Stage = (UInt16)opcStage_0_Cam_prepare_stage.Value;
+            cp.Stage_0_CompliteP = (bool)opcComplete.Value;
+            cp.Access = (bool)opcAccess.Value;
+
+        }
+        public static void WriteInput(ref Session session, ref CrioPumpStart cp)
+        {
+            WriteValueCollection nodesToWrite = new WriteValueCollection();
+
+
+            WriteValue bServiceMode = new WriteValue();
+            bServiceMode.NodeId = new NodeId(Path + ".\"Stage_0_Stag\"");
+            bServiceMode.AttributeId = Attributes.Value;
+            bServiceMode.Value = new DataValue();
+            bServiceMode.Value.Value = (UInt16)cp.Stage_0_Stage;
+            nodesToWrite.Add(bServiceMode);
+
+
+            
+
+            // String Node - Objects\CTT\Scalar\Scalar_Static\String
+
+
+            // Write the node attributes
+            StatusCodeCollection results = null;
+            DiagnosticInfoCollection diagnosticInfos;
+            Console.WriteLine("Writing nodes...");
+
+            // Call Write Service
+            session.Write(null,
+                            nodesToWrite,
+                            out results,
+                            out diagnosticInfos);
+
+        }
+
 
     }
 }

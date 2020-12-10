@@ -39,9 +39,12 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.PreHeat_Temp_SP.Value = float.Parse(PreHeatTemp2.Text);
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCObjects.PreHeat_Temp_SP.Path, OPCObjects.PreHeat_Temp_SP.Value);
+                OPCObjects.PreHeat_Temp_SP.WriteValue(ref OPCObjects.session);
+                
                 OPCObjects.PreHeat_Timer_SP.Value = float.Parse(PreHeatTime2.Text);
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCObjects.PreHeat_Timer_SP.Path, OPCObjects.PreHeat_Timer_SP.Value);
+                OPCObjects.PreHeat_Timer_SP.WriteValue(ref OPCObjects.session);
+
+
             }
         }
 
@@ -50,9 +53,9 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.HeatAssist_Temp_SP.Value = float.Parse(HeatAssistTemp.Text);
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCObjects.HeatAssist_Temp_SP.Path, OPCObjects.HeatAssist_Temp_SP.Value);
+                OPCObjects.HeatAssist_Temp_SP.WriteValue(ref OPCObjects.session);
                 OPCObjects.HeatAssist_Timer_SP.Value = float.Parse(HeatAssistTime.Text);
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCObjects.HeatAssist_Timer_SP.Path, OPCObjects.HeatAssist_Timer_SP.Value);
+                OPCObjects.HeatAssist_Timer_SP.WriteValue(ref OPCObjects.session);
             }
         }
 
@@ -61,7 +64,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                OPCObjects.PidHeatMode.Value = (float)4.0;
-               OPCUAWorker.OPCUAWorker.Write<float>(OPCObjects.PidHeatMode.Path, OPCObjects.PidHeatMode.Value);
+                OPCObjects.PidHeatMode.WriteValue(ref OPCObjects.session);
 
             }
         }

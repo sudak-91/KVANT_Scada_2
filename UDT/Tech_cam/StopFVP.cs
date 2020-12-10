@@ -1,4 +1,4 @@
-﻿using Opc.UaFx;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.UDT.Tech_cam
 {
-    [OpcDataType("ns=3;s=DT_\"Stop_FVP\"")]
-    [OpcDataTypeEncoding("ns=3;s=TE_\"Stop_FVP\"")]
+
     ///<summaray>
     ///Класс StopFVP является представлением 
     ///OPC DataType "ns=3;s=DT_\"Stop_FVP\"

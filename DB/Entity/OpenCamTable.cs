@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.DB.Entity
 {
-    public class OpenCamTable:OpenCam
-    {
+    public class OpenCamTable
+    { 
         [Key]
         public int Id { get; set; }
         [Required]

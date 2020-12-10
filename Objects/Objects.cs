@@ -7,7 +7,7 @@ using KVANT_Scada_2.UDT.IntValue;
 using KVANT_Scada_2.UDT.ION;
 using KVANT_Scada_2.UDT.Tech_cam;
 using KVANT_Scada_2.UDT.Valve;
-using Opc.UaFx.Client;
+using Opc.Ua.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace KVANT_Scada_2.Objects
     public class OPCObjects
     {
 
-        public static OpcClient client;
+     
         public static ValveStatus BAV_3_status, FVV_S_Status, FVV_B_Status, CPV_Status, SHV_Status;
         public static ValveInput BAV_3_input, FVV_S_Input, FVV_B_Input, CPV_Input, SHV_Input;
         public static CamPrepare camPrepare;
@@ -36,7 +36,7 @@ namespace KVANT_Scada_2.Objects
         public static FVPStatus FVPStatus;
         public static CrioInput CrioInput;
         public static CrioStatus CrioStatus;
-        public static AnalogInput AnalogInput;
+        public static Session session;
         public static object SQLLocker;
         public static object OPCLocker;
         public static List<AnalogValue> AnalogValues;
@@ -79,110 +79,109 @@ namespace KVANT_Scada_2.Objects
         private static OPCObjects instance;
         private OPCObjects()
         {
-            camPrepare = new CamPrepare();
+            
             AnalogValues = new List<AnalogValue>();
             DiscreteValues = new List<DiscreteValue>();
             ValvesInput = new Dictionary<int, ValveInput>();
             ValvesStatus = new Dictionary<int, ValveStatus>();
-            SFT01_FT = new AnalogValue();
-            SFT02_FT = new AnalogValue();
-            SFT03_FT = new AnalogValue();
-            SFT04_FT = new AnalogValue();
-            SFT05_FT = new AnalogValue();
-            SFT06_FT = new AnalogValue(); 
-            SFT07_FT = new AnalogValue(); 
-            SFT08_FT = new AnalogValue();
-            SFT09_FT = new AnalogValue();
-            SFT10_FT = new AnalogValue();
-            FT_TT_1 = new AnalogValue();
-            FT_TT_2 = new AnalogValue();
-            FT_TT_3 = new AnalogValue();
-            K_RRG1 = new AnalogValue();
-            K_RRG2 = new AnalogValue();
-            K_RRG3 = new AnalogValue();
-            K_RRG4 = new AnalogValue();
-            PidHeatMode = new AnalogValue();
-            RRG_Pressure_SP = new AnalogValue();
-            RRG_9A1_feedback = new AnalogValue();
-            RRG_9A2_feedback = new AnalogValue();
-            RRG_9A3_feedback = new AnalogValue();
-            RRG_9A4_feedback = new AnalogValue();
-            TE_1 = new AnalogValue();
-            Pneumatic_Pressure = new AnalogValue();
-            Crio_Pressure = new AnalogValue();
-            Camera_Pressure = new AnalogValue(); 
-            Main_Pressure = new AnalogValue();
-            Crio_Temperature = new AnalogValue();
-            PreHeat_Temp_SP = new AnalogValue();
-            HeatAssist_Temp_SP = new AnalogValue();
-            PreHeat_Timer_SP = new AnalogValue();
-            HeatAssist_Timer_SP = new AnalogValue();
-            ManualSetTemp = new AnalogValue(); 
-            BLM_Speed = new AnalogValue();
-            BLM_Speed_SP = new AnalogValue();
-            PreHeat_Done = new DiscreteValue();
-            HeatAssist_Done = new DiscreteValue();
-            PreHeat_Start = new DiscreteValue();
-            HeatAssist_Flag = new DiscreteValue(); 
-            Heat_Done = new DiscreteValue();
-            HeatAssist_TempDone = new DiscreteValue();
-            Heat_Assit_On = new DiscreteValue();
-            BLM_Start = new DiscreteValue();
-            BLM_Stop = new DiscreteValue();
-            BLM_Remote_Control_Done = new DiscreteValue();
-            BLM_Run = new DiscreteValue();
-            Alarm_Open_door = new DiscreteValue();
-            Alarm_Water_CRIO = new DiscreteValue();
-            Alarm_Hight_Pne_Press = new DiscreteValue();
-            Alarm_Low_One_Presse = new DiscreteValue();
-            Alarm_Crio_power_failure = new DiscreteValue();
-            Alarm_Qartz_power_failure = new DiscreteValue();
-            Alarm_ELI_Power_failure = new DiscreteValue();
-            Alarm_FloatHeater_power_failure = new DiscreteValue();
-            Alarm_Ion_power_failure = new DiscreteValue();
-            Alarm_FVP_power_failure = new DiscreteValue();
-            Alarm_Indexer_power_failure = new DiscreteValue();
-            Alarm_SSP_power_failure = new DiscreteValue();
-            Alarm_TV1_power_failure = new DiscreteValue();
-            Alarm_Water_SECOND = new DiscreteValue();
-            Alarm_Hight_Crio_Temp = new DiscreteValue();
-            Crio_start_signal = new DiscreteValue();
-            Alarm_manual_stop = new DiscreteValue();
-            StartProcessSignal = new DiscreteValue();
-            StopProcessSignal = new DiscreteValue();
-            ELI_complete = new DiscreteValue();
-            ELI_access = new DiscreteValue();
-            PreHeat_Stage = new IntValue();
-            HeatAssist_Stage = new IntValue();
-            Tech_cam_STAGE = new IntValue();
-            FullCycleStage = new IntValue();
+            SFT01_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT01_FT_path);
+            SFT02_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT02_FT_path);
+            SFT03_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT03_FT_path);
+            SFT04_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT04_FT_path);
+            SFT05_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT05_FT_path);
+            SFT06_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT06_FT_path); 
+            SFT07_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT07_FT_path); 
+            SFT08_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT08_FT_path);
+            SFT09_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT09_FT_path);
+            SFT10_FT = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.SFT10_FT_path);
+            FT_TT_1 = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.FT_TT_1_path);
+            FT_TT_2 = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.FT_TT_2_path);
+            FT_TT_3 = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.FT_TT_3_path);
+            K_RRG1 = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.K_RRG1_path);
+            K_RRG2 = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.K_RRG2_path);
+            K_RRG3 = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.K_RRG3_path);
+            K_RRG4 = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.K_RRG4_path);
+            PidHeatMode = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.PidHeatMode_path);
+            RRG_Pressure_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.RRG_Pressure_SP);
+            RRG_9A1_feedback = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.RRG_9A1_feedback_path);
+            RRG_9A2_feedback = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.RRG_9A2_feedback_path);
+            RRG_9A3_feedback = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.RRG_9A3_feedback_path);
+            RRG_9A4_feedback = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.RRG_9A4_feedback_path);
+            TE_1 = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.TE_1_path);
+            Pneumatic_Pressure = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.PneumaticPressure_path);
+            Crio_Pressure = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.CrioPressure_path);
+            Camera_Pressure = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.CameraPressure_path); 
+            Main_Pressure = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.MainPressure_path);
+            Crio_Temperature = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.CrioTemperature_path);
+            PreHeat_Temp_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Temp_SP_path);
+            HeatAssist_Temp_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Temp_SP_path);
+            PreHeat_Timer_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Timer_path);
+            HeatAssist_Timer_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.Heat_Assist_Timer_SP_path);
+            ManualSetTemp = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.ManualSetTemp_path); 
+            BLM_Speed = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.BLM_Speed_path);
+            BLM_Speed_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.BLM_Speed_SP_path);
+            PreHeat_Done = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Done_path);
+            HeatAssist_Done = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Done_path);
+            PreHeat_Start = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Start_path);
+            HeatAssist_Flag = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Flag_path); 
+            Heat_Done = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Done_path);
+            HeatAssist_TempDone = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_TempDone_path);
+            Heat_Assit_On = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Heat_Assist_ON_path);
+            BLM_Start = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.BLM_Start_path);
+            BLM_Stop = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.BLM_Stop_path);
+            BLM_Remote_Control_Done = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.BLM_Remote_Control_Done_path);
+            BLM_Run = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.BLM_Run_path);
+            Alarm_Open_door = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Open_door_path);
+            Alarm_Water_CRIO = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Water_CRIO_path);
+            Alarm_Hight_Pne_Press = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Hight_Pne_Presse_path);
+            Alarm_Low_One_Presse = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Low_One_Presse_path);
+            Alarm_Crio_power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Crio_power_failure_path);
+            Alarm_Qartz_power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Qartz_power_filure_path);
+            Alarm_ELI_Power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_ELI_power_failure_path);
+            Alarm_FloatHeater_power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_FloatHeater_power_failure_path);
+            Alarm_Ion_power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Ion_power_failure_path);
+            Alarm_FVP_power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_FVP_power_failure_path);
+            Alarm_Indexer_power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Indexer_power_failure_path);
+            Alarm_SSP_power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_SSP_power_failure_path);
+            Alarm_TV1_power_failure = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_TV1_power_failure_path);
+            Alarm_Water_SECOND = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Water_SECOND_path);
+            Alarm_Hight_Crio_Temp = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_Hight_Crio_Temp_path);
+            Crio_start_signal = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Crio_start_signal_path);
+            Alarm_manual_stop = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_manual_Stop_path);
+            StartProcessSignal = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.StartProcessSignal_path);
+            StopProcessSignal = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.StopProcessSignal_path);
+            ELI_complete = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.ELI_complete_path);
+            ELI_access = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.ELI_access_path);
+            PreHeat_Stage = new IntValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Stage_path);
+            HeatAssist_Stage = new IntValue(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Stage_path);
+            Tech_cam_STAGE = new IntValue(OPCUAWorker.OPCUAWorkerPaths.Tech_cam_STAGE_path);
+            FullCycleStage = new IntValue(OPCUAWorker.OPCUAWorkerPaths.FullCycleStage_path);
             IntValues = new List<IntValue>();
-            FVPStatus = new FVPStatus();
-            IonInputSetPoint = new IonInputSetPoint();
+            FVPStatus = new FVPStatus(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path);
             OPCLocker = new object();
             SQLLocker = new object();
-            BAV_3_status = new ValveStatus();
-            FVV_S_Status = new ValveStatus();
-            FVV_B_Status = new ValveStatus();
-            CPV_Status = new ValveStatus(); 
-            SHV_Status = new ValveStatus();
-            BAV_3_input = new ValveInput(); 
-            FVV_S_Input = new ValveInput(); 
-            FVV_B_Input = new ValveInput(); 
-            CPV_Input = new ValveInput(); 
-            SHV_Input = new ValveInput();
-            camPrepare = new CamPrepare();
-            CrioPumpStart = new CrioPumpStart();
-            openCam = new OpenCam();
+            BAV_3_status = new ValveStatus(OPCUAWorker.OPCUAWorkerPaths.BAV_3_Status_path);
+            FVV_S_Status = new ValveStatus(OPCUAWorker.OPCUAWorkerPaths.FVV_S_Status_path);
+            FVV_B_Status = new ValveStatus(OPCUAWorker.OPCUAWorkerPaths.FVV_B_Status_path);
+            CPV_Status = new ValveStatus(OPCUAWorker.OPCUAWorkerPaths.CPV_Status_path); 
+            SHV_Status = new ValveStatus(OPCUAWorker.OPCUAWorkerPaths.SHV_Status_path);
+            BAV_3_input = new ValveInput(OPCUAWorker.OPCUAWorkerPaths.BAV_3_Input_path); 
+            FVV_S_Input = new ValveInput(OPCUAWorker.OPCUAWorkerPaths.FVV_S_Input_path); 
+            FVV_B_Input = new ValveInput(OPCUAWorker.OPCUAWorkerPaths.FVV_B_Input_path); 
+            CPV_Input = new ValveInput(OPCUAWorker.OPCUAWorkerPaths.CPV_Input_path); 
+            SHV_Input = new ValveInput(OPCUAWorker.OPCUAWorkerPaths.SHV_Input_path);
+            camPrepare = new CamPrepare(OPCUAWorker.OPCUAWorkerPaths.CamPrepare_path);
+            CrioPumpStart = new CrioPumpStart(OPCUAWorker.OPCUAWorkerPaths.CrioPumpStart_path);
+            openCam = new OpenCam(OPCUAWorker.OPCUAWorkerPaths.OpenCam_path);
             StopCrio = new StopCrio();
             StopFVP = new StopFVP();
-            IonInputCommnd = new IonInputCommand();
-            IonInputSetPoint = new IonInputSetPoint();
-            IonOutputFeedBack = new IonOutputFeedBack();
-            IonStatus = new IonStatus();
-            FVPStatus = new FVPStatus();
-            CrioInput = new CrioInput();
-            CrioStatus = new CrioStatus();
+            IonInputCommnd = new IonInputCommand(OPCUAWorker.OPCUAWorkerPaths.IonInputCommand_path);
+            IonInputSetPoint = new IonInputSetPoint(OPCUAWorker.OPCUAWorkerPaths.IonInputSetPoint_path);
+            IonOutputFeedBack = new IonOutputFeedBack(OPCUAWorker.OPCUAWorkerPaths.IonOutputFeedBack_path);
+            IonStatus = new IonStatus(OPCUAWorker.OPCUAWorkerPaths.IonStatus_path);
+            FVPStatus = new FVPStatus(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path);
+            CrioInput = new CrioInput(OPCUAWorker.OPCUAWorkerPaths.Crio_pump_Input_path);
+            CrioStatus = new CrioStatus(OPCUAWorker.OPCUAWorkerPaths.Crio_pump_Status_path);
             user = new User();
         }
 
@@ -293,14 +292,7 @@ namespace KVANT_Scada_2.Objects
             return OPCLocker;
         }
 
-        public void SetAnalogInput(AnalogInput obj)
-        {
-            AnalogInput = obj;
-        }
-        public AnalogInput GetAnalogInput()
-        {
-            return AnalogInput;
-        }
+      
 
         public void SetFVPStatus(FVPStatus obj)
         {
@@ -329,14 +321,7 @@ namespace KVANT_Scada_2.Objects
             return CrioStatus;
         }
 
-        public void set_OpcClient(OpcClient client)
-        {
-            client = client;
-        }
-        public OpcClient get_OpcClietn()
-        {
-            return client;
-        }
+       
         public void setBAV_3_Status(ValveStatus obj)
         {
             BAV_3_status = obj;

@@ -48,7 +48,9 @@ namespace KVANT_Scada_2.GUI
         {
             lock (OPCObjects.OPCLocker)
             {
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.RRG_Pressure_SP, float.Parse(RRG_PID_SP.Text.Replace(".",",").ToString()));
+                OPCObjects.RRG_Pressure_SP.Value = float.Parse(RRG_PID_SP.Text.Replace(".", ","));
+                OPCObjects.RRG_Pressure_SP.WriteValue(ref OPCObjects.session);
+               
             }
         }
 
@@ -56,10 +58,15 @@ namespace KVANT_Scada_2.GUI
         {
             lock (OPCObjects.OPCLocker)
             {
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG1_path, float.Parse(RRG_1_K.Text.Replace(".", ",")));
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG2_path, float.Parse(RRG_2_K.Text.Replace(".",",")));
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG3_path, float.Parse(RRG_3_K.Text.Replace(".", ",")));
-                OPCUAWorker.OPCUAWorker.Write<float>(OPCUAWorker.OPCUAWorkerPaths.K_RRG4_path, float.Parse(RRG_4_K.Text.Replace(".", ",")));
+                OPCObjects.K_RRG1.Value = float.Parse(RRG_1_K.Text.Replace(".", ","));
+                OPCObjects.K_RRG2.Value = float.Parse(RRG_2_K.Text.Replace(".", ","));
+                OPCObjects.K_RRG3.Value = float.Parse(RRG_3_K.Text.Replace(".", ","));
+                OPCObjects.K_RRG4.Value = float.Parse(RRG_4_K.Text.Replace(".", ","));
+                OPCObjects.K_RRG1.WriteValue(ref OPCObjects.session);
+                OPCObjects.K_RRG2.WriteValue(ref OPCObjects.session);
+                OPCObjects.K_RRG3.WriteValue(ref OPCObjects.session);
+                OPCObjects.K_RRG4.WriteValue(ref OPCObjects.session);
+
             }
         }
 

@@ -45,7 +45,7 @@ namespace KVANT_Scada_2.GUI
                 OPCObjects.IonInputSetPoint.Heat_I_SP = float.Parse(HeatSPI.Text);
                 OPCObjects.IonInputSetPoint.Heat_P_SP = float.Parse(HeatSPP.Text);
                 OPCObjects.IonInputSetPoint.Heat_U_SP = float.Parse(HeatSPU.Text);
-                OPCUAWorker.OPCUAWorker.Write<IonInputSetPoint>(OPCUAWorker.OPCUAWorkerPaths.IonInputSetPoint_path, OPCObjects.IonInputSetPoint);
+                UDT.ION.IonInputSetPoint.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputSetPoint);
             }
         }
 
@@ -54,7 +54,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.IonInputCommnd.Manual_Start = true;
-                OPCUAWorker.OPCUAWorker.Write<IonInputCommand>(OPCUAWorker.OPCUAWorkerPaths.IonInputCommand_path, OPCObjects.IonInputCommnd);
+                UDT.ION.IonInputCommand.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputCommnd);
             }
         }
 
@@ -63,7 +63,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.IonInputCommnd.Manual_Stop = true;
-                OPCUAWorker.OPCUAWorker.Write<IonInputCommand>(OPCUAWorker.OPCUAWorkerPaths.IonInputCommand_path, OPCObjects.IonInputCommnd);
+                UDT.ION.IonInputCommand.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputCommnd);
             }
         }
 
@@ -72,7 +72,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.IonInputCommnd.Reset_error = true;
-                OPCUAWorker.OPCUAWorker.Write<IonInputCommand>(OPCUAWorker.OPCUAWorkerPaths.IonInputCommand_path, OPCObjects.IonInputCommnd);
+                UDT.ION.IonInputCommand.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputCommnd);
             }
         }
 
@@ -88,7 +88,7 @@ namespace KVANT_Scada_2.GUI
                 {
                     OPCObjects.IonInputCommnd.Auto_mod = true;
                 }
-                OPCUAWorker.OPCUAWorker.Write<IonInputCommand>(OPCUAWorker.OPCUAWorkerPaths.IonInputCommand_path, OPCObjects.IonInputCommnd);
+                UDT.ION.IonInputCommand.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputCommnd);
 
             }
         }

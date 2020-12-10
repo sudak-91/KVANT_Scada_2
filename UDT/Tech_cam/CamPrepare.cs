@@ -1,4 +1,6 @@
-﻿using Opc.UaFx;
+﻿using Opc.Ua;
+using Opc.Ua.Client;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.UDT.Tech_cam
 {
-    [OpcDataType("ns=3;s=DT_\"Cam_Prepare\"")]
-    [OpcDataTypeEncoding("ns=3;s=TE_\"Cam_Prepare\"")]
+    
     ///<summaray>
     ///Класс CamPrepare является представлением 
     ///OPC DataType "ns=3;s=DT_\"Cam_Prepare\"
@@ -22,6 +23,24 @@ namespace KVANT_Scada_2.UDT.Tech_cam
         public bool Access { get; set; }
         public bool Stage_0_Cam_prepare_Complite { get; set; }
         public bool Return_ERROR { get; set; }
+        private static string Path;
+        public CamPrepare(string path)
+        {
+            Path = path;
+        }
 
+        public static void ReadValue(ref Session session, ref CamPrepare cp)
+        {
+            DataValue opcStage_0_Cam_prepare_stage = session.ReadValue(NodeId.Parse(Path + ".\"Stage_0_Cam_prepare_Stage\""));
+            DataValue opcComplete = session.ReadValue(NodeId.Parse(Path + ".\"Stage_0_Cam_prepare_Complite\""));
+            DataValue opcAccess = session.ReadValue(NodeId.Parse(Path + ".\"Access\""));
+        
+            cp.Stage_0_Cam_prepare_Stage = (UInt16)opcStage_0_Cam_prepare_stage.Value;
+            cp.Stage_0_Cam_prepare_Complite = (bool)opcComplete.Value;
+            cp.Access = (bool)opcAccess.Value;
+
+
+
+        }
     }
 }

@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>packages\Portable.BouncyCastle.1.8.8\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -176,29 +176,32 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Opc.Ua.Client, Version=1.4.363.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
-      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Client.1.4.363.107\lib\net462\Opc.Ua.Client.dll</HintPath>
+    <Reference Include="Opc.Ua.Bindings.Https, Version=1.4.364.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
+      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Bindings.Https.1.4.364.40\lib\net462\Opc.Ua.Bindings.Https.dll</HintPath>
     </Reference>
-    <Reference Include="Opc.Ua.Configuration, Version=1.4.363.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
-      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Configuration.1.4.363.107\lib\net462\Opc.Ua.Configuration.dll</HintPath>
+    <Reference Include="Opc.Ua.Client, Version=1.4.364.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
+      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Client.1.4.364.40\lib\net462\Opc.Ua.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Opc.Ua.Core, Version=1.4.363.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
-      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Core.1.4.363.107\lib\net462\Opc.Ua.Core.dll</HintPath>
+    <Reference Include="Opc.Ua.Configuration, Version=1.4.364.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
+      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Configuration.1.4.364.40\lib\net462\Opc.Ua.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Opc.Ua.Gds.Client.Common, Version=1.4.363.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
-      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Gds.Client.Common.1.4.363.107\lib\net462\Opc.Ua.Gds.Client.Common.dll</HintPath>
+    <Reference Include="Opc.Ua.Core, Version=1.4.364.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
+      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Core.1.4.364.40\lib\net462\Opc.Ua.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Opc.Ua.Gds.Server.Common, Version=1.4.363.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
-      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Gds.Server.Common.1.4.363.107\lib\net462\Opc.Ua.Gds.Server.Common.dll</HintPath>
+    <Reference Include="Opc.Ua.Gds.Client.Common, Version=1.4.364.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
+      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Gds.Client.Common.1.4.364.40\lib\net462\Opc.Ua.Gds.Client.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Opc.Ua.Server, Version=1.4.363.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
-      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Server.1.4.363.107\lib\net462\Opc.Ua.Server.dll</HintPath>
+    <Reference Include="Opc.Ua.Gds.Server.Common, Version=1.4.364.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
+      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Gds.Server.Common.1.4.364.40\lib\net462\Opc.Ua.Gds.Server.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Opc.UaFx.Client, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0220af0d33d50236, processorArchitecture=MSIL">
-      <HintPath>packages\Opc.UaFx.Client.2.11.2\lib\net471\Opc.UaFx.Client.dll</HintPath>
+    <Reference Include="Opc.Ua.Server, Version=1.4.364.0, Culture=neutral, PublicKeyToken=bfa7a73c5cf4b6e8, processorArchitecture=MSIL">
+      <HintPath>packages\OPCFoundation.NetStandard.Opc.Ua.Server.1.4.364.40\lib\net462\Opc.Ua.Server.dll</HintPath>
     </Reference>
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="S7.Net, Version=0.7.0.0, Culture=neutral, PublicKeyToken=d5812d469e84c693, processorArchitecture=MSIL">
+      <HintPath>packages\S7netplus.0.7.0\lib\net452\S7.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -333,7 +336,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="UDT\AnalogInput\AnalogInput.cs" />
     <Compile Include="UDT\AnalogValue\AnalogValue.cs" />
     <Compile Include="UDT\Crio\CrioInput.cs" />
     <Compile Include="UDT\Crio\CrioStatus.cs" />

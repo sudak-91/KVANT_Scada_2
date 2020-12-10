@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Opc.Ua;
+using Opc.Ua.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Opc.Ua.Client;
 
 namespace KVANT_Scada_2
 {
@@ -33,9 +36,19 @@ namespace KVANT_Scada_2
             locker = new object();
 
             res = new Resource1();
-          
+
+
+            ApplicationInstance application = new ApplicationInstance();
+            application.ApplicationName = "Quickstart Console Reference Client";
+            application.ApplicationType = ApplicationType.Client;
+            application.LoadApplicationConfiguration("D:\\Project\\opcua_TEST\\OpcUATest\\ConsoleReferenceClient.Config.xml", false).Wait();
+            // check the application certificate.
+            application.CheckApplicationInstanceCertificate(false, 0).Wait();
+
+            application.ApplicationConfiguration.CertificateValidator.CertificateValidation += CertificateValidation;
+
             createData = new DB.Logic.CreateData();
-            opcUaWorker = new OPCUAWorker.OPCUAWorker();
+            opcUaWorker = new OPCUAWorker.OPCUAWorker(application.ApplicationConfiguration);
             opcUaWorker.RegisterHandler(new OPCUAWorker.OPCUAWorker.OPCHandler(OpcUaWorker_OPCNotify));
             MainWindow = new MainWindow();
             MainWindow.Show();
@@ -61,6 +74,22 @@ namespace KVANT_Scada_2
         private void ConsoleWrite()
         {
            
+        }
+        private static void CertificateValidation(CertificateValidator sender, CertificateValidationEventArgs e)
+        {
+            bool certificateAccepted = true;
+
+            // ****
+            // Implement a custom logic to decide if the certificate should be accepted or not and set certificateAccepted flag accordingly.
+            // The certificate can be retrieved from the e.Certificate field
+            // ***
+
+            if (certificateAccepted)
+            {
+                Console.WriteLine("Untrusted Certificate accepted. SubjectName = {0}", e.Certificate.SubjectName);
+            }
+
+            e.Accept = certificateAccepted;
         }
 
     }

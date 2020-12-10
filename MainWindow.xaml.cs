@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Opc.UaFx.Client;
+
 using Opc.Ua.Configuration;
-using Opc.UaFx;
+
 using System.Threading;
 using KVANT_Scada_2.DB;
 using KVANT_Scada_2.Objects;
@@ -71,37 +71,7 @@ namespace KVANT_Scada_2
 
 
 
-            var client = new OpcClient("opc.tcp://192.168.0.10:4840/");
-            client.Connect();
-
-            var node = client.BrowseNode("ns=3;s=\"Crio_DB\".\"Crio\".\"Input\"");
-
-            if (node is OpcVariableNodeInfo variablenode)
-            {
-                OpcNodeId datatypeid = variablenode.DataTypeId;
-                OpcDataTypeInfo datatype = client.GetDataTypeSystem().GetType(datatypeid);
-
-                Console.WriteLine(datatype.TypeId);
-                Console.WriteLine(datatype.Encoding);
-
-                Console.WriteLine(datatype.Name);
-
-                foreach (OpcDataFieldInfo field in datatype.GetFields())
-                    Console.WriteLine(".{0} : {1}", field.Name, field.FieldType);
-
-                Console.WriteLine();
-                Console.WriteLine("data type attributes:");
-                Console.WriteLine(
-                        "\t[opcdatatype(\"{0}\")]",
-                        datatype.TypeId.ToString(OpcNodeIdFormat.Foundation));
-                Console.WriteLine(
-                        "\t[opcdatatypeencoding(\"{0}\", namespaceuri = \"{1}\")]",
-                        datatype.Encoding.Id.ToString(OpcNodeIdFormat.Foundation),
-                        datatype.Encoding.Namespace.Value);
-            }
-            Console.WriteLine("А я из основного потока. Просто надо так сделать");
-
-
+            
 
 
         }
@@ -638,14 +608,17 @@ namespace KVANT_Scada_2
 
         private void HeatAssistcheckBox_Checked(object sender, RoutedEventArgs e)
         {
-
-            OPCUAWorker.OPCUAWorker.WriteDi(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Flag_path, (bool)HeatAssistcheckBox.IsChecked);
+            OPCObjects.HeatAssist_Flag.Value = (bool)HeatAssistcheckBox.IsChecked;
+            OPCObjects.HeatAssist_Flag.WriteValue(ref OPCObjects.session);
+           
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Включение ассистирования при напылении");
         }
 
         private void HeatAssistcheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            OPCUAWorker.OPCUAWorker.WriteDi(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Flag_path, (bool)HeatAssistcheckBox.IsChecked);
+            OPCObjects.HeatAssist_Flag.Value = (bool)HeatAssistcheckBox.IsChecked;
+            OPCObjects.HeatAssist_Flag.WriteValue(ref OPCObjects.session);
+          
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Отключение ассистирования при напылении");
         }
 
@@ -661,7 +634,8 @@ namespace KVANT_Scada_2
                 lock (OPCObjects.OPCLocker)
                 {
                     OPCObjects.Crio_start_signal.Value = true;
-                    OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.Crio_start_signal.Path, OPCObjects.Crio_start_signal.Value);
+                    OPCObjects.Crio_start_signal.WriteValue(ref OPCObjects.session);
+                   
                 }
                 CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматического включения крионасоса");
 
@@ -673,7 +647,7 @@ namespace KVANT_Scada_2
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.Tech_cam_STAGE.Value = 4;
-                OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
+                OPCObjects.Tech_cam_STAGE.WriteValue(ref OPCObjects.session);
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматической остановки крионасоса");
         }
@@ -683,7 +657,7 @@ namespace KVANT_Scada_2
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.Tech_cam_STAGE.Value = 2;
-                OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
+                OPCObjects.Tech_cam_STAGE.WriteValue(ref OPCObjects.session);
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматической откачки камеры");
         }
@@ -693,7 +667,8 @@ namespace KVANT_Scada_2
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.Tech_cam_STAGE.Value = 3;
-                OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
+                OPCObjects.Tech_cam_STAGE.WriteValue(ref OPCObjects.session);
+                
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматического напуска камеры");
         }
@@ -703,7 +678,7 @@ namespace KVANT_Scada_2
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.Tech_cam_STAGE.Value = 5;
-                OPCUAWorker.OPCUAWorker.Write<int>(OPCObjects.Tech_cam_STAGE.Path, OPCObjects.Tech_cam_STAGE.Value);
+                OPCObjects.Tech_cam_STAGE.WriteValue(ref OPCObjects.session);
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматической остановки ФВН");
         }
@@ -713,7 +688,7 @@ namespace KVANT_Scada_2
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.StartProcessSignal.Value = true;
-                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.StartProcessSignal.Path, OPCObjects.StartProcessSignal.Value);
+                OPCObjects.Tech_cam_STAGE.WriteValue(ref OPCObjects.session);
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск напыления");
         }
@@ -723,7 +698,7 @@ namespace KVANT_Scada_2
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.StopProcessSignal.Value = true;
-                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.StopProcessSignal.Path, OPCObjects.StopProcessSignal.Value);
+                OPCObjects.StopProcessSignal.WriteValue(ref OPCObjects.session);
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Ручная остановка напыления");
         }
@@ -733,7 +708,8 @@ namespace KVANT_Scada_2
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.PreHeat_Start.Value = true;
-                OPCUAWorker.OPCUAWorker.Write<bool>(OPCObjects.PreHeat_Start.Path, OPCObjects.PreHeat_Start.Value);
+                OPCObjects.PreHeat_Start.WriteValue(ref OPCObjects.session);
+                
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Включение режима препрогрева");
         }

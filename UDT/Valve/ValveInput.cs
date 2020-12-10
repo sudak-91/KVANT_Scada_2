@@ -1,5 +1,6 @@
-﻿using Opc.UaFx;
-using Opc.UaFx.Client;
+﻿using Opc.Ua;
+using Opc.Ua.Client;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace KVANT_Scada_2.UDT.Valve
 {
-    [OpcDataType("ns=3;s=DT_\"ValveInput\"")]
-    [OpcDataTypeEncoding("ns=3;s=TE_\"ValveInput\"")]
+  
 
     ///<summaray>
     ///Класс ValveInput является представлением 
@@ -25,7 +25,58 @@ namespace KVANT_Scada_2.UDT.Valve
         public bool Block { get; set; }
         public bool Opened_signal { get; set; }
         public bool Closed_signal { get; set; }
+        private static string Path;
+        
 
-}
+        public ValveInput(string path)
+        {
+            Path = path;
+        }
+
+        public static void WriteValveInput(ref Session session, ref ValveInput vi)
+        {
+            WriteValueCollection nodesToWrite = new WriteValueCollection();
+
+           
+            WriteValue bServiceMode = new WriteValue();
+            bServiceMode.NodeId = new NodeId(Path+".\"ServiceMode\"");
+            bServiceMode.AttributeId = Attributes.Value;
+            bServiceMode.Value = new DataValue();
+            bServiceMode.Value.Value = (bool)vi.Service_mode;
+            nodesToWrite.Add(bServiceMode);
+
+            
+            WriteValue bAutoMode = new WriteValue();
+            bAutoMode.NodeId = new NodeId(Path + ".\"AutoMode\"");
+            bAutoMode.AttributeId = Attributes.Value;
+            bAutoMode.Value = new DataValue();
+            bAutoMode.Value.Value = (bool)vi.Auto_mode;
+            nodesToWrite.Add(bAutoMode);
+
+            WriteValue bManCommand = new WriteValue();
+            bManCommand.NodeId = new NodeId(Path + ".\"ManCommand\"");
+            bManCommand.AttributeId = Attributes.Value;
+            bManCommand.Value = new DataValue();
+            bManCommand.Value.Value = (bool)vi.Man_command;
+            nodesToWrite.Add(bManCommand);
+
+            // String Node - Objects\CTT\Scalar\Scalar_Static\String
+          
+
+            // Write the node attributes
+            StatusCodeCollection results = null;
+            DiagnosticInfoCollection diagnosticInfos;
+            Console.WriteLine("Writing nodes...");
+
+            // Call Write Service
+            session.Write(null,
+                            nodesToWrite,
+                            out results,
+                            out diagnosticInfos);
+
+        }
+
+
+    }
 
 }

@@ -42,7 +42,8 @@ namespace KVANT_Scada_2.GUI
             {
                 OPCObjects.FVPStatus.Auto_mode = true;
                 OPCObjects.FVPStatus.Remote = false;
-                OPCUAWorker.OPCUAWorker.Write<FVPStatus>(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path, OPCObjects.FVPStatus);
+                UDT.FVP.FVPStatus.WriteInput(ref OPCObjects.session, ref OPCObjects.FVPStatus);
+                
             }
         }
 
@@ -57,7 +58,7 @@ namespace KVANT_Scada_2.GUI
             {
                 OPCObjects.FVPStatus.Auto_mode = false;
                 OPCObjects.FVPStatus.Remote = true;
-                OPCUAWorker.OPCUAWorker.Write<FVPStatus>(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path, OPCObjects.FVPStatus);
+                UDT.FVP.FVPStatus.WriteInput(ref OPCObjects.session, ref OPCObjects.FVPStatus);
             }
         }
 
@@ -66,7 +67,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.FVPStatus.Manual_start = true;
-                OPCUAWorker.OPCUAWorker.Write<FVPStatus>(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path, OPCObjects.FVPStatus);
+                UDT.FVP.FVPStatus.WriteInput(ref OPCObjects.session, ref OPCObjects.FVPStatus);
             }
         }
 
@@ -75,7 +76,7 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.FVPStatus.Manual_start = false;
-                OPCUAWorker.OPCUAWorker.Write<FVPStatus>(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path, OPCObjects.FVPStatus);
+                UDT.FVP.FVPStatus.WriteInput(ref OPCObjects.session, ref OPCObjects.FVPStatus);
             }
         }
 

@@ -40,7 +40,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.CrioInput.Auto_mode = true;
-                OPCUAWorker.OPCUAWorker.Write<CrioInput>(OPCUAWorker.OPCUAWorkerPaths.Crio_pump_Input_path, OPCObjects.CrioInput);
+                UDT.Crio.CrioInput.WriteCrioInput(ref OPCObjects.session, ref OPCObjects.CrioInput);
 
             }
 
@@ -51,7 +51,7 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.CrioInput.Auto_mode = false;
-                OPCUAWorker.OPCUAWorker.Write<CrioInput>(OPCUAWorker.OPCUAWorkerPaths.Crio_pump_Input_path, OPCObjects.CrioInput);
+                UDT.Crio.CrioInput.WriteCrioInput(ref OPCObjects.session, ref OPCObjects.CrioInput);
 
             }
 
@@ -62,7 +62,7 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.CrioInput.Command_manual = true;
-                OPCUAWorker.OPCUAWorker.Write<CrioInput>(OPCUAWorker.OPCUAWorkerPaths.Crio_pump_Input_path, OPCObjects.CrioInput);
+                UDT.Crio.CrioInput.WriteCrioInput(ref OPCObjects.session, ref OPCObjects.CrioInput);
 
             }
 
@@ -73,7 +73,7 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.CrioInput.Command_manual = false;
-                OPCUAWorker.OPCUAWorker.Write<CrioInput>(OPCUAWorker.OPCUAWorkerPaths.Crio_pump_Input_path, OPCObjects.CrioInput);
+                UDT.Crio.CrioInput.WriteCrioInput(ref OPCObjects.session, ref OPCObjects.CrioInput);
 
             }
 
