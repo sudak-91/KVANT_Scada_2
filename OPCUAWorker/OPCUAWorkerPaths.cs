@@ -113,5 +113,9 @@ namespace KVANT_Scada_2.OPCUAWorker
         public static string PidHeatMode_path = "ns=3;s=\"TEMP_PID_DB\".\"Mode_real\"";
         public static string ELI_complete_path = "ns=3;s=\"ELI_DB\".\"ELI_complete\"";
         public static string ELI_access_path = "ns=3;s=\"ELI_DB\".\"ELI_Access\"";
+        public static string ELI_block_path = "ns=3;s=\"ELI_DB\".\"Block\"";
+        public static string SSP_ON_path = "ns=3;s=\"dout_db\".\"SSP_turn_on\".\"value\"";
+        public static string SSP_turn_on_path = "ns=3;s=\"din_db\".\"SSP_cont_on\".\"value\"";
+        public static string EliShutterPath = "ns=3;s=\"Other\".\"Shutter_ELI\"";
     }
 }

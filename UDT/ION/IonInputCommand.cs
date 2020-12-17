@@ -22,13 +22,13 @@ namespace KVANT_Scada_2.UDT.ION
         public bool Manual_Stop{get;set;}
         public bool Auto_mod {get;set;}
         public bool Reset_error{get;set;}
-        private static string Path;
+        private  string Path;
         public IonInputCommand(string path)
         {
             Path = path;
         }
 
-        public static void WriteInput(ref Session session, ref IonInputCommand cp)
+        public  void WriteInput(ref Session session)
         {
             WriteValueCollection nodesToWrite = new WriteValueCollection();
 
@@ -37,21 +37,21 @@ namespace KVANT_Scada_2.UDT.ION
             bManStart.NodeId = new NodeId(Path + ".\"Manual_Start\"");
             bManStart.AttributeId = Attributes.Value;
             bManStart.Value = new DataValue();
-            bManStart.Value.Value = (bool)cp.Manual_Start;
+            bManStart.Value.Value = (bool)this.Manual_Start;
             nodesToWrite.Add(bManStart);
 
             WriteValue bManStop = new WriteValue();
             bManStop.NodeId = new NodeId(Path + ".\"Manual_Stop\"");
             bManStop.AttributeId = Attributes.Value;
             bManStop.Value = new DataValue();
-            bManStop.Value.Value = (bool)cp.Manual_Stop;
+            bManStop.Value.Value = (bool)this.Manual_Stop;
             nodesToWrite.Add(bManStop);
 
             WriteValue bAutoMode = new WriteValue();
             bAutoMode.NodeId = new NodeId(Path + ".\"Auto_mod\"");
             bAutoMode.AttributeId = Attributes.Value;
             bAutoMode.Value = new DataValue();
-            bAutoMode.Value.Value = (bool)cp.Auto_mod;
+            bAutoMode.Value.Value = (bool)this.Auto_mod;
             nodesToWrite.Add(bAutoMode);
 
 
@@ -59,7 +59,7 @@ namespace KVANT_Scada_2.UDT.ION
             bResetError.NodeId = new NodeId(Path + ".\"Reset_Error\"");
             bResetError.AttributeId = Attributes.Value;
             bResetError.Value = new DataValue();
-            bResetError.Value.Value = (bool)cp.Reset_error;
+            bResetError.Value.Value = (bool)this.Reset_error;
             nodesToWrite.Add(bResetError);
 
             

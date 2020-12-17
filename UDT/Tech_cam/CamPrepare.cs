@@ -29,15 +29,15 @@ namespace KVANT_Scada_2.UDT.Tech_cam
             Path = path;
         }
 
-        public static void ReadValue(ref Session session, ref CamPrepare cp)
+        public void ReadValue(ref Session session)
         {
             DataValue opcStage_0_Cam_prepare_stage = session.ReadValue(NodeId.Parse(Path + ".\"Stage_0_Cam_prepare_Stage\""));
             DataValue opcComplete = session.ReadValue(NodeId.Parse(Path + ".\"Stage_0_Cam_prepare_Complite\""));
             DataValue opcAccess = session.ReadValue(NodeId.Parse(Path + ".\"Access\""));
         
-            cp.Stage_0_Cam_prepare_Stage = (UInt16)opcStage_0_Cam_prepare_stage.Value;
-            cp.Stage_0_Cam_prepare_Complite = (bool)opcComplete.Value;
-            cp.Access = (bool)opcAccess.Value;
+            this.Stage_0_Cam_prepare_Stage = (UInt16)opcStage_0_Cam_prepare_stage.Value;
+            this.Stage_0_Cam_prepare_Complite = (bool)opcComplete.Value;
+            this.Access = (bool)opcAccess.Value;
 
 
 

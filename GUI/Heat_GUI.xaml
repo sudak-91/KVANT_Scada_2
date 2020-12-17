@@ -45,7 +45,7 @@
         </Button>
         <Label Content="Уставка мощности" HorizontalAlignment="Left" Margin="18,271,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="HeatPowerSP" HorizontalAlignment="Left" Height="23" Margin="136,274,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="HeatPowerSave" Content="Сохранить" HorizontalAlignment="Left" Height="26" Margin="271,309,0,0" VerticalAlignment="Top" Width="86">
+        <Button x:Name="HeatPowerSave" Content="Сохранить" HorizontalAlignment="Left" Height="26" Margin="271,309,0,0" VerticalAlignment="Top" Width="86" Click="HeatPowerSave_Click">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

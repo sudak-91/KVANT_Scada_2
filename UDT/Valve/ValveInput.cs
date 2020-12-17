@@ -25,7 +25,7 @@ namespace KVANT_Scada_2.UDT.Valve
         public bool Block { get; set; }
         public bool Opened_signal { get; set; }
         public bool Closed_signal { get; set; }
-        private static string Path;
+        private string Path;
         
 
         public ValveInput(string path)
@@ -33,7 +33,7 @@ namespace KVANT_Scada_2.UDT.Valve
             Path = path;
         }
 
-        public static void WriteValveInput(ref Session session, ref ValveInput vi)
+        public  void WriteValveInput(ref Session session)
         {
             WriteValueCollection nodesToWrite = new WriteValueCollection();
 
@@ -42,7 +42,7 @@ namespace KVANT_Scada_2.UDT.Valve
             bServiceMode.NodeId = new NodeId(Path+".\"ServiceMode\"");
             bServiceMode.AttributeId = Attributes.Value;
             bServiceMode.Value = new DataValue();
-            bServiceMode.Value.Value = (bool)vi.Service_mode;
+            bServiceMode.Value.Value = (bool)this.Service_mode;
             nodesToWrite.Add(bServiceMode);
 
             
@@ -50,14 +50,14 @@ namespace KVANT_Scada_2.UDT.Valve
             bAutoMode.NodeId = new NodeId(Path + ".\"AutoMode\"");
             bAutoMode.AttributeId = Attributes.Value;
             bAutoMode.Value = new DataValue();
-            bAutoMode.Value.Value = (bool)vi.Auto_mode;
+            bAutoMode.Value.Value = (bool)this.Auto_mode;
             nodesToWrite.Add(bAutoMode);
 
             WriteValue bManCommand = new WriteValue();
             bManCommand.NodeId = new NodeId(Path + ".\"ManCommand\"");
             bManCommand.AttributeId = Attributes.Value;
             bManCommand.Value = new DataValue();
-            bManCommand.Value.Value = (bool)vi.Man_command;
+            bManCommand.Value.Value = (bool)this.Man_command;
             nodesToWrite.Add(bManCommand);
 
             // String Node - Objects\CTT\Scalar\Scalar_Static\String
@@ -74,6 +74,10 @@ namespace KVANT_Scada_2.UDT.Valve
                             out results,
                             out diagnosticInfos);
 
+        }
+        public string getpath()
+        {
+            return this.Path;
         }
 
 

@@ -17,12 +17,12 @@ namespace KVANT_Scada_2.UDT.Crio
         public bool Turn_On { get; set; }
         public bool Auto_mode { get; set; }
         public bool Error { get; set; }
-        private static string Path;
+        private  string Path;
         public CrioStatus(string path)
         {
             Path = path;
         }
-        public static void ReadStatus(ref Session session, ref CrioStatus cs)
+        public  void ReadStatus(ref Session session)
         {
             DataValue opcPowerOn = session.ReadValue(NodeId.Parse(Path + ".\"Power_ON\""));
             DataValue opcBlcoked = session.ReadValue(NodeId.Parse(Path + ".\"Blocked\""));
@@ -30,11 +30,11 @@ namespace KVANT_Scada_2.UDT.Crio
             DataValue opcAutoMode= session.ReadValue(NodeId.Parse(Path + ".\"Automode\""));
             DataValue opcError = session.ReadValue(NodeId.Parse(Path + ".\"Error\""));
 
-            cs.Auto_mode = (bool)opcAutoMode.Value;
-            cs.Blocked = (bool)opcBlcoked.Value;
-            cs.Error = (bool)opcError.Value;
-            cs.Power_On = (bool)opcPowerOn.Value;
-            cs.Turn_On = (bool)opcTurnOn.Value;
+            this.Auto_mode = (bool)opcAutoMode.Value;
+            this.Blocked = (bool)opcBlcoked.Value;
+            this.Error = (bool)opcError.Value;
+            this.Power_On = (bool)opcPowerOn.Value;
+            this.Turn_On = (bool)opcTurnOn.Value;
 
         }
     }

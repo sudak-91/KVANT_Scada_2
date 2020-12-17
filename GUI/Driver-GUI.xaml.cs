@@ -31,6 +31,7 @@ namespace KVANT_Scada_2.GUI
             neutral = new SolidColorBrush(Color.FromRgb(221, 221, 221));
             timerCallback = new TimerCallback(Update_GUI);
             timer = new Timer(timerCallback, null, 0, 1000);
+            this.Topmost = true;
             InitializeComponent();
         }
 

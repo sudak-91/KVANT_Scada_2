@@ -23,6 +23,7 @@ namespace KVANT_Scada_2.GUI
         public Login()
         {
             InitializeComponent();
+            this.Topmost = true;
         }
 
         private void Signin_Click(object sender, RoutedEventArgs e)

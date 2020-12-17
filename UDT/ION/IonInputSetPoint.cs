@@ -22,12 +22,12 @@ namespace KVANT_Scada_2.UDT.ION
         public float Heat_I_SP { get; set; }
         public float Heat_U_SP { get; set; }
         public float Heat_P_SP { get; set; }
-        private static string Path;
+        private  string Path;
         public IonInputSetPoint(string path)
         {
             Path = path;   
         }
-        public static void ReadValue(ref Session session, ref IonInputSetPoint ifb)
+        public void ReadValue(ref Session session)
         {
             DataValue opcAnod_I = session.ReadValue(NodeId.Parse(Path + ".\"Anod_I_SP\""));
             DataValue opcAnod_U = session.ReadValue(NodeId.Parse(Path + ".\"Anod_U_SP\""));
@@ -35,15 +35,15 @@ namespace KVANT_Scada_2.UDT.ION
             DataValue opcHeat_I = session.ReadValue(NodeId.Parse(Path + ".\"Heat_I_SP\""));
             DataValue opcHeat_U = session.ReadValue(NodeId.Parse(Path + ".\"Heat_U_SP\""));
             DataValue opcHeat_P = session.ReadValue(NodeId.Parse(Path + ".\"Heat_P_SP\""));
-            ifb.Anod_I_SP = (float)opcAnod_I.Value;
-            ifb.Anod_P_SP = (float)opcAnod_P.Value;
-            ifb.Anod_U_SP = (float)opcAnod_U.Value;
-            ifb.Heat_I_SP = (float)opcHeat_I.Value;
-            ifb.Heat_P_SP = (float)opcHeat_P.Value;
-            ifb.Heat_U_SP = (float)opcHeat_U.Value;
+            this.Anod_I_SP = (float)opcAnod_I.Value;
+            this.Anod_P_SP = (float)opcAnod_P.Value;
+            this.Anod_U_SP = (float)opcAnod_U.Value;
+            this.Heat_I_SP = (float)opcHeat_I.Value;
+            this.Heat_P_SP = (float)opcHeat_P.Value;
+            this.Heat_U_SP = (float)opcHeat_U.Value;
 
         }
-        public static void WriteInput(ref Session session, ref IonInputSetPoint cp)
+        public  void WriteInput(ref Session session, ref IonInputSetPoint cp)
         {
             WriteValueCollection nodesToWrite = new WriteValueCollection();
 

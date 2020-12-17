@@ -2,6 +2,7 @@
 using KVANT_Scada_2.UDT;
 using KVANT_Scada_2.UDT.Crio;
 using KVANT_Scada_2.UDT.DiscreteValue;
+using KVANT_Scada_2.UDT.ELI_Shutter;
 using KVANT_Scada_2.UDT.FVP;
 using KVANT_Scada_2.UDT.IntValue;
 using KVANT_Scada_2.UDT.ION;
@@ -36,6 +37,7 @@ namespace KVANT_Scada_2.Objects
         public static FVPStatus FVPStatus;
         public static CrioInput CrioInput;
         public static CrioStatus CrioStatus;
+        public static Shutter EliShutter;
         public static Session session;
         public static object SQLLocker;
         public static object OPCLocker;
@@ -66,7 +68,7 @@ namespace KVANT_Scada_2.Objects
                                     Alarm_Indexer_power_failure, Alarm_SSP_power_failure,
                                     Alarm_TV1_power_failure, Alarm_Water_SECOND, Alarm_Hight_Crio_Temp,
                                     Crio_start_signal, Alarm_manual_stop, StartProcessSignal, StopProcessSignal,
-                                    ELI_complete, ELI_access;
+                                    ELI_complete, ELI_access, ELI_block, SSP_on, SSP_turn_on;
         public static IntValue PreHeat_Stage;
         public static IntValue HeatAssist_Stage;
         public static IntValue Tech_cam_STAGE;
@@ -115,7 +117,7 @@ namespace KVANT_Scada_2.Objects
             Crio_Temperature = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.CrioTemperature_path);
             PreHeat_Temp_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Temp_SP_path);
             HeatAssist_Temp_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.HeatAssist_Temp_SP_path);
-            PreHeat_Timer_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Timer_path);
+            PreHeat_Timer_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Timer_SP_path);
             HeatAssist_Timer_SP = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.Heat_Assist_Timer_SP_path);
             ManualSetTemp = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.ManualSetTemp_path); 
             BLM_Speed = new AnalogValue(OPCUAWorker.OPCUAWorkerPaths.BLM_Speed_path);
@@ -150,6 +152,7 @@ namespace KVANT_Scada_2.Objects
             Alarm_manual_stop = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.Alarm_manual_Stop_path);
             StartProcessSignal = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.StartProcessSignal_path);
             StopProcessSignal = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.StopProcessSignal_path);
+            ELI_block = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.ELI_block_path);
             ELI_complete = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.ELI_complete_path);
             ELI_access = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.ELI_access_path);
             PreHeat_Stage = new IntValue(OPCUAWorker.OPCUAWorkerPaths.PreHeat_Stage_path);
@@ -182,6 +185,10 @@ namespace KVANT_Scada_2.Objects
             FVPStatus = new FVPStatus(OPCUAWorker.OPCUAWorkerPaths.FVPStatus_path);
             CrioInput = new CrioInput(OPCUAWorker.OPCUAWorkerPaths.Crio_pump_Input_path);
             CrioStatus = new CrioStatus(OPCUAWorker.OPCUAWorkerPaths.Crio_pump_Status_path);
+            SSP_on = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.SSP_ON_path);
+            SSP_turn_on = new DiscreteValue(OPCUAWorker.OPCUAWorkerPaths.SSP_turn_on_path);
+            EliShutter = new Shutter(OPCUAWorker.OPCUAWorkerPaths.EliShutterPath);
+
             user = new User();
         }
 

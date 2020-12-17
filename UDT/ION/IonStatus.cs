@@ -30,7 +30,7 @@ namespace KVANT_Scada_2.UDT.ION
         public bool Power_Stop { get; set; }
         public bool Temperature_Stop { get; set; }
         public bool Other_Failure { get; set; }
-        private static string Path;
+        private  string Path;
         public IonStatus( string path)
         {
             Path = path;
@@ -39,7 +39,7 @@ namespace KVANT_Scada_2.UDT.ION
 
 
 
-        public static void ReadValue(ref Session session, ref IonStatus IonS)
+        public  void ReadValue(ref Session session)
         {
             DataValue opcAutoMode = session.ReadValue(NodeId.Parse(Path + ".\"Auto_mode\""));
             DataValue opcPower_on = session.ReadValue(NodeId.Parse(Path + ".\"Power_on\""));
@@ -59,20 +59,20 @@ namespace KVANT_Scada_2.UDT.ION
 
 
 
-            IonS.Auto_mode = (bool)opcAutoMode.Value;
-            IonS.Emergancy_Stop = (bool)opcEmergancy_Stop.Value;
-            IonS.Failure = (bool)opcFailure.Value;
-            IonS.Filament_Failure = (bool)opcFilament_Failure.Value;
-            IonS.Interlock = (bool)opcInterlock.Value;
-            IonS.Other_Failure = (bool)opcOther_Failure.Value;
-            IonS.Power_Failure = (bool)opcPower_Failure.Value;
-            IonS.Power_on = (bool)opcPower_on.Value;
-            IonS.Power_Stop = (bool)opcPower_Stop.Value;
-            IonS.Repeat_Failure = (bool)opcRepeat_Failure.Value;
-            IonS.Temperature_Failure = (bool)opcTemperature_Failure.Value;
-            IonS.Temperature_Stop = (bool)opcTemperature_Stop.Value;
-            IonS.Turn_off = (bool)opcTurn_off.Value;
-            IonS.Turn_On = (bool)opcTurn_On.Value;
+            this.Auto_mode = (bool)opcAutoMode.Value;
+            this.Emergancy_Stop = (bool)opcEmergancy_Stop.Value;
+            this.Failure = (bool)opcFailure.Value;
+            this.Filament_Failure = (bool)opcFilament_Failure.Value;
+            this.Interlock = (bool)opcInterlock.Value;
+            this.Other_Failure = (bool)opcOther_Failure.Value;
+            this.Power_Failure = (bool)opcPower_Failure.Value;
+            this.Power_on = (bool)opcPower_on.Value;
+            this.Power_Stop = (bool)opcPower_Stop.Value;
+            this.Repeat_Failure = (bool)opcRepeat_Failure.Value;
+            this.Temperature_Failure = (bool)opcTemperature_Failure.Value;
+            this.Temperature_Stop = (bool)opcTemperature_Stop.Value;
+            this.Turn_off = (bool)opcTurn_off.Value;
+            this.Turn_On = (bool)opcTurn_On.Value;
 
 
         }

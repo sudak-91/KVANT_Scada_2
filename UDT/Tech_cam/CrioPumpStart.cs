@@ -29,31 +29,31 @@ namespace KVANT_Scada_2.UDT.Tech_cam
         {
             Path = path;
         }
-        public static void ReadValue(ref Session session, ref CrioPumpStart cp)
+        public void ReadValue(ref Session session)
         {
             DataValue opcStage_0_Cam_prepare_stage = session.ReadValue(NodeId.Parse(Path + ".\"Stage_0_Stage\""));
             DataValue opcComplete = session.ReadValue(NodeId.Parse(Path + ".\"Stage_0_Complite\""));
             DataValue opcAccess = session.ReadValue(NodeId.Parse(Path + ".\"Access\""));
 
-            cp.Stage_0_Stage = (UInt16)opcStage_0_Cam_prepare_stage.Value;
-            cp.Stage_0_CompliteP = (bool)opcComplete.Value;
-            cp.Access = (bool)opcAccess.Value;
+            this.Stage_0_Stage = (UInt16)opcStage_0_Cam_prepare_stage.Value;
+            this.Stage_0_CompliteP = (bool)opcComplete.Value;
+            this.Access = (bool)opcAccess.Value;
 
         }
-        public static void WriteInput(ref Session session, ref CrioPumpStart cp)
+        public  void WriteInput(ref Session session)
         {
             WriteValueCollection nodesToWrite = new WriteValueCollection();
 
 
             WriteValue bServiceMode = new WriteValue();
-            bServiceMode.NodeId = new NodeId(Path + ".\"Stage_0_Stag\"");
+            bServiceMode.NodeId = new NodeId(Path + ".\"Stage_0_Stage\"");
             bServiceMode.AttributeId = Attributes.Value;
             bServiceMode.Value = new DataValue();
-            bServiceMode.Value.Value = (UInt16)cp.Stage_0_Stage;
+            bServiceMode.Value.Value = (UInt16)this.Stage_0_Stage;
             nodesToWrite.Add(bServiceMode);
 
+       
 
-            
 
             // String Node - Objects\CTT\Scalar\Scalar_Static\String
 

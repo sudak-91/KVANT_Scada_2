@@ -24,14 +24,14 @@ namespace KVANT_Scada_2.UDT.Valve
         public bool Closing { get; set; }
         public bool Blocked { get; set; }
         public bool Serviced { get; set; }
-        private static string Path;
+        private string Path;
 
         public ValveStatus(string path)
         {
             Path = path;
 
         }
-        public static void  ReadValue(ref Session session, ref ValveStatus vs)
+        public  void  ReadValue(ref Session session)
         {
             DataValue opcAuto = session.ReadValue(NodeId.Parse(Path+".\"Auto_mode\""));
             DataValue opcOpened = session.ReadValue(NodeId.Parse(Path + ".\"Opened\""));
@@ -40,13 +40,13 @@ namespace KVANT_Scada_2.UDT.Valve
             DataValue opcClosing = session.ReadValue(NodeId.Parse(Path + ".\"Closing\""));
             DataValue opcBlocked = session.ReadValue(NodeId.Parse(Path + ".\"Blocked\""));
             DataValue opcServiced = session.ReadValue(NodeId.Parse(Path + ".\"Serviced\""));
-            vs.Auto_mode =(bool) opcAuto.Value;
-            vs.Blocked = (bool)opcBlocked.Value;
-            vs.Closed = (bool)opcClosed.Value;
-            vs.Closing = (bool)opcClosing.Value;
-            vs.Opened = (bool)opcOpened.Value;
-            vs.Opening = (bool)opcOpening.Value;
-            vs.Serviced = (bool)opcServiced.Value;
+            this.Auto_mode =(bool) opcAuto.Value;
+            this.Blocked = (bool)opcBlocked.Value;
+            this.Closed = (bool)opcClosed.Value;
+            this.Closing = (bool)opcClosing.Value;
+            this.Opened = (bool)opcOpened.Value;
+            this.Opening = (bool)opcOpening.Value;
+            this.Serviced = (bool)opcServiced.Value;
             
 
 

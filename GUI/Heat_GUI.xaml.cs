@@ -22,6 +22,7 @@ namespace KVANT_Scada_2.GUI
     {
         public Heat_GUI()
         {
+            this.Topmost = true;
             InitializeComponent();
         }
 
@@ -72,6 +73,11 @@ namespace KVANT_Scada_2.GUI
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
+        }
+
+        private void HeatPowerSave_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

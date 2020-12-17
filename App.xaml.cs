@@ -41,26 +41,30 @@ namespace KVANT_Scada_2
             ApplicationInstance application = new ApplicationInstance();
             application.ApplicationName = "Quickstart Console Reference Client";
             application.ApplicationType = ApplicationType.Client;
-            application.LoadApplicationConfiguration("D:\\Project\\opcua_TEST\\OpcUATest\\ConsoleReferenceClient.Config.xml", false).Wait();
+            application.LoadApplicationConfiguration("C:\\conf\\ConsoleReferenceClient.Config.xml", false);
             // check the application certificate.
-            application.CheckApplicationInstanceCertificate(false, 0).Wait();
 
+            application.CheckApplicationInstanceCertificate(false, 0);
             application.ApplicationConfiguration.CertificateValidator.CertificateValidation += CertificateValidation;
 
             createData = new DB.Logic.CreateData();
             opcUaWorker = new OPCUAWorker.OPCUAWorker(application.ApplicationConfiguration);
             opcUaWorker.RegisterHandler(new OPCUAWorker.OPCUAWorker.OPCHandler(OpcUaWorker_OPCNotify));
-            MainWindow = new MainWindow();
-            MainWindow.Show();
+            opcUaWorker.ConnectOPC();
            
-            //opcUaWorker.OPCNotify += OpcUaWorker_OPCNotify;
+    
 
-            ConsoleWrite();
-            //opcUaWorker.OPCNotify += MainWindow.OpcUaWorker_OPCNotify;
+     
+           
             Thread OPCthread = new Thread(new ThreadStart(opcUaWorker.StartOPCUAClient));
             Thread CreateDataThread = new Thread(new ThreadStart(createData.CreateTables));
             CreateDataThread.Start();
-            OPCthread.Start(); 
+            OPCthread.Start();
+
+            MainWindow = new MainWindow();
+            MainWindow.Show();
+
+           
         }
 
 
@@ -91,6 +95,7 @@ namespace KVANT_Scada_2
 
             e.Accept = certificateAccepted;
         }
+       
 
     }
   

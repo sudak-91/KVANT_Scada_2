@@ -307,6 +307,9 @@
     <Compile Include="GUI\Driver-GUI.xaml.cs">
       <DependentUpon>Driver-GUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ELIShutter.xaml.cs">
+      <DependentUpon>ELIShutter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\FVP_GUI.xaml.cs">
       <DependentUpon>FVP_GUI.xaml</DependentUpon>
     </Compile>
@@ -328,6 +331,9 @@
     <Compile Include="GUI\Valve_GUI.xaml.cs">
       <DependentUpon>Valve_GUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Objects\Objects.cs" />
     <Compile Include="OPCUAWorker\OPCUAWorker.cs" />
     <Compile Include="OPCUAWorker\OPCUAWorkerPaths.cs" />
@@ -340,6 +346,7 @@
     <Compile Include="UDT\Crio\CrioInput.cs" />
     <Compile Include="UDT\Crio\CrioStatus.cs" />
     <Compile Include="UDT\DiscreteValue\DiscreteValue.cs" />
+    <Compile Include="UDT\ELI_Shutter\Shutter.cs" />
     <Compile Include="UDT\FVP\FVPStatus.cs" />
     <Compile Include="UDT\IntValue\IntValue.cs" />
     <Compile Include="UDT\ION\IonInputCommand.cs" />
@@ -358,6 +365,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Driver-GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ELIShutter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -386,6 +397,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Valve_GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

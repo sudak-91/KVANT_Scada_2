@@ -19,13 +19,13 @@ namespace KVANT_Scada_2.UDT.FVP
         public bool Power_On {get;set;}
         public bool Turn_On{get;set;}
         public bool Block {get;set;}
-        private static string Path;
+        private  string Path;
 
         public FVPStatus(string path)
         {
             Path = path;
         }
-        public static void ReadValue(ref Session session, ref FVPStatus fs)
+        public  void ReadValue(ref Session session)
         {
             DataValue opcRemote = session.ReadValue(NodeId.Parse(Path + ".\"Remote\""));
             DataValue opcAutoMode = session.ReadValue(NodeId.Parse(Path + ".\"Auto_mode\""));
@@ -34,18 +34,18 @@ namespace KVANT_Scada_2.UDT.FVP
             DataValue opcPowerOn = session.ReadValue(NodeId.Parse(Path + ".\"Power_on\""));
             DataValue opcTurnOn = session.ReadValue(NodeId.Parse(Path + ".\"Turn_on\""));
             DataValue opcBlock = session.ReadValue(NodeId.Parse(Path + ".\"Block\""));
-            fs.Auto_mode = (bool)opcAutoMode.Value;
-            fs.Block = (bool)opcBlock.Value;
-            fs.Manual_start = (bool)opcManualStart.Value;
-            fs.Power_On = (bool)opcPowerOn.Value;
-            fs.Remote = (bool)opcRemote.Value;
-            fs.Start = (bool)opcStart.Value;
-            fs.Turn_On = (bool)opcTurnOn.Value;
+            this.Auto_mode = (bool)opcAutoMode.Value;
+            this.Block = (bool)opcBlock.Value;
+            this.Manual_start = (bool)opcManualStart.Value;
+            this.Power_On = (bool)opcPowerOn.Value;
+            this.Remote = (bool)opcRemote.Value;
+            this.Start = (bool)opcStart.Value;
+            this.Turn_On = (bool)opcTurnOn.Value;
 
 
 
         }
-        public static void WriteInput(ref Session session, ref FVPStatus fs)
+        public  void WriteInput(ref Session session)
         {
             WriteValueCollection nodesToWrite = new WriteValueCollection();
 
@@ -54,7 +54,7 @@ namespace KVANT_Scada_2.UDT.FVP
             bRemote.NodeId = new NodeId(Path + ".\"Remote\"");
             bRemote.AttributeId = Attributes.Value;
             bRemote.Value = new DataValue();
-            bRemote.Value.Value = (bool)fs.Remote;
+            bRemote.Value.Value = (bool)this.Remote;
             nodesToWrite.Add(bRemote);
 
 
@@ -62,14 +62,14 @@ namespace KVANT_Scada_2.UDT.FVP
             bAutoMode.NodeId = new NodeId(Path + ".\"Auto_mode\"");
             bAutoMode.AttributeId = Attributes.Value;
             bAutoMode.Value = new DataValue();
-            bAutoMode.Value.Value = (bool)fs.Auto_mode;
+            bAutoMode.Value.Value = (bool)this.Auto_mode;
             nodesToWrite.Add(bAutoMode);
 
             WriteValue bManCommand = new WriteValue();
             bManCommand.NodeId = new NodeId(Path + ".\"Manual_start\"");
             bManCommand.AttributeId = Attributes.Value;
             bManCommand.Value = new DataValue();
-            bManCommand.Value.Value = (bool)fs.Manual_start;
+            bManCommand.Value.Value = (bool)this.Manual_start;
             nodesToWrite.Add(bManCommand);
 
             // String Node - Objects\CTT\Scalar\Scalar_Static\String

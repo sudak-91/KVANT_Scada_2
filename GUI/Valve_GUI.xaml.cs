@@ -53,6 +53,7 @@ namespace KVANT_Scada_2.GUI
                 //UDT.Valve.ValveInput.WriteValveInput(ref OPCObjects.session, );
                 //OPCUAWorker.OPCUAWorker.Write<ValveInput>(inputPath, Input);
                 //client.WriteNode(inputPath, Input);
+                Input.WriteValveInput(ref OPCObjects.session);
             
                 
                 
@@ -69,9 +70,10 @@ namespace KVANT_Scada_2.GUI
 
                 ////client.Connect();
                 //Input = client.ReadNode(inputPath).As<ValveInput>();
-                //Input.Auto_mode = false;
+                Input.Auto_mode = false;
                 //OPCUAWorker.OPCUAWorker.Write<ValveInput>(inputPath, Input);
                 ////client.Disconnect();
+                Input.WriteValveInput(ref OPCObjects.session);
 
 
             }
@@ -82,7 +84,9 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 Input.Man_command = true;
-                UDT.Valve.ValveInput.WriteValveInput(ref OPCObjects.session,ref Input);
+                Input.WriteValveInput(ref OPCObjects.session);
+                Console.WriteLine(Input.getpath());
+                
 
             }
          
@@ -91,7 +95,8 @@ namespace KVANT_Scada_2.GUI
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Input.Man_command = false;
-            UDT.Valve.ValveInput.WriteValveInput(ref OPCObjects.session, ref Input);
+            Input.WriteValveInput(ref OPCObjects.session);
+           
         }
 
         private void ServiceMode_Click(object sender, RoutedEventArgs e)
@@ -130,7 +135,8 @@ namespace KVANT_Scada_2.GUI
             this.statusPath = statusPath;
             UpdateTimerCallBack = new TimerCallback(UpdateGUI);
             UpdateTimer = new Timer(UpdateTimerCallBack, null, 0, 1000);
-           
+            this.Topmost = true;
+
         }
         public void UpdateGUI(object obj)
         {
@@ -145,7 +151,8 @@ namespace KVANT_Scada_2.GUI
 
                     //Status = OPCObjects.client.ReadNode(statusPath).As<ValveStatus>();
                     //client.Disconnect();
-                    UDT.Valve.ValveStatus.ReadValue(ref OPCObjects.session, ref Status);
+                    
+                    Status.ReadValue(ref OPCObjects.session);
                     Console.WriteLine("-----------------------------------Обновление{0}", Status.Auto_mode.ToString());
                     if (Status.Auto_mode)
                     {

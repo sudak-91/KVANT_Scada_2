@@ -33,6 +33,7 @@ namespace KVANT_Scada_2.GUI
             neutral = new SolidColorBrush(Color.FromRgb(221, 221, 221));
             UpdateTimerCallBack = new TimerCallback(UpdateGUI);
             UpdateTimer = new Timer(UpdateTimerCallBack, null, 0, 1000);
+            this.Topmost = true;
         }
 
         private void SaveSP_Click(object sender, RoutedEventArgs e)
@@ -45,7 +46,7 @@ namespace KVANT_Scada_2.GUI
                 OPCObjects.IonInputSetPoint.Heat_I_SP = float.Parse(HeatSPI.Text);
                 OPCObjects.IonInputSetPoint.Heat_P_SP = float.Parse(HeatSPP.Text);
                 OPCObjects.IonInputSetPoint.Heat_U_SP = float.Parse(HeatSPU.Text);
-                UDT.ION.IonInputSetPoint.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputSetPoint);
+                OPCObjects.IonInputCommnd.WriteInput(ref OPCObjects.session);
             }
         }
 
@@ -54,7 +55,8 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.IonInputCommnd.Manual_Start = true;
-                UDT.ION.IonInputCommand.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputCommnd);
+              
+                OPCObjects.IonInputCommnd.WriteInput(ref OPCObjects.session);
             }
         }
 
@@ -63,7 +65,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.IonInputCommnd.Manual_Stop = true;
-                UDT.ION.IonInputCommand.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputCommnd);
+                OPCObjects.IonInputCommnd.WriteInput(ref OPCObjects.session);
             }
         }
 
@@ -72,7 +74,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.IonInputCommnd.Reset_error = true;
-                UDT.ION.IonInputCommand.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputCommnd);
+                OPCObjects.IonInputCommnd.WriteInput(ref OPCObjects.session);
             }
         }
 
@@ -88,7 +90,7 @@ namespace KVANT_Scada_2.GUI
                 {
                     OPCObjects.IonInputCommnd.Auto_mod = true;
                 }
-                UDT.ION.IonInputCommand.WriteInput(ref OPCObjects.session, ref OPCObjects.IonInputCommnd);
+                OPCObjects.IonInputCommnd.WriteInput(ref OPCObjects.session);
 
             }
         }

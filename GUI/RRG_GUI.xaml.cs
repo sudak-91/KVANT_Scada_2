@@ -81,6 +81,7 @@ namespace KVANT_Scada_2.GUI
             on = new SolidColorBrush(Color.FromRgb(0, 255, 0));
             error = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             neutral = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+            this.Topmost = true;
         }
         private void UpdateGUI(object obj)
         {

@@ -57,6 +57,7 @@ namespace KVANT_Scada_2
             PnePressure.IsReadOnly = true;
             CamTemperature.IsReadOnly = true;
             Crio_temperature.IsReadOnly = true;
+            this.WindowState = WindowState.Maximized;
           
             
             UpdateTimerCallBack = new TimerCallback(delegate  {
@@ -157,15 +158,14 @@ namespace KVANT_Scada_2
             {
                 lock (OPCObjects.OPCLocker)
                 {
-                    Main_pressure.Text = OPCObjects.Main_Pressure.Value.ToString("E5") + "mbar";
-                    Main_pressure.Text = OPCObjects.Main_Pressure.Value.ToString("E5") + "mbar";
-                    Crio_pressure.Text = OPCObjects.Crio_Pressure.Value.ToString("E4") + "mbar";
+                    Main_pressure.Text = OPCObjects.Main_Pressure.Value.ToString("E2") + "mbar";
+                    Crio_pressure.Text = OPCObjects.Crio_Pressure.Value.ToString("E2") + "mbar";
                     ForVac_pressure.Text = OPCObjects.Camera_Pressure.Value.ToString() + "mbar";
-                    PnePressure.Text = OPCObjects.Pneumatic_Pressure.Value.ToString() + "bar";
+                    PnePressure.Text = OPCObjects.Pneumatic_Pressure.Value.ToString() + "МПа";
                     Crio_temperature.Text = OPCObjects.Crio_Temperature.Value.ToString() + "K";
                     CamTemperature.Text = OPCObjects.TE_1.Value.ToString();
                     User_login_name.Content = OPCObjects.user.Login;
-                    if(OPCObjects.user.Role == 0)
+                    if (OPCObjects.user.Role == 0)
                     {
                         FVP_Open.IsEnabled = false;
                         CrioPumpStart.IsEnabled = false;
@@ -189,8 +189,11 @@ namespace KVANT_Scada_2
                         Signin.Visibility = Visibility.Visible;
                         Logout.Visibility = Visibility.Hidden;
                     }
-                    if(OPCObjects.user.Role == 9)
+                    if (OPCObjects.user.Role == 9)
                     {
+                        Signin.IsEnabled = false;
+                        Signin.Visibility = Visibility.Hidden;
+                        Logout.Visibility = Visibility.Visible;
                         FVP_Open.IsEnabled = true;
                         CrioPumpStart.IsEnabled = true;
                         CPV_GUI.IsEnabled = true;
@@ -211,16 +214,49 @@ namespace KVANT_Scada_2
                         Register_GUI.IsEnabled = true;
 
                     }
-                    if(OPCObjects.user.Role!=0)
+                    if (OPCObjects.user.Role != 0 && OPCObjects.user.Role != 9)
                     {
                         Signin.IsEnabled = false;
                         Signin.Visibility = Visibility.Hidden;
                         Logout.Visibility = Visibility.Visible;
+                        FVP_Open.IsEnabled = true;
+                        CrioPumpStart.IsEnabled = true;
+                        CPV_GUI.IsEnabled = true;
+                        FVV_S_GUI.IsEnabled = true;
+                        FVV_B_GUI.IsEnabled = true;
+                        BAV3_GUI.IsEnabled = true;
+                        IonGUI_ON.IsEnabled = true;
+                        Driver_GUI.IsEnabled = true;
+                        HeaterGUI_ON.IsEnabled = true;
+                        CrioStart.IsEnabled = true;
+                        StopCrio.IsEnabled = true;
+                        OpenCam.IsEnabled = true;
+                        CamPrepare.IsEnabled = true;
+                        StopFVPBTN.IsEnabled = true;
+                        StartELI.IsEnabled = true;
+                        StopELI.IsEnabled = true;
+                        PreHeatProc.IsEnabled = true;
+                        Register_GUI.IsEnabled = false;
 
                     }
+                    if(OPCObjects.SHV_Status.Opened)
+                    {
+                        SHVOpened.Fill = on;
+                    }
+                    else
+                    {
+                        SHVOpened.Fill = neutral;
+                    }
+                    if(OPCObjects.EliShutter.Opened)
+                    {
+                        ELIShutter.Fill = on;
+                    }
+                    else
+                    {
+                        ELIShutter.Fill = neutral;
+                    }
 
-
-                    if(OPCObjects.Alarm_Open_door.Value)
+                    if (OPCObjects.Alarm_Open_door.Value)
                     {
                         AlarmOpenDoor.Fill = error;
                         DoorOpen.Fill = error;
@@ -230,9 +266,60 @@ namespace KVANT_Scada_2
                         AlarmOpenDoor.Fill = neutral;
                         DoorOpen.Fill = on;
                     }
+                    if(OPCObjects.camPrepare.Stage_0_Cam_prepare_Complite)
+                    {
+                        CamPrepDone.Fill = on;
+                    }
+                    else
+                    {
+                        CamPrepDone.Fill = neutral;
+                    }
+                    if(OPCObjects.CrioPumpStart.Stage_0_CompliteP)
+                    {
+                        CrioStartDone.Fill = on;
+                    }
+                    else
+                    {
+                        CrioStartDone.Fill = neutral;
+                    }
+                    if(OPCObjects.openCam.Stage_1_done)
+                    {
+                        AtmosDone.Fill = on;
+                    }
+                    else
+                    {
+                        AtmosDone.Fill = neutral;
+                    }
+                    if(OPCObjects.FullCycleStage.Value == 1)
+                    {
+                        FullStage0.Fill = on;
+                    }
+                    if(OPCObjects.FullCycleStage.Value == 2)
+                    {
+                        FullStage1.Fill = on;
+                    }
+                    if (OPCObjects.FullCycleStage.Value == 20)
+                    {
+                        FullStage2.Fill = on;
+                    }
+                    if (OPCObjects.FullCycleStage.Value == 200)
+                    {
+                        FullStage3.Fill = on;
+                    }
+                    if (OPCObjects.FullCycleStage.Value == 3)
+                    {
+                        FullStage4.Fill = on;
+                    }
+                    if (OPCObjects.FullCycleStage.Value == 0)
+                    {
+                        FullStage0.Fill = neutral;
+                        FullStage1.Fill = neutral;
+                        FullStage2.Fill = neutral;
+                        FullStage3.Fill = neutral;
+                        FullStage4.Fill = neutral;
+                    }
 
-
-                    if(OPCObjects.Alarm_Crio_power_failure.Value)
+                    if (OPCObjects.Alarm_Crio_power_failure.Value)
                     {
                         AlarmCrioPower.Fill = error;
                     }
@@ -241,7 +328,7 @@ namespace KVANT_Scada_2
                         AlarmCrioPower.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_ELI_Power_failure.Value)
+                    if (OPCObjects.Alarm_ELI_Power_failure.Value)
                     {
                         AlarmELIPower.Fill = error;
                     }
@@ -250,7 +337,7 @@ namespace KVANT_Scada_2
                         AlarmELIPower.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_FloatHeater_power_failure.Value)
+                    if (OPCObjects.Alarm_FloatHeater_power_failure.Value)
                     {
                         AlarmFloatHeaterPower.Fill = error;
                     }
@@ -259,15 +346,15 @@ namespace KVANT_Scada_2
                         AlarmFloatHeaterPower.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_FVP_power_failure.Value)
+                    if (OPCObjects.Alarm_FVP_power_failure.Value)
                     {
                         AlarmFVPPower.Fill = error;
-                    }else
+                    } else
                     {
                         AlarmFVPPower.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_Hight_Crio_Temp.Value)
+                    if (OPCObjects.Alarm_Hight_Crio_Temp.Value)
                     {
                         AlarmHightCrioTemp.Fill = error;
                     }
@@ -276,7 +363,7 @@ namespace KVANT_Scada_2
                         AlarmHightCrioTemp.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_Hight_Pne_Press.Value)
+                    if (OPCObjects.Alarm_Hight_Pne_Press.Value)
                     {
                         AlarmHightPnePress.Fill = error;
                     }
@@ -285,7 +372,7 @@ namespace KVANT_Scada_2
                         AlarmHightPnePress.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_Indexer_power_failure.Value)
+                    if (OPCObjects.Alarm_Indexer_power_failure.Value)
                     {
                         AlarmInderxerPower.Fill = error;
                     }
@@ -295,7 +382,7 @@ namespace KVANT_Scada_2
                     }
 
 
-                    if(OPCObjects.Alarm_Ion_power_failure.Value)
+                    if (OPCObjects.Alarm_Ion_power_failure.Value)
                     {
                         AlarmIonPower.Fill = error;
                     }
@@ -304,16 +391,16 @@ namespace KVANT_Scada_2
                         AlarmIonPower.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_Low_One_Presse.Value)
+                    if (OPCObjects.Alarm_Low_One_Presse.Value)
                     {
                         AlarmLowPnePress.Fill = error;
-                    } 
+                    }
                     else
                     {
                         AlarmLowPnePress.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_Qartz_power_failure.Value)
+                    if (OPCObjects.Alarm_Qartz_power_failure.Value)
                     {
                         AlarmQartzPower.Fill = error;
                     }
@@ -330,7 +417,7 @@ namespace KVANT_Scada_2
                         AlarmSSPPower.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_TV1_power_failure.Value)
+                    if (OPCObjects.Alarm_TV1_power_failure.Value)
                     {
                         AlarmTV1Power.Fill = error;
                     }
@@ -339,7 +426,7 @@ namespace KVANT_Scada_2
                         AlarmTV1Power.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_Water_CRIO.Value)
+                    if (OPCObjects.Alarm_Water_CRIO.Value)
                     {
                         AlarmWaterCrio.Fill = error;
                     }
@@ -348,7 +435,7 @@ namespace KVANT_Scada_2
                         AlarmWaterCrio.Fill = neutral;
                     }
 
-                    if(OPCObjects.Alarm_Water_SECOND.Value)
+                    if (OPCObjects.Alarm_Water_SECOND.Value)
                     {
                         AlarmWaterSecond.Fill = error;
                     }
@@ -372,7 +459,7 @@ namespace KVANT_Scada_2
                     {
                         FVP.Fill = neutral;
                     }
-                    if(OPCObjects.FVV_B_Status.Opened)
+                    if (OPCObjects.FVV_B_Status.Opened)
                     {
                         FVV_B.Fill = on;
                     }
@@ -380,7 +467,7 @@ namespace KVANT_Scada_2
                     {
                         FVV_B.Fill = neutral;
                     }
-                    if(OPCObjects.FVV_S_Status.Opened)
+                    if (OPCObjects.FVV_S_Status.Opened)
                     {
                         FVV_S.Fill = on;
                     }
@@ -388,7 +475,7 @@ namespace KVANT_Scada_2
                     {
                         FVV_S.Fill = neutral;
                     }
-                    if(OPCObjects.CPV_Status.Opened)
+                    if (OPCObjects.CPV_Status.Opened)
                     {
                         CPV.Fill = on;
                     }
@@ -397,7 +484,7 @@ namespace KVANT_Scada_2
                         CPV.Fill = neutral;
                     }
 
-                    if(OPCObjects.BAV_3_status.Opened)
+                    if (OPCObjects.BAV_3_status.Opened)
                     {
                         BAV_3.Fill = on;
                     }
@@ -408,9 +495,10 @@ namespace KVANT_Scada_2
                     if (!Firstcheck) {
 
                         HeatAssistcheckBox.IsChecked = OPCObjects.HeatAssist_Flag.Value;
+                        HeatCam.IsChecked = OPCObjects.openCam.Heat_cam;
                         Firstcheck = true;
                     }
-                    if(OPCObjects.Tech_cam_STAGE.Value == 3)
+                    if (OPCObjects.Tech_cam_STAGE.Value == 3)
                     {
                         CamPrepare.Background = on;
                     }
@@ -418,7 +506,7 @@ namespace KVANT_Scada_2
                     {
                         CamPrepare.Background = neutral;
                     }
-                    if(OPCObjects.Tech_cam_STAGE.Value == 2)
+                    if (OPCObjects.Tech_cam_STAGE.Value == 2)
                     {
                         CamPrepare.Background = on;
                     }
@@ -426,7 +514,7 @@ namespace KVANT_Scada_2
                     {
                         CamPrepare.Background = neutral;
                     }
-                    if(OPCObjects.Tech_cam_STAGE.Value == 4)
+                    if (OPCObjects.Tech_cam_STAGE.Value == 4)
                     {
                         StopCrio.Background = on;
                     }
@@ -434,7 +522,7 @@ namespace KVANT_Scada_2
                     {
                         StopCrio.Background = neutral;
                     }
-                    if(OPCObjects.Tech_cam_STAGE.Value == 5)
+                    if (OPCObjects.Tech_cam_STAGE.Value == 5)
                     {
                         StopFVPBTN.Background = on;
                     }
@@ -442,7 +530,7 @@ namespace KVANT_Scada_2
                     {
                         StopFVPBTN.Background = neutral;
                     }
-                    if(OPCObjects.Crio_start_signal.Value)
+                    if (OPCObjects.CrioPumpStart.Stage_0_Stage != 0)
                     {
                         CrioStart.Background = on;
                     }
@@ -450,7 +538,7 @@ namespace KVANT_Scada_2
                     {
                         CrioStart.Background = neutral;
                     }
-                    if(OPCObjects.StartProcessSignal.Value)
+                    if (OPCObjects.StartProcessSignal.Value)
                     {
                         StartELI.Background = on;
                     }
@@ -458,7 +546,7 @@ namespace KVANT_Scada_2
                     {
                         StartELI.Background = neutral;
                     }
-                    if(OPCObjects.BAV_3_status.Opened)
+                    if (OPCObjects.BAV_3_status.Opened)
                     {
                         BAV_3.Fill = on;
                     }
@@ -466,7 +554,7 @@ namespace KVANT_Scada_2
                     {
                         BAV_3.Fill = neutral;
                     }
-                    if(OPCObjects.CPV_Status.Opened)
+                    if (OPCObjects.CPV_Status.Opened)
                     {
                         CPV.Fill = on;
                     }
@@ -474,7 +562,7 @@ namespace KVANT_Scada_2
                     {
                         CPV.Fill = neutral;
                     }
-                    if(OPCObjects.FVV_B_Status.Opened)
+                    if (OPCObjects.FVV_B_Status.Opened)
                     {
                         FVV_B.Fill = on;
                     }
@@ -482,7 +570,7 @@ namespace KVANT_Scada_2
                     {
                         FVV_B.Fill = neutral;
                     }
-                    if(OPCObjects.FVV_S_Status.Opened)
+                    if (OPCObjects.FVV_S_Status.Opened)
                     {
                         FVV_S.Fill = on;
                     }
@@ -490,7 +578,7 @@ namespace KVANT_Scada_2
                     {
                         FVV_S.Fill = neutral;
                     }
-                    if(OPCObjects.FVPStatus.Turn_On)
+                    if (OPCObjects.FVPStatus.Turn_On)
                     {
                         FVP.Fill = on;
                     }
@@ -498,7 +586,7 @@ namespace KVANT_Scada_2
                     {
                         FVP.Fill = neutral;
                     }
-                    if(OPCObjects.CrioStatus.Turn_On)
+                    if (OPCObjects.CrioStatus.Turn_On)
                     {
                         CrioPump.Fill = on;
                     }
@@ -506,7 +594,7 @@ namespace KVANT_Scada_2
                     {
                         CrioPump.Fill = neutral;
                     }
-                    if(OPCObjects.ELI_access.Value)
+                    if (OPCObjects.ELI_access.Value)
                     {
                         Eli_access.Fill = on;
                     }
@@ -514,7 +602,7 @@ namespace KVANT_Scada_2
                     {
                         Eli_access.Fill = error;
                     }
-                    if(OPCObjects.ELI_complete.Value)
+                    if (OPCObjects.ELI_complete.Value)
                     {
                         Eli_complete.Fill = on;
                     }
@@ -522,8 +610,121 @@ namespace KVANT_Scada_2
                     {
                         Eli_complete.Fill = neutral;
                     }
-                    
+                    if (OPCObjects.BAV_3_status.Auto_mode)
+                    {
+                        BAV3AutoMode.Fill = on;
+                    }
+                    else
+                    {
+                        BAV3AutoMode.Fill = neutral;
+                    }
+                    if (OPCObjects.SHV_Status.Auto_mode)
+                    {
+                        SHVAutoMode.Fill = on;
+                    }
+                    else
+                    {
+                        SHVAutoMode.Fill = neutral;
+                    }
+                    if (OPCObjects.CPV_Status.Auto_mode)
+                    {
+                        CPVAutoMode.Fill = on;
+                    }
+                    else
+                    {
+                        CPVAutoMode.Fill = neutral;
+                    }
+                    if (OPCObjects.FVV_B_Status.Auto_mode)
+                    {
+                        FVVBAutoMode.Fill = on;
+                    }
+                    else
+                    {
+                        FVVBAutoMode.Fill = neutral;
+                    }
+                    if (OPCObjects.FVV_S_Status.Auto_mode)
+                    {
+                        FVVSAutoMode.Fill = on;
+                    }
+                    else
+                    {
+                        FVVSAutoMode.Fill = neutral;
+                    }
+                    if (OPCObjects.CrioStatus.Auto_mode)
+                    {
+                        CPAutoMode.Fill = on;
+                    }
+                    else
+                    {
+                        CPAutoMode.Fill = neutral;
+                    }
+                    if (OPCObjects.FVPStatus.Auto_mode)
+                    {
+                        FVPAutoMode.Fill = on;
+                    }
+                    else
+                    {
+                        FVPAutoMode.Fill = neutral;
+                    }
+                    if (OPCObjects.CrioPumpStart.Stage_0_Stage != 0)
+                    {
+                        CP_WORK.Fill = on;
+                    }
+                    else
+                    {
+                        CP_WORK.Fill = neutral;
+                    }
+                    if (OPCObjects.CrioPumpStart.Stage_0_Stage == 3)
+                    {
+                        CP_Vacuuming.Fill = on;
+                    }
+                    else
+                    {
+                        CP_Vacuuming.Fill = neutral;
+                    }
+                    if (OPCObjects.CrioPumpStart.Stage_0_Stage == 4)
+                    {
+                        CP_VacuumCheck.Fill = on;
+                    }
+                    else
+                    {
+                        CP_VacuumCheck.Fill = neutral;
+                    }
+                    if (OPCObjects.CrioPumpStart.Stage_0_Stage == 6)
+                    {
+                        CP_Cooling.Fill = on;
+                    }
+                    else
+                    {
+                        CP_Cooling.Fill = neutral;
+                    }
+                    if (OPCObjects.Tech_cam_STAGE.Value == 2)
+                    {
+                        CamPrepare.Background = on;
+                    } else
+                    {
+                        CamPrepare.Background = neutral;
+                    }
+                    if(OPCObjects.Tech_cam_STAGE.Value == 3)
+                    {
+                        OpenCam.Background = on;
+                    }
+                    else
+                    {
+                        OpenCam.Background = neutral;
+                    }
+                    if(OPCObjects.SSP_turn_on.Value)
+                    {
+                        SSPStartStop.Background = on;
+                    }
+                    else
+                    {
+                        SSPStartStop.Background = neutral;
+                    }
 
+
+                    Console.WriteLine("MAIN GUI UPDATE" + DateTime.Now.ToString());
+                        
                 }
             });
           
@@ -633,11 +834,15 @@ namespace KVANT_Scada_2
             {
                 lock (OPCObjects.OPCLocker)
                 {
-                    OPCObjects.Crio_start_signal.Value = true;
-                    OPCObjects.Crio_start_signal.WriteValue(ref OPCObjects.session);
-                   
+                    if (OPCObjects.CrioPumpStart.Stage_0_Stage == 0)
+                    {
+                        OPCObjects.Crio_start_signal.Value = true;
+                        OPCObjects.Crio_start_signal.WriteValue(ref OPCObjects.session);
+                        CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматического включения крионасоса");
+                    }
+          
                 }
-                CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск автоматического включения крионасоса");
+                
 
             }
         }
@@ -688,7 +893,7 @@ namespace KVANT_Scada_2
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.StartProcessSignal.Value = true;
-                OPCObjects.Tech_cam_STAGE.WriteValue(ref OPCObjects.session);
+                OPCObjects.StartProcessSignal.WriteValue(ref OPCObjects.session);
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Запуск напыления");
         }
@@ -697,8 +902,10 @@ namespace KVANT_Scada_2
         {
             lock (OPCObjects.OPCLocker)
             {
+                OPCObjects.ELI_block.Value = false;
                 OPCObjects.StopProcessSignal.Value = true;
                 OPCObjects.StopProcessSignal.WriteValue(ref OPCObjects.session);
+                OPCObjects.ELI_block.WriteValue(ref OPCObjects.session);
             }
             CreateData.AddOperatoAction(OPCObjects.user.Login, "Ручная остановка напыления");
         }
@@ -757,6 +964,77 @@ namespace KVANT_Scada_2
             });
             RRG_GUIthread.SetApartmentState(ApartmentState.STA);
             RRG_GUIthread.Start();
+
+        }
+
+        private void StopCriostart_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.CrioPumpStart.Stage_0_Stage = 0;
+                OPCObjects.CrioPumpStart.WriteInput(ref OPCObjects.session);
+            }
+
+        }
+
+        private void StopPreHeat_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.PreHeat_Done.Value = true;
+                OPCObjects.PreHeat_Done.WriteValue(ref OPCObjects.session);
+            }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            UpdateTimer.Dispose();
+        }
+
+        private void SSPStartStop_Click(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                if(OPCObjects.SSP_turn_on.Value)
+                {
+                    OPCObjects.SSP_on.Value = false;
+                }
+                else
+                {
+                    OPCObjects.SSP_on.Value = true;
+                }
+                OPCObjects.SSP_on.WriteValue(ref OPCObjects.session);
+            }
+        }
+
+        private void HeatCam_Checked(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.openCam.Heat_cam = HeatCam.IsChecked.Value;
+                OPCObjects.openCam.WriteInput(ref OPCObjects.session);
+            }
+        }
+
+        private void HeatCam_Unchecked(object sender, RoutedEventArgs e)
+        {
+            lock(OPCObjects.OPCLocker)
+            {
+                OPCObjects.openCam.Heat_cam = HeatCam.IsChecked.Value;
+                OPCObjects.openCam.WriteInput(ref OPCObjects.session);
+            }
+        }
+
+        private void Shutter_Click(object sender, RoutedEventArgs e)
+        {
+            Thread ELIShutter_GUI = new Thread(delegate ()
+            {
+                ELIShutter w = new GUI.ELIShutter();
+                w.Show();
+                System.Windows.Threading.Dispatcher.Run();
+            });
+            ELIShutter_GUI.SetApartmentState(ApartmentState.STA);
+            ELIShutter_GUI.Start();
 
         }
 

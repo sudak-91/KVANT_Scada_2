@@ -18,12 +18,12 @@ namespace KVANT_Scada_2.UDT.Crio
         public bool Block { get; set; }
         public bool Power_on { get; set; }
         public bool Switch_on { get; set; }
-        private static string Path;
+        private  string Path;
         public CrioInput(string path)
         {
             Path = path;
         }
-        public static void WriteCrioInput(ref Session session, ref CrioInput ci)
+        public void WriteCrioInput(ref Session session)
         {
             WriteValueCollection nodesToWrite = new WriteValueCollection();
 
@@ -32,7 +32,7 @@ namespace KVANT_Scada_2.UDT.Crio
             bAutoMode.NodeId = new NodeId(Path + ".\"Auto_mode\"");
             bAutoMode.AttributeId = Attributes.Value;
             bAutoMode.Value = new DataValue();
-            bAutoMode.Value.Value = (bool)ci.Auto_mode;
+            bAutoMode.Value.Value = (bool)this.Auto_mode;
             nodesToWrite.Add(bAutoMode);
 
 
@@ -42,7 +42,7 @@ namespace KVANT_Scada_2.UDT.Crio
             bManCommand.NodeId = new NodeId(Path + ".\"Command_manual\"");
             bManCommand.AttributeId = Attributes.Value;
             bManCommand.Value = new DataValue();
-            bManCommand.Value.Value = (bool)ci.Command_manual;
+            bManCommand.Value.Value = (bool)this.Command_manual;
             nodesToWrite.Add(bManCommand);
 
             // String Node - Objects\CTT\Scalar\Scalar_Static\String

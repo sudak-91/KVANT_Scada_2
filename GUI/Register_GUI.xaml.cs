@@ -25,6 +25,7 @@ namespace KVANT_Scada_2.GUI
         public Register_GUI()
         {
             InitializeComponent();
+            this.Topmost = true;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

@@ -26,20 +26,20 @@ namespace KVANT_Scada_2.UDT.Tech_cam
         {
             Path = path;
         }
-        public static void ReadValue(ref Session session, ref OpenCam cp)
+        public  void ReadValue(ref Session session)
         {
             DataValue opcStage_0_Cam_prepare_stage = session.ReadValue(NodeId.Parse(Path + ".\"Stage_1_stage\""));
             DataValue opcComplete = session.ReadValue(NodeId.Parse(Path + ".\"Stage_1_done\""));
             DataValue opcAccess = session.ReadValue(NodeId.Parse(Path + ".\"Access\""));
             DataValue opcHeat_cam = session.ReadValue(NodeId.Parse(Path + ".\"Heat_cam\""));
 
-            cp.Stage_1_stage = (UInt16)opcStage_0_Cam_prepare_stage.Value;
-            cp.Stage_1_done = (bool)opcComplete.Value;
-            cp.Access = (bool)opcAccess.Value;
-            cp.Heat_cam = (bool)opcHeat_cam.Value;
+            this.Stage_1_stage = (UInt16)opcStage_0_Cam_prepare_stage.Value;
+            this.Stage_1_done = (bool)opcComplete.Value;
+            this.Access = (bool)opcAccess.Value;
+            this.Heat_cam = (bool)opcHeat_cam.Value;
 
         }
-        public static void WriteInput(ref Session session, ref OpenCam cp)
+        public  void WriteInput(ref Session session)
         {
             WriteValueCollection nodesToWrite = new WriteValueCollection();
 
@@ -48,7 +48,7 @@ namespace KVANT_Scada_2.UDT.Tech_cam
             bServiceMode.NodeId = new NodeId(Path + ".\"Heat_cam\"");
             bServiceMode.AttributeId = Attributes.Value;
             bServiceMode.Value = new DataValue();
-            bServiceMode.Value.Value = (bool)cp.Heat_cam;
+            bServiceMode.Value.Value = (bool)this.Heat_cam;
             nodesToWrite.Add(bServiceMode);
 
 

@@ -31,6 +31,7 @@ namespace KVANT_Scada_2.GUI
             on = new SolidColorBrush(Color.FromRgb(0, 255, 0));
             error = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             neutral = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+            this.Topmost = true;
             InitializeComponent();
             timerCallback = new TimerCallback(Update_GUI);
             UpdateTimer = new Timer(timerCallback, null, 0, 1000);
@@ -41,9 +42,11 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.FVPStatus.Auto_mode = true;
-                OPCObjects.FVPStatus.Remote = false;
-                UDT.FVP.FVPStatus.WriteInput(ref OPCObjects.session, ref OPCObjects.FVPStatus);
+                OPCObjects.FVPStatus.Remote = true;
                 
+                OPCObjects.FVPStatus.WriteInput(ref OPCObjects.session);
+
+
             }
         }
 
@@ -58,7 +61,7 @@ namespace KVANT_Scada_2.GUI
             {
                 OPCObjects.FVPStatus.Auto_mode = false;
                 OPCObjects.FVPStatus.Remote = true;
-                UDT.FVP.FVPStatus.WriteInput(ref OPCObjects.session, ref OPCObjects.FVPStatus);
+                OPCObjects.FVPStatus.WriteInput(ref OPCObjects.session);
             }
         }
 
@@ -67,7 +70,7 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.FVPStatus.Manual_start = true;
-                UDT.FVP.FVPStatus.WriteInput(ref OPCObjects.session, ref OPCObjects.FVPStatus);
+                OPCObjects.FVPStatus.WriteInput(ref OPCObjects.session);
             }
         }
 
@@ -76,7 +79,7 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.FVPStatus.Manual_start = false;
-                UDT.FVP.FVPStatus.WriteInput(ref OPCObjects.session, ref OPCObjects.FVPStatus);
+                OPCObjects.FVPStatus.WriteInput(ref OPCObjects.session);
             }
         }
 

@@ -33,6 +33,7 @@ namespace KVANT_Scada_2.GUI
             timeCallback = new TimerCallback(Update_GUI);
             timer = new Timer(timeCallback, null, 0, 1000);
             InitializeComponent();
+            this.Topmost = true;
         }
 
         private void AutoMode_Click(object sender, RoutedEventArgs e)
@@ -40,7 +41,8 @@ namespace KVANT_Scada_2.GUI
             lock(OPCObjects.OPCLocker)
             {
                 OPCObjects.CrioInput.Auto_mode = true;
-                UDT.Crio.CrioInput.WriteCrioInput(ref OPCObjects.session, ref OPCObjects.CrioInput);
+                OPCObjects.CrioInput.WriteCrioInput(ref OPCObjects.session);
+                
 
             }
 
@@ -51,7 +53,7 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.CrioInput.Auto_mode = false;
-                UDT.Crio.CrioInput.WriteCrioInput(ref OPCObjects.session, ref OPCObjects.CrioInput);
+                OPCObjects.CrioInput.WriteCrioInput(ref OPCObjects.session);
 
             }
 
@@ -62,7 +64,7 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.CrioInput.Command_manual = true;
-                UDT.Crio.CrioInput.WriteCrioInput(ref OPCObjects.session, ref OPCObjects.CrioInput);
+                OPCObjects.CrioInput.WriteCrioInput(ref OPCObjects.session);
 
             }
 
@@ -73,7 +75,7 @@ namespace KVANT_Scada_2.GUI
             lock (OPCObjects.OPCLocker)
             {
                 OPCObjects.CrioInput.Command_manual = false;
-                UDT.Crio.CrioInput.WriteCrioInput(ref OPCObjects.session, ref OPCObjects.CrioInput);
+                OPCObjects.CrioInput.WriteCrioInput(ref OPCObjects.session);
 
             }
 

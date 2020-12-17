@@ -1,0 +1,20 @@
+﻿<Window x:Class="KVANT_Scada_2.GUI.ELIShutter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KVANT_Scada_2.GUI"
+        mc:Ignorable="d"
+        Title="Заслонка" Height="450" Width="300">
+    <Grid HorizontalAlignment="Left" Height="420" Margin="-1,-2,0,0" VerticalAlignment="Top" Width="292">
+        <Ellipse x:Name="AutoMode" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Margin="18,20,0,0" Stroke="Black" VerticalAlignment="Top" Width="15"/>
+        <Ellipse x:Name="Opened" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Margin="17,45,0,0" Stroke="Black" VerticalAlignment="Top" Width="15"/>
+        <Ellipse x:Name="Closed" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="15" Margin="18,70,0,0" Stroke="Black" VerticalAlignment="Top" Width="15"/>
+        <Label Content="Автоматический режим" HorizontalAlignment="Left" Margin="44,15,0,0" VerticalAlignment="Top"/>
+        <Label Content="Открыт" HorizontalAlignment="Left" Margin="42,40,0,0" VerticalAlignment="Top"/>
+        <Label Content="Закрыт" HorizontalAlignment="Left" Margin="43,65,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnAutoMode" Content="Автоматический режим" HorizontalAlignment="Left" Height="40" Margin="60,144,0,0" VerticalAlignment="Top" Width="167" Click="btnAutoMode_Click"/>
+        <Button x:Name="Open" Content="Открыть" HorizontalAlignment="Left" Height="40" Margin="60,202,0,0" VerticalAlignment="Top" Width="167" Click="Open_Click"/>
+        <Button x:Name="Close" Content="Закрыть" HorizontalAlignment="Left" Height="40" Margin="61,259,0,0" VerticalAlignment="Top" Width="167" Click="Close_Click"/>
+    </Grid>
+</Window>

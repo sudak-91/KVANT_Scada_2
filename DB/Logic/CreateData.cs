@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace KVANT_Scada_2.DB.Logic
 {
@@ -812,19 +813,24 @@ namespace KVANT_Scada_2.DB.Logic
 
         public static void TimerUpdateSQL(object obj)
         {
-            UpdateCamPrepTable(obj);
-            //UpdateCrioPumpStartTable();
-            UpdateAnalogValue();
-            UpdateDigitalValue();
-            UpdateIntValue();
-            UpdateCrioPumpStartTable();
-            UpdateOpenCamTable();
-            UpdateStopCrioTable();
-            UpdateStopFVPTable();
-            UpdateCrioPump();
-            UpdateFVP();
-            UpdateION();
-            UpdateValves();
+            try
+            {
+                UpdateCamPrepTable(obj);
+                UpdateAnalogValue();
+                UpdateDigitalValue();
+                UpdateIntValue();
+                UpdateCrioPumpStartTable();
+                UpdateOpenCamTable();
+                UpdateStopCrioTable();
+                UpdateStopFVPTable();
+                UpdateCrioPump();
+                UpdateFVP();
+                UpdateION();
+                UpdateValves();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.ToString());
+            }
 
 
 
